@@ -93,6 +93,20 @@ Para decargarlo con archivo .zip, una vez descragada la carpta, nos dirijimos a 
 ![WhatsApp Image 2024-05-30 at 8 36 55 AM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/ed534883-5825-4fb9-ad3d-beef02324f43)
 
 Ahora copiamos y pegamos la carpeta del proyecto en los proyectos de netbeans.
+![WhatsApp Image 2024-05-29 at 8 00 16 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/c1619d2d-591c-4c75-b1d9-cb9cee40a43a)
+
+Abrimos nuestro netbeans y abrimos nuestro proyecto.
+![WhatsApp Image 2024-05-29 at 8 03 09 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/8ac93056-07d3-4edc-a174-5f169f693e57)
+
+En caso de que el proyecto te salga en rojo o tengas algun problema, debes dar click en el proyecto y seleccionar la opcion de solucionar problemas.
+![WhatsApp Image 2024-05-30 at 9 15 59 AM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/a874962a-e0cb-4de8-a0b8-457eb7c76749)
+![WhatsApp Image 2024-05-30 at 9 17 27 AM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/dd60a814-fda5-498b-a1de-4339b640c187)
+![WhatsApp Image 2024-05-30 at 9 18 05 AM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/fff723e7-f577-463a-9774-a367f2fc41f4)
+
+Una vez que ya todo este bien, solo necesitas ejecutar la clase de Prueba que esta en el paquete de Ejecutable.
+![WhatsApp Image 2024-05-30 at 9 20 20 AM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/89269100-d4a1-48ff-a3b1-6879fb7afc86)
+
+
 
 
 
