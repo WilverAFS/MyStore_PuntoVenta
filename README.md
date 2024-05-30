@@ -110,3 +110,12 @@ Una vez que ya todo este bien, solo necesitas ejecutar la clase de Prueba que es
 
 
 
+## Autores
+- Flores Santiago Wilver Alfredo - *Estudiante* 
+- Roque Hernández Diego Misael- *Estudiante* 
+### Final
+Gracias por ver ;)
+
+
+
+
