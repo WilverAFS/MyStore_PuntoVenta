@@ -144,14 +144,14 @@ public class lateralAlmacen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarProductoActionPerformed
 
     private void btnProductosAgotadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosAgotadosActionPerformed
-        // TODO add your handling code here:
-        dlaProdcutosAgotas dialog = new dlaProdcutosAgotas(new javax.swing.JFrame(), true);
+        // READY
+        dialogoTabla dialog = new dialogoTabla(new javax.swing.JFrame(), true,2);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }//GEN-LAST:event_btnProductosAgotadosActionPerformed
 
     private void btnModificarExistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarExistenciaActionPerformed
-        // TODO add your handling code here:
+        // P
         dlaModificarExistencia dialog = new dlaModificarExistencia(new javax.swing.JFrame(), true);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);

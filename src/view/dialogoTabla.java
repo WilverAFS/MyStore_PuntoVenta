@@ -4,11 +4,25 @@
  */
 package view;
 
+import database.BaseDeDatos;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import model.Cliente;
+import model.DescripcionVenta;
+import model.Empleado;
+import model.Producto;
+import model.Puesto;
+import model.Venta;
+
 /**
  *
  * @author Wilver
  */
 public class dialogoTabla extends javax.swing.JDialog {
+    
+    private BaseDeDatos BD;
+    private List<Venta> ventas;
 
     /**
      * Creates new form dialogoTabla
@@ -16,7 +30,77 @@ public class dialogoTabla extends javax.swing.JDialog {
     public dialogoTabla(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        BD = new BaseDeDatos();
+        
     }
+    
+    public dialogoTabla(java.awt.Frame parent, boolean modal, int n) {
+        super(parent, modal);
+        initComponents();
+        BD = new BaseDeDatos();
+        if(n ==1){ cargarVentas(); }
+        if(n ==2){ cargarProductosAgotados(); }
+        if(n ==3){ cargarVentas(); }
+    }
+    
+    public dialogoTabla(java.awt.Frame parent, boolean modal, int n, BaseDeDatos bd) {
+        super(parent, modal);
+        initComponents();
+        BD = bd;
+        if(n ==1){ cargarVentas(); }
+        if(n ==2){ cargarVentas(); }
+        if(n ==3){ cargarVentas(); }
+    }
+    
+    private void cargarVentas(){
+        this.setTitle("VENTAS");
+        this.lblTitulo.setText("Tabla de ventas");
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Folio");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Hora");
+        modelo.addColumn("ID Empleado");
+        modelo.addColumn("ID Cliente");  
+        this.tabla.setModel(modelo);
+        String data[] = new String [5];        
+        for(Venta v: BD.getVentas()){
+            data[0] = String.valueOf(  v.getFolio_venta()  );
+            data[1] =  v.getFecha().toString();
+            data[2] = v.getHora().toString();
+            data[3] = String.valueOf(v.getId_empleado() ) ; 
+            data[4] = String.valueOf( v.getId_cliente() );
+            modelo.addRow(data); //Enviamos una fila al modelo;
+        }        
+    }
+    
+    private void cargarProductosAgotados(){    
+        this.setTitle("PRODUCTOS AGOTADOS");
+        this.lblTitulo.setText("Tabla de productos agotados");
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Costo");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Categoria");
+        modelo.addColumn("Descripcion");
+        this.tabla.setModel(modelo);        
+        String data[] = new String[6];
+        
+        for(Producto p: BD.getProductos()){
+            if(p.getExistencia() <= 0){
+                data[0] = String.valueOf(p.getCodigo());                
+                data[1] = p.getNombre();
+                data[2] = String.valueOf(p.getPrecioC());
+                data[3] = String.valueOf(p.getPrecioV());
+                data[4] = p.getCategoriaNombre();
+                data[5] = p.getDescripcion();
+                modelo.addRow(data);
+            }        
+        }
+        
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,8 +122,10 @@ public class dialogoTabla extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        panelTabla.setToolTipText("TABLA");
         panelTabla.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tabla.setAutoCreateRowSorter(true);
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -53,16 +139,16 @@ public class dialogoTabla extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        panelTabla.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 860, 380));
+        panelTabla.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 860, 360));
 
         lblTitulo.setFont(new java.awt.Font("Roboto Slab", 0, 18)); // NOI18N
         lblTitulo.setText("Titulo tabla");
-        panelTabla.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 40));
+        panelTabla.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 770, 40));
 
         jLabel1.setBackground(new java.awt.Color(0, 63, 100));
         jLabel1.setOpaque(true);
-        panelTabla.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 860, 10));
-        panelTabla.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 860, 10));
+        panelTabla.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 880, 10));
+        panelTabla.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 880, 10));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (8).png"))); // NOI18N
         panelTabla.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 420, 37, 60));

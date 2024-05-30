@@ -55,6 +55,18 @@ public class Producto {
     public double getPrecioV() {        return precioV;    }
     public void setPrecioV(double precioV) {        this.precioV = precioV;    }
     
+    public String getCategoriaNombre(){
+        String c ="Desconocido";
+        switch (categoria) {
+            case 1 -> c="Telefonia";
+            case 2 -> c="Computo";
+            case 3 -> c="Tablets";
+            case 4 -> c="Accesorios";
+            case 5 -> c="Otro";
+            default -> c="Desconocido";
+        }
+        return c;
+    }
     
     
 }

@@ -31,7 +31,8 @@ public class dldEditarEmpleado extends javax.swing.JDialog {
         initComponents();
         con = cbd;
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,6 +67,7 @@ public class dldEditarEmpleado extends javax.swing.JDialog {
         txtContraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("EDITAR EMPLEADO");
 
         panelEditarEmpleado.setBackground(new java.awt.Color(255, 255, 255));
         panelEditarEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -154,6 +156,11 @@ public class dldEditarEmpleado extends javax.swing.JDialog {
         btnCancelar.setFont(new java.awt.Font("Roboto Slab", 1, 12)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
         panelEditarEmpleado.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 353, 110, 30));
         panelEditarEmpleado.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 420, 10));
 
@@ -220,7 +227,7 @@ public class dldEditarEmpleado extends javax.swing.JDialog {
     }//GEN-LAST:event_txtApellidoMaternoActionPerformed
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // R
+        // READY
         boolean b = true;
         if(txtID.getText().isBlank() || txtID.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un ID de trabajador", "CAMPO INCOMPLETO", 2); //Advertencia  
@@ -303,6 +310,11 @@ public class dldEditarEmpleado extends javax.swing.JDialog {
             }            
         }        
     }//GEN-LAST:event_btnEdicionActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

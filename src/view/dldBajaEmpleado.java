@@ -32,6 +32,14 @@ public class dldBajaEmpleado extends javax.swing.JDialog {
         this.con = con;
     }
     
+    public void limpiarCampos(){
+        this.txtApellidoMaterno.setText("");
+        this.txtApellidoPaterno.setText("");
+        this.txtClave.setText("");
+        this.txtNombre.setText("");
+        this.txtPuesto.setText("");
+        this.txtUsuario.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,6 +73,7 @@ public class dldBajaEmpleado extends javax.swing.JDialog {
         txtNombre = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("BAJA DE EMPLEADO");
 
         panelBajaDeEmpleados.setBackground(new java.awt.Color(255, 255, 255));
         panelBajaDeEmpleados.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -159,6 +168,7 @@ public class dldBajaEmpleado extends javax.swing.JDialog {
         btnBaja.setFont(new java.awt.Font("Roboto Slab", 1, 12)); // NOI18N
         btnBaja.setForeground(new java.awt.Color(255, 255, 255));
         btnBaja.setText("Baja");
+        btnBaja.setEnabled(false);
         btnBaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBajaActionPerformed(evt);
@@ -210,13 +220,37 @@ public class dldBajaEmpleado extends javax.swing.JDialog {
 
     private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
         //Traer los datos del empleado y mostrarlos
-        int id = Integer.parseInt(this.txtClave.getText());
-        Empleado empleado = con.buscarEmpleado(id);
-        this.txtNombre.setText(empleado.getNombre());
-        this.txtApellidoMaterno.setText(empleado.getApellidoM());
-        this.txtApellidoPaterno.setText(empleado.getApellidoP());
-        this.txtPuesto.setText(String.valueOf(empleado.getId_puesto()));
-        this.txtUsuario.setText(empleado.getUsuario());
+        String i = txtClave.getText();
+        if(i.isBlank() || i.isEmpty()){
+            
+            try {
+                int id = Integer.parseInt(this.txtClave.getText());
+                Empleado empleado = con.buscarEmpleado(id);
+                
+                if(empleado == null){
+                    JOptionPane.showMessageDialog(null, "El ID ingresado no corresponde a ningun empleado", "EMPLEDO NO ENCONTRADO", 2); //Advertencia
+                    limpiarCampos();
+                    
+                } else{
+                    this.btnBaja.setEnabled(true);
+                    this.txtNombre.setText(empleado.getNombre());
+                    this.txtApellidoMaterno.setText(empleado.getApellidoM());
+                    this.txtApellidoPaterno.setText(empleado.getApellidoP());
+                    this.txtPuesto.setText(String.valueOf(empleado.getId_puesto()));
+                    this.txtUsuario.setText(empleado.getUsuario());
+                }
+                
+                
+            } catch (Exception e) {
+                    System.out.println(e);
+                    JOptionPane.showMessageDialog(null, "El ID ingresado no es valido a ningun empleado", "ID INVALIDO", 2); //Advertencia
+                    limpiarCampos();
+            }
+            
+        }
+        
+       
+        
     }//GEN-LAST:event_txtClaveActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed

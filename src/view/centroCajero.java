@@ -19,7 +19,7 @@ public class centroCajero extends javax.swing.JFrame {
         initComponents();
     }
     
-    public JPanel getPanelCentroCajero(){ return this.jPanel1;}
+    public JPanel getPanelCentroCajero(){ return this.panelCentroCaja;}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,7 +30,7 @@ public class centroCajero extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panelCentroCaja = new javax.swing.JPanel();
         jLabel43 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel42 = new javax.swing.JLabel();
@@ -41,20 +41,20 @@ public class centroCajero extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1030, 480));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelCentroCaja.setBackground(new java.awt.Color(255, 255, 255));
+        panelCentroCaja.setPreferredSize(new java.awt.Dimension(1030, 480));
+        panelCentroCaja.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel43.setBackground(new java.awt.Color(0, 0, 0));
         jLabel43.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
         jLabel43.setText("TOTAL");
-        jPanel1.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 433, 100, 50));
-        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 483, 1030, 10));
+        panelCentroCaja.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 433, 100, 50));
+        panelCentroCaja.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 483, 1030, 10));
 
         jLabel42.setBackground(new java.awt.Color(0, 0, 0));
         jLabel42.setFont(new java.awt.Font("Georgia", 1, 36)); // NOI18N
         jLabel42.setText("$");
-        jPanel1.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 430, 40, 50));
+        panelCentroCaja.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 430, 40, 50));
 
         tablaCentroCajero.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -69,14 +69,14 @@ public class centroCajero extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaCentroCajero);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, -1));
+        panelCentroCaja.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, -1));
 
         lblresultado.setBackground(new java.awt.Color(0, 0, 0));
         lblresultado.setFont(new java.awt.Font("Georgia", 1, 36)); // NOI18N
         lblresultado.setText(" 0.00");
-        jPanel1.add(lblresultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 430, 210, 50));
+        panelCentroCaja.add(lblresultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 430, 210, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(panelCentroCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -119,10 +119,10 @@ public class centroCajero extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel lblresultado;
+    private javax.swing.JPanel panelCentroCaja;
     private javax.swing.JTable tablaCentroCajero;
     // End of variables declaration//GEN-END:variables
 }

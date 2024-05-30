@@ -4,11 +4,18 @@
  */
 package view;
 
+import controler.ControladorBD;
+import javax.swing.JOptionPane;
+import model.Producto;
+
 /**
  *
  * @author Wilver
  */
 public class dlaBuscarProducto extends javax.swing.JDialog {
+    
+    private ControladorBD con;
+    private int id = -1;
 
     /**
      * Creates new form dlaBuscarProducto
@@ -16,6 +23,23 @@ public class dlaBuscarProducto extends javax.swing.JDialog {
     public dlaBuscarProducto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        con = new ControladorBD();
+    }
+    
+    public dlaBuscarProducto(java.awt.Frame parent, boolean modal, ControladorBD cbd) {
+        super(parent, modal);
+        initComponents();
+        con = cbd;
+    }
+    
+    private void limpiarCampos(){
+        this.txtCategoria.setText("");
+        this.txtDescripcion.setText("");
+        this.txtExistencias.setText("");
+        this.txtID.setText("");
+        this.txtNombre.setText("");
+        this.txtPrecioC.setText("");
+        this.txtPrecioV.setText("");
     }
 
     /**
@@ -32,15 +56,29 @@ public class dlaBuscarProducto extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        txtCodigoDeProducto = new javax.swing.JTextField();
-        lblDescripcion = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtPrecio = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        lbl1 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        txtID = new javax.swing.JTextField();
+        lbl2 = new javax.swing.JLabel();
+        txtPrecioC = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
+        lbl3 = new javax.swing.JLabel();
+        txtPrecioV = new javax.swing.JLabel();
+        jSeparator7 = new javax.swing.JSeparator();
+        lbl4 = new javax.swing.JLabel();
+        txtCategoria = new javax.swing.JLabel();
+        lbl5 = new javax.swing.JLabel();
+        jSeparator9 = new javax.swing.JSeparator();
+        txtExistencias = new javax.swing.JLabel();
+        lbl6 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDescripcion = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("BUSCAR UN PRODUCTO");
@@ -48,7 +86,8 @@ public class dlaBuscarProducto extends javax.swing.JDialog {
         panelBuscarProducto.setBackground(new java.awt.Color(255, 255, 255));
         panelBuscarProducto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Roboto Slab", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Roboto Slab", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 153));
         jLabel3.setText("Buscar Producto");
         panelBuscarProducto.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 4, 170, 30));
 
@@ -56,7 +95,7 @@ public class dlaBuscarProducto extends javax.swing.JDialog {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (11).png"))); // NOI18N
         panelBuscarProducto.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, -5, 30, 40));
 
-        jLabel8.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
         jLabel8.setText("Producto:");
         panelBuscarProducto.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
@@ -64,60 +103,86 @@ public class dlaBuscarProducto extends javax.swing.JDialog {
         jLabel1.setOpaque(true);
         panelBuscarProducto.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 36, 370, 6));
 
-        txtCodigoDeProducto.setForeground(new java.awt.Color(204, 204, 204));
-        txtCodigoDeProducto.setText("Introduce el codigo del producto");
-        txtCodigoDeProducto.setBorder(null);
-        txtCodigoDeProducto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtCodigoDeProductoMousePressed(evt);
-            }
-        });
-        txtCodigoDeProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoDeProductoActionPerformed(evt);
-            }
-        });
-        panelBuscarProducto.add(txtCodigoDeProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 200, 20));
-
-        lblDescripcion.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
-        lblDescripcion.setText("Aqui se mostrara la descripcion del producto");
-        panelBuscarProducto.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 340, -1));
-
-        jLabel7.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel7.setText("Unidades en almacen:");
-        panelBuscarProducto.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 130, -1));
-
-        txtPrecio.setForeground(new java.awt.Color(204, 204, 204));
-        txtPrecio.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtPrecio.setText("0.00");
-        txtPrecio.setBorder(null);
-        txtPrecio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtPrecioMousePressed(evt);
-            }
-        });
-        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioActionPerformed(evt);
-            }
-        });
-        panelBuscarProducto.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 110, 20));
-
         btnAceptar.setBackground(new java.awt.Color(0, 63, 100));
         btnAceptar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAceptar.setText("Editar Producto");
-        panelBuscarProducto.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 130, -1));
-        panelBuscarProducto.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 330, 10));
+        btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
+        panelBuscarProducto.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, 130, 30));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (8).png"))); // NOI18N
-        panelBuscarProducto.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 37, 60));
+        panelBuscarProducto.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, 37, 60));
 
         jLabel9.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 63, 100));
         jLabel9.setText("MY STORE");
-        panelBuscarProducto.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, -1, 20));
-        panelBuscarProducto.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 370, 10));
+        panelBuscarProducto.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 570, -1, 20));
+        panelBuscarProducto.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 370, 10));
+
+        lbl1.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
+        lbl1.setText("Nombre:");
+        panelBuscarProducto.add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 70, 40));
+
+        txtNombre.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        panelBuscarProducto.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 270, 40));
+        panelBuscarProducto.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 320, 10));
+
+        txtID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIDActionPerformed(evt);
+            }
+        });
+        panelBuscarProducto.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 240, -1));
+
+        lbl2.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
+        lbl2.setText("Precio de compra:  $");
+        panelBuscarProducto.add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 150, 40));
+
+        txtPrecioC.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        panelBuscarProducto.add(txtPrecioC, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 190, 40));
+        panelBuscarProducto.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 320, 10));
+        panelBuscarProducto.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 320, 10));
+
+        lbl3.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
+        lbl3.setText("Precio de venta:      $");
+        panelBuscarProducto.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 150, 40));
+
+        txtPrecioV.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        panelBuscarProducto.add(txtPrecioV, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 180, 40));
+        panelBuscarProducto.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 320, 10));
+
+        lbl4.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
+        lbl4.setText("Categoria:");
+        panelBuscarProducto.add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 100, 40));
+
+        txtCategoria.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        panelBuscarProducto.add(txtCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 240, 40));
+
+        lbl5.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
+        lbl5.setText("Descripcion:");
+        panelBuscarProducto.add(lbl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 100, 30));
+        panelBuscarProducto.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 320, 10));
+
+        txtExistencias.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        panelBuscarProducto.add(txtExistencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, 210, 40));
+
+        lbl6.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
+        lbl6.setText("Existencias:");
+        panelBuscarProducto.add(lbl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 100, 40));
+
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtDescripcion.setRows(5);
+        jScrollPane1.setViewportView(txtDescripcion);
+
+        panelBuscarProducto.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 320, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,27 +192,55 @@ public class dlaBuscarProducto extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCodigoDeProductoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCodigoDeProductoMousePressed
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+        // READY
+        if(txtID.getText().isBlank() || txtID.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese un CODIGO de producto", "CAMPO INCOMPLETO", 2); //Advertencia
+            this.limpiarCampos();
+        }else{
+            
+            try{
+                id = Integer.parseInt(this.txtID.getText());
+                Producto producto = con.buscarProducto(id);
+                
+                if(producto == null){
+                    JOptionPane.showMessageDialog(null, "El CODIGO ingresado no corresponde a ningun producto", "PRODUCTO    NO ENCONTRADO", 2); //Advertencia
+                    this.limpiarCampos();
+                } else{
+                    txtNombre.setText(producto.getNombre());
+                    this.txtPrecioC.setText(String.valueOf(producto.getPrecioC()));
+                    txtPrecioV.setText(String.valueOf(producto.getPrecioV()));
+                    switch (producto.getCategoria()) {
+                        case 1 -> txtCategoria.setText("Telefonia");
+                        case 2 -> txtCategoria.setText("Computo");
+                        case 3 -> txtCategoria.setText("Tablets");
+                        case 4 -> txtCategoria.setText("Accesorios");
+                        case 5 -> txtCategoria.setText("Otro");
+                        default -> txtCategoria.setText("Desconocido");
+                    }
+                    txtDescripcion.setText(producto.getDescripcion());
+                    this.txtExistencias.setText(String.valueOf(producto.getExistencia()));
+                }                
+                
+            } catch(NumberFormatException e){
+                System.out.println(e);
+                JOptionPane.showMessageDialog(null, "El CODIGO ingresado no es una entrada valida", "ENTRADA INVALIDA", 2); //Advertencia
+                this.limpiarCampos();                
+            }         
+        }
+        
+    }//GEN-LAST:event_txtIDActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoDeProductoMousePressed
-
-    private void txtCodigoDeProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoDeProductoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoDeProductoActionPerformed
-
-    private void txtPrecioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPrecioMousePressed
-
-    }//GEN-LAST:event_txtPrecioMousePressed
-
-    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,14 +290,28 @@ public class dlaBuscarProducto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lblDescripcion;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JLabel lbl1;
+    private javax.swing.JLabel lbl2;
+    private javax.swing.JLabel lbl3;
+    private javax.swing.JLabel lbl4;
+    private javax.swing.JLabel lbl5;
+    private javax.swing.JLabel lbl6;
     private javax.swing.JPanel panelBuscarProducto;
-    private javax.swing.JTextField txtCodigoDeProducto;
-    private javax.swing.JTextField txtPrecio;
+    private javax.swing.JLabel txtCategoria;
+    private javax.swing.JTextArea txtDescripcion;
+    private javax.swing.JLabel txtExistencias;
+    private javax.swing.JTextField txtID;
+    private javax.swing.JLabel txtNombre;
+    private javax.swing.JLabel txtPrecioC;
+    private javax.swing.JLabel txtPrecioV;
     // End of variables declaration//GEN-END:variables
 }

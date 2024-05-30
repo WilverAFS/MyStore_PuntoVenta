@@ -149,7 +149,7 @@ public class ControladorBD {
             ps.setString(2, cliente.getNombre());
             ps.setString(3, cliente.getTelefono());
             ps.setString(4, cliente.getCorreo());            
-            ps.executeUpdate();            
+            ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Datos guardados correctamente", "ACTUALIZACION EXISTOSA", 1);
             //Hacer la actualizacion y limpieza desde donde se llame este metodo;
         }
@@ -248,18 +248,18 @@ public class ControladorBD {
     //------------------------------------------------------------------//
     //Metodos de tipo UPDATE para EDITAR
     
-    public void editarProducto(Producto x){
+    public void editarProducto(Producto producto){
         //UPDATE `mystore`.`producto` SET `nombre_p` = 's', `precio_compra_p` = '1', `precio_venta_p` = '2', `categoria_p` = '2', `descripcion_p` = '1', `existencia_p` = '1' WHERE (`codigo_producto` = '400001');
         String query ="UPDATE producto SET nombre_p=?, precio_compra_p=?, precio_venta_p=?, categoria_p=?,  descripcion_p=?, existencia_p=?,  WHERE codigo_producto=?";
         try{
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, x.getNombre());
-            ps.setDouble(2, x.getPrecioC());
-            ps.setDouble(3, x.getPrecioV());
-            ps.setInt(4, x.getCategoria());
-            ps.setString(5, x.getDescripcion());
-            ps.setInt(6, x.getExistencia());
-            ps.setInt(7, x.getCodigo());
+            ps.setString(1, producto.getNombre());
+            ps.setDouble(2, producto.getPrecioC());
+            ps.setDouble(3, producto.getPrecioV());
+            ps.setInt(4, producto.getCategoria());
+            ps.setString(5, producto.getDescripcion());
+            ps.setInt(6, producto.getExistencia());
+            ps.setInt(7, producto.getCodigo());
             
             ps.executeQuery();
             JOptionPane.showMessageDialog(null, "Datos guardados correctamente", "ACTUALIZACION EXISTOSA", 1);

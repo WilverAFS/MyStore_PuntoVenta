@@ -234,6 +234,8 @@ public class lateralCajero extends javax.swing.JFrame {
         FVerDisponibilidad.setLocationRelativeTo(null);
         FVerDisponibilidad.setVisible(true);
         */
+        
+        
         this.dcVerDisponibilidad = new dlcVerDisponibilidad (new javax.swing.JFrame(), true);
         this.dcVerDisponibilidad.setLocationRelativeTo(null);
         this.dcVerDisponibilidad.setVisible(true);

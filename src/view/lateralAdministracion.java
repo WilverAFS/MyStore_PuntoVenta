@@ -11,14 +11,14 @@ import javax.swing.JPanel;
  * @author diego
  */
 public class lateralAdministracion extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form lateralAdministracion
      */
     public lateralAdministracion() {
         initComponents();
     }
-    
+        
     public JPanel getPanelLateralAdministracion () { return this.panelLateralAdmin;}
 
     /**
@@ -204,8 +204,8 @@ public class lateralAdministracion extends javax.swing.JFrame {
 
     private void btnVerVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerVentasActionPerformed
         // TODO add your handling code here:
-        dialogoTabla dialog = new dialogoTabla(new javax.swing.JFrame(), true);
-        dialog.setLocationRelativeTo(null);
+        dialogoTabla dialog = new dialogoTabla(new javax.swing.JFrame(), true, 1);
+        dialog.setLocationRelativeTo(null);        
         dialog.setVisible(true); 
     }//GEN-LAST:event_btnVerVentasActionPerformed
 

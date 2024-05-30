@@ -31,6 +31,15 @@ public class dldBuscarEmpleado extends javax.swing.JDialog {
         initComponents();
         con = cbd;
     }
+    
+    private void limpiarCampos(){
+        this.txtApellidoMaterno.setText("");
+        this.txtApellidoPaterno.setText("");
+        this.txtCodigoDeEmpleado.setText("");
+        this.txtNombre.setText("");
+        this.txtPuesto.setText("");
+        this.txtUsuario.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,6 +72,7 @@ public class dldBuscarEmpleado extends javax.swing.JDialog {
         txtUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("BUSCAR EMPLEADO");
 
         panelBuscarEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -84,6 +94,7 @@ public class dldBuscarEmpleado extends javax.swing.JDialog {
 
         txtCodigoDeEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtCodigoDeEmpleado.setForeground(new java.awt.Color(0, 0, 102));
+        txtCodigoDeEmpleado.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtCodigoDeEmpleado.setBorder(null);
         txtCodigoDeEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -98,7 +109,6 @@ public class dldBuscarEmpleado extends javax.swing.JDialog {
         panelBuscarEmpleado.add(txtCodigoDeEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 240, 30));
 
         txtPuesto.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
-        txtPuesto.setText("Nombre:");
         panelBuscarEmpleado.add(txtPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 210, 40));
 
         btnAceptar.setBackground(new java.awt.Color(0, 63, 100));
@@ -142,19 +152,15 @@ public class dldBuscarEmpleado extends javax.swing.JDialog {
         panelBuscarEmpleado.add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 70, 40));
 
         txtNombre.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
-        txtNombre.setText("Nombre:");
         panelBuscarEmpleado.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 210, 40));
 
         txtApellidoPaterno.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
-        txtApellidoPaterno.setText("Nombre:");
         panelBuscarEmpleado.add(txtApellidoPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 210, 40));
 
         txtApellidoMaterno.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
-        txtApellidoMaterno.setText("Nombre:");
         panelBuscarEmpleado.add(txtApellidoMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 210, 40));
 
         txtUsuario.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
-        txtUsuario.setText("Nombre:");
         panelBuscarEmpleado.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 210, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -181,26 +187,20 @@ public class dldBuscarEmpleado extends javax.swing.JDialog {
         
         if(txtCodigoDeEmpleado.getText().isBlank() || txtCodigoDeEmpleado.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un ID de empleado", "CAMPO INCOMPLETO", 2); //Advertencia     
-            this.txtCodigoDeEmpleado.setText("");
+            this.limpiarCampos();
         }else{
             try{
                 id = Integer.parseInt(this.txtCodigoDeEmpleado.getText());
             } catch(NumberFormatException e){
                 System.out.println(e);
-                this.txtCodigoDeEmpleado.setText("");
+                //JOptionPane.showMessageDialog(null, "El ID ingresado no es una entrada valida", "ENTRADA INVALIDA", 2); //Advertencia
+                this.limpiarCampos();
             }
             
-            Empleado empleado = con.buscarEmpleado(id);
-            
+            Empleado empleado = con.buscarEmpleado(id);            
             if (empleado == null) {
-                String s = "";
                 JOptionPane.showMessageDialog(null, "El ID ingresado no corresponde a ningun empleado", "EMPLEDO NO ENCONTRADO", 2); //Advertencia
-                this.txtCodigoDeEmpleado.setText("");
-                this.txtNombre.setText(s);
-                this.txtApellidoMaterno.setText(s);
-                this.txtApellidoPaterno.setText(s);
-                this.txtPuesto.setText(s);
-                this.txtUsuario.setText(s);
+                this.limpiarCampos();
             } else {
                 this.txtNombre.setText(empleado.getNombre());
                 this.txtApellidoMaterno.setText(empleado.getApellidoM());
