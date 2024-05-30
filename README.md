@@ -58,3 +58,41 @@ El uso de entornos de desarrollo integrados (IDEs) como NetBeans facilita la vis
 **NOTA:** El proyecto fue creado con Windows 11.
 
 
+## API 
+
+### Paquetes
+Para este sistema ocupamos de 6 paquetes, los cuales son: PaqueteModelo, PaqueteVistas, PaqueteControlador, PaqueteBaseDeDatos, PaqueteImagenes y PaqueteEjecutable.
+A continuacion se muestra detalladamente los paquetes con sus contenidos.
+
+
+
+### Paquete de Modelo
+#### Clase Cliente
+
+
+#### Variables
+
+
+
+#### Constructor
+
+#### Metodos
+
+
+
+
+## Instalacion
+Para hacer uso de este componete puedes:
+1. Descargar desde github el proyecto `.ZIP` 
+2. Obtener el repositorio clon desde github.
+Despues simplemente extrae el proyecto en tu ordenar y abrelo desde NetBeans (o el IDE de tu preferencia), luego compila el proyecto verificando que no haya errores.
+![WhatsApp Image 2024-05-29 at 7 47 53 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/cb867cd1-ca53-4464-93ce-64a586c87848)
+
+Para decargarlo con archivo .zip, una vez descragada la carpta, nos dirijimos a la ruta de descarga para descomprimirlo.
+![WhatsApp Image 2024-05-29 at 7 48 33 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/c62116a5-bae5-44cf-8045-f6c3898f31d1)
+![WhatsApp Image 2024-05-30 at 8 36 55 AM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/ed534883-5825-4fb9-ad3d-beef02324f43)
+
+Ahora copiamos y pegamos la carpeta del proyecto en los proyectos de netbeans.
+
+
+
