@@ -1,0 +1,138 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package controler;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.JPanel;
+import model.Empleado;
+import model.Usuario;
+import view.centroAdministracion;
+import view.centroAlmacen;
+import view.centroCajero;
+import view.lateralAdministracion;
+import view.lateralAlmacen;
+import view.lateralCajero;
+import view.login;
+import view.vistaGeneral;
+import view.vistaInicial;
+
+/**
+ *
+ * @author Wilver
+ */
+//UNICO FUNCIONAL 100%  
+
+public class ControladorAlfa  implements ActionListener  {
+    
+    private login vLogin;
+    private vistaGeneral vGeneral;
+    private vistaInicial vInicio;
+    private JPanel pL, pG; 
+    
+    private List<Empleado> listaEmpleados;
+    
+    
+    //Constructor de prueba
+    public ControladorAlfa(){}
+    
+    
+    //Contructor especializado
+    public ControladorAlfa(vistaInicial vInicio, login vLogin, vistaGeneral vGeneral, List<Empleado> listaEmpleados ){
+        this.vInicio= vInicio;    
+        this.vLogin = vLogin;
+        this.vGeneral = vGeneral;
+        this.listaEmpleados = listaEmpleados;
+         
+         //Damos Forma a los paneles
+        this.pL = vLogin.getPanelVistaLogin();
+        this.pG = vGeneral.getPanelVistaGeneral();
+
+        //Agrgamos el evento al boton.
+        this.vLogin.getBtnEntrar().addActionListener(this);
+    }    
+       
+    public void iniciar(){       
+        //Hace visible los paneles de login
+        vInicio.setTitle("INICIAR SESION");
+        vInicio.setSize(this.vGeneral.getSize());
+        vInicio.add(pL);
+        vInicio.revalidate();
+        vInicio.repaint();
+        vInicio.setLocationRelativeTo(null);
+        vInicio.setVisible(true);
+    }    
+    
+    public void definirVista(int nivel){
+        //int nivel = mUsuario.getNivel();
+        switch (nivel){
+            case 1 -> { //Vista de usuario nivel 1 = CAJERO
+                vGeneral.getPanelCentral().add(new centroCajero().getPanelCentroCajero());
+                vGeneral.getPanelLateral().add(new lateralCajero().getPanelLateralCajero());
+                vGeneral.activarNivelUsuario(nivel);
+                
+            }
+            case 2 -> { //Vista de usuario nivel 2 = ALMACEN
+                vGeneral.getPanelCentral().add(new centroAlmacen().getPanelCentroAlmacen());
+                vGeneral.getPanelLateral().add(new lateralAlmacen().getPanelLateralAlmacen());
+                vGeneral.activarNivelUsuario(nivel);
+                
+            }
+            case 3 -> {//Vista de usuario nivel 3 = ADMINISTRACION
+                vGeneral.getPanelCentral().add( new centroAdministracion().getPanelCentroAsministracion());
+                vGeneral.getPanelLateral().add(new lateralAdministracion().getPanelLateralAdministracion());
+                vGeneral.activarNivelUsuario(nivel);
+                
+            }
+            case 10 -> { //Vista de usuario nivel 10 = SUPER ADMIN                
+                //this.vGeneral.getBotonCambiarVista().setVisible(true);
+                //this.vGeneral.getBotonCambiarVista().setEnabled(true);
+                this.vGeneral.getPanelCentral().setVisible(false);
+                this.vGeneral.getPanelLateral().setVisible(false);
+                vGeneral.activarNivelUsuario(nivel);               
+            }
+            default -> System.out.println("Error fatal en el nivel de usuario, revisarlo desde el construtor o en la base de datos");        
+        }                
+    }
+    
+    public void verificarUsuario(String usuario, String contraseña){
+        boolean existe = false;        
+        int nivel=0;
+        //Verifica las credenciales dadas y muestra las vistas correspondientes si existe
+        for( Empleado empleado: listaEmpleados ){ //Recorremos la lista de empleado
+            if(empleado.validarUsuario(usuario, contraseña)  ){ 
+                //Si es true econtramos al empleado y definimos el nivel de vista segun esta coincidencia
+                existe = true;
+                nivel = empleado.getNivel();
+            } 
+        }
+        
+        if(existe){ //Si ecxiste inicializamos todo
+                this.definirVista(nivel);
+                this.iniciarVista(nivel);
+        } else {
+            vLogin.mostrarMensaje("ERROR  en las credenciales");
+        }
+        
+    }
+    
+    public void iniciarVista(int nivel){
+        vLogin.mostrarMensaje("Bienvenido usuario de nivel: " + nivel );
+        //Sustitucion de vista        
+        this.vInicio.remove(pL);
+        this.vInicio.setTitle("My Store General");
+        this.vInicio.add(pG);
+        this.vInicio.revalidate();
+        this.vInicio.repaint();
+    }    
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //Evento del boton ENTRAR al iniciar sesion
+        this.verificarUsuario(vLogin.getUsuario(), vLogin.getContraseña()); 
+    }
+    
+}

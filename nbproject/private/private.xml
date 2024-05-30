@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="8">
+        <file>
+            <url>src/view/vistaGeneral.java</url>
+            <bookmark id="6">
+                <name/>
+                <line>474</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/mysistem/pruebaInicioSuper.java</url>
+            <bookmark id="7">
+                <name/>
+                <line>8</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/controler/ControladorUsuarioLogin.java</url>
+            <bookmark id="5">
+                <name/>
+                <line>37</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/mysistem/Test.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>22</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem/src/ejecutable/Prueba1.java</file>
+            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem/src/view/lateralAdministracion.java</file>
+            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem/src/view/dialogoTabla.java</file>
+            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem/src/view/vistaGeneral.java</file>
+            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem/src/controler/ControladorBD.java</file>
+            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem/src/database/BaseDeDatos.java</file>
+        </group>
+    </open-files>
+</project-private>
