@@ -759,24 +759,142 @@ Esta clase representa un diálogo para recuperar la contraseña de acceso al sis
 ![WhatsApp Image 2024-05-31 at 12 26 18 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/01e1eb04-1d27-433b-ac05-c3af3cfa1362)
 
 
+### Clase dvlRecuperarContraseñaUsuario
+
+Esta clase representa un diálogo que muestra una lista de usuarios para recuperar sus contraseñas.
+
+#### Constructor
+| Nombre                            | Parámetros                   | Descripción                                           |
+| :-------------------------------- | ---------------------------- | ---------------------------------------------------- |
+| dvlRecuperarContraseñaUsuario     | java.awt.Frame parent, boolean modal | Constructor que inicializa el diálogo con el frame principal y el estado modal. |
+
+#### Métodos
+| Nombre                   | Parámetros                    | Descripción                                           |
+| :----------------------- | ---------------------------- | ---------------------------------------------------- |
+| btnMostrarContraseña     | java.awt.event.ActionEvent evt | Abre un nuevo diálogo para mostrar la contraseña del usuario seleccionado. |
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 28 43 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/fad71d0f-077b-4d65-a54f-77209f458dda)
+
+
+### Clase dvlValoresIniciales
+
+Esta clase representa un diálogo para ingresar los valores iniciales de la caja.
+
+#### Constructor
+| Nombre               | Parámetros                  | Descripción                                           |
+| :------------------- | --------------------------- | ---------------------------------------------------- |
+| dvlValoresIniciales  | java.awt.Frame parent, boolean modal | Constructor que inicializa el diálogo con el frame principal y el estado modal. |
+
+#### Métodos
+| Nombre              | Parámetros                    | Descripción                                           |
+| :------------------ | ---------------------------- | ---------------------------------------------------- |
+| btnAceptar          | java.awt.event.ActionEvent evt | Obtiene el dinero ingresado y abre un nuevo diálogo de confirmación con el monto. |
+| btnCancelar         | java.awt.event.ActionEvent evt | Cierra el diálogo actual. |
+| txtDineroEnCajaActionPerformed | java.awt.event.ActionEvent evt | Método de acción para el campo de texto del dinero en caja. |
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 30 01 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/b7794cf0-5a22-40ec-a419-bc6f0a77fd86)
+
+
+### Clase dvlValoresInicialesConfirmacion
+
+Esta clase representa un diálogo de confirmación para los valores iniciales de la caja.
+
+#### Constructor
+| Nombre                                 | Parámetros                                          | Descripción                                           |
+| :------------------------------------- | --------------------------------------------------- | ---------------------------------------------------- |
+| dvlValoresInicialesConfirmacion        | java.awt.Frame parent, boolean modal                | Constructor que inicializa el diálogo con el frame principal y el estado modal. |
+| dvlValoresInicialesConfirmacion        | java.awt.Frame parent, boolean modal, String valor | Constructor que inicializa el diálogo con el frame principal, el estado modal y el valor ingresado para mostrar en el diálogo. |
+
+#### Métodos
+| Nombre          | Parámetros                    | Descripción                                           |
+| :-------------- | ---------------------------- | ---------------------------------------------------- |
+| btnCancelar     | java.awt.event.ActionEvent evt | Cierra el diálogo actual. |
+
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 32 17 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/1c3e93c4-a48f-4bcf-9afb-fd15f33b066d)
 
 
 
+### Clase finalRecuperarContraseña
+
+Esta clase representa una ventana que muestra la contraseña recuperada del usuario.
+
+#### Constructor
+| Nombre                        | Parámetros | Descripción                                                  |
+| :---------------------------- | ---------- | ----------------------------------------------------------- |
+| finalRecuperarContraseña      |            | Constructor que inicializa la ventana y sus componentes.    |
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 33 31 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/d7556ae7-3c8b-4bc7-a241-7b65bb532150)
+
+
+### Clase lateralAdministracion
+
+Esta clase representa una ventana que muestra las opciones de administración.
+
+#### Constructor
+| Nombre               | Parámetros | Descripción                                                  |
+| :------------------- | ---------- | ----------------------------------------------------------- |
+| lateralAdministracion|            | Constructor que inicializa la ventana y sus componentes.    |
+
+#### Métodos
+| Nombre                     | Parámetros                 | Descripción                                                  |
+| :------------------------- | -------------------------- | ----------------------------------------------------------- |
+| getPanelLateralAdministracion |                            | Retorna el panel lateral de administración.              |
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 34 41 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/8a05e416-8772-4c91-a212-272c2a4a55a4)
+
+
+### Clase lateralAlmacen
+
+Esta clase representa una ventana que muestra las opciones de almacenamiento.
+
+#### Constructor
+| Nombre               | Parámetros | Descripción                                                  |
+| :------------------- | ---------- | ----------------------------------------------------------- |
+| lateralAlmacen       |            | Constructor que inicializa la ventana y sus componentes.    |
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 35 55 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/1377cb6c-f6a3-4eb8-ab18-a502f88385d4)
+
+
+### Clase lateralCajero
+
+Esta clase representa una ventana que muestra las opciones de caja para un cajero.
+#### Constructor
+| Nombre               | Parámetros | Descripción                                                  |
+| :------------------- | ---------- | ----------------------------------------------------------- |
+| lateralCajero       |            | Constructor que inicializa la ventana y sus componentes.    |
+
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 37 31 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/3bffab68-6db8-462c-82e1-0a0fa35edd2f)
 
 
 
+### Clase login
+
+Esta clase representa la ventana de inicio de sesión.
+### Constructor
+| Nombre       | Parámetros | Descripción                               |
+| :----------- | ---------- | ---------------------------------------- |
+| login        |            | Constructor que inicializa la ventana y sus componentes. |
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 40 01 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/3b1a4479-4cce-4b10-b83c-14539e41442a)
+
+
+### Clase valoresIniciales
+
+Esta clase representa la ventana para ingresar los valores iniciales al abrir la caja.
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 41 40 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/2948abaf-c212-4f42-968a-1198edf0f87c)
 
 
 
-
-
-
-
-
-
-
-
-
+### Clase vistaGeneral
+Esta clase representa la interfaz principal de un sistema de gestión de tienda. Permite al usuario acceder a diferentes funcionalidades como ventas, gestión de clientes, gestión de productos, movimientos de almacén, impresión de reportes y generación de gráficos.
+### Constructor
+| Nombre       | Parámetros | Descripción                               |
+| :----------- | ---------- | ---------------------------------------- |
+|vistaGeneral	|Ninguno|	Constructor que inicializa la interfaz de usuario y establece el estado inicial de los componentes.|
+|vistaGeneral(boolean b)	|boolean b|	Constructor utilizado para realizar pruebas, permitiendo establecer el estado de visibilidad de los botones.|
 
 
 
