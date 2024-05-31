@@ -67,6 +67,7 @@ A continuacion se muestra detalladamente los paquetes con sus contenidos.
 
 
 ### Paquete de Modelo
+
 ### Clase Cliente
 Esta clase representa un cliente y contiene información relevante como su nombre, teléfono, correo electrónico y un identificador único.
 
@@ -297,6 +298,200 @@ Esta clase representa un usuario del sistema, incluyendo detalles como el nombre
 |public	|void|	setFecha	|(Date fecha)|	Establece la fecha en que se realizó la venta.|
 |public|	Time|	getHora|	()|	Devuelve la hora en que se realizó la venta.|
 |public|	void	|setHora	|(Time hora)|	Establece la hora en que se realizó la venta.|
+
+
+### Paquete de Controlador.
+
+### Clase ControladorAlfa
+Esta clase actúa como controlador para manejar las interacciones de la vista con el modelo, específicamente para la autenticación y la asignación de vistas basadas en los niveles de usuario.
+
+#### Variables
+| Tipo	| Nombre	| Descripción  |
+| :------------ |---------------| -----|
+|login|	vLogin	|Instancia de la vista de login.|
+|vistaGeneral	|vGeneral	|Instancia de la vista general de la aplicación.|
+|vistaInicial|vInicio|	Instancia de la vista inicial de la aplicación.|
+|JPanel	|pL|	Panel lateral para la vista de login.|
+|JPanel	|pG|	Panel general para la vista principal.|
+List<Empleado>|	listaEmpleados	|Lista de empleados para verificación de credenciales.|
+
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|ControladorAlfa|	()	|Constructor vacío utilizado para pruebas.|
+|ControladorAlfa	|(vistaInicial vInicio, login vLogin, vistaGeneral vGeneral, List<Empleado> listaEmpleados)|	Constructor completo que inicializa el controlador con las vistas y la lista de empleados proporcionados.|
+
+#### Metodos
+| Tipo	| Return	| Nombre	| Parámetros	| Descripción|
+| :--------| :------------ |---------------| --------| --------|
+|public|  void|	iniciar|	()|	Hace visible la vista de inicio con el panel de login.|
+|public|	void	|definirVista|	(int nivel)|	Define la vista según el nivel de usuario proporcionado.|
+|public|	void|	verificarUsuario	|(String usuario, String contraseña)	|Verifica las credenciales del usuario y muestra las vistas correspondientes si las credenciales son correctas.|
+|public|	void|	iniciarVista	|(int nivel)|	Inicia la vista principal reemplazando la vista de login.|
+|public|	void|	actionPerformed|	(ActionEvent e)|	Método sobrescrito para manejar el evento de acción del botón "Entrar".|
+
+
+### Clase ControladorBD
+Esta clase actúa como controlador para interactuar con la base de datos y realizar operaciones de búsqueda, inserción, edición y eliminación de datos.
+#### Variables
+| Tipo	| Nombre	| Descripción  |
+| :------------ |---------------| -----|
+|Connection	|con|	Objeto de conexión a la base de datos.|
+|BaseDeDatos|	BD	|Instancia de la clase BaseDeDatos para acceder a los datos.|
+|int|	nCliente	|Número total de clientes en la base de datos.|
+|int	|nVenta	|Número total de ventas en la base de datos.|
+|int|	nEmpleado|	Número total de empleados en la base de datos.|
+|int|	nPuesto|	Número total de puestos en la base de datos.|
+
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|ControladorBD	|(BaseDeDatos BD)	|Constructor que inicializa el controlador con una instancia de BaseDeDatos.|
+|ControladorBD|	()|	Constructor de prueba que establece una nueva conexión y obtiene los datos de la base de datos.|
+
+#### Metodos
+| Tipo	| Return	| Nombre	| Parámetros	| Descripción|
+| :--------| :------------ |---------------| --------| --------|
+|public|	Producto	|buscarProducto	|(int id)	|Busca un producto por su ID en la base de datos.|
+|public	|Empleado|	buscarEmpleado|	(int id)	|Busca un empleado por su ID en la base de datos.|
+|public|	Cliente	buscarCliente	|(int id)	|Busca un cliente por su ID en la base de datos.|
+|public	|Cliente|	buscarTelefonoCliente	|(String tel)	|Busca un cliente por su número de teléfono en la base de datos.|
+|public|	Puesto|	buscarPuesto	|(int id)|	Busca un puesto por su ID en la base de datos.|
+|public|	Venta|buscarVenta	|(int folio)|	Busca una venta por su folio en la base de datos.|
+|public|	List<DescripcionVenta>	|getDescripcionesXventa	|(int folio)	|Obtiene las descripciones de venta para un folio de venta dado.|
+|public|	int|	getnCliente|	()|	Obtiene el número total de clientes en la base de datos.|
+|public|	int|	getnVenta	|()|	Obtiene el número total de ventas en la base de datos.|
+|public|	int|	getnEmpleado|	()|	Obtiene el número total de empleados en la base de datos.|
+|public	|int|	getnPuesto|	()	|Obtiene el número total de puestos en la base de datos.|
+|public|	int	|getNPCategoria	|(int n)|	Obtiene el número total de productos por categoría en la base de datos.|
+|public	|void|	insertarProducto|	(Producto producto)|	Inserta un nuevo producto en la base de datos.|
+|public|	void	|insertarCliente|	(Cliente cliente)	|Inserta un nuevo cliente en la base de datos.|
+|public|	void|	insertarPuesto	|(Puesto puesto)|	Inserta un nuevo puesto en la base de datos.|
+|public	|void	|insertarEmpleado	|(Empleado empleado)	|Inserta un nuevo empleado en la base de datos.|
+|public	|void	|insertarVenta|	(Venta venta)|	Inserta una nueva venta en la base de datos.|
+|public|	void	|insertarDescripcionVenta	|(DescripcionVenta dVenta)	|Inserta una nueva descripción de venta en la base de datos.|
+|public|	void|	editarProducto	|(Producto x)|	Edita un producto en la base de datos.|
+|public|	void|	cambiarExistenciaxProducto	|(int id, int existencia)	|Cambia la existencia de un producto en la base de datos.|
+|public	|void	|editarPuesto|	(Puesto x)	|Edita un puesto en la base de datos.|
+|public|	void	|editarCliente	|(Cliente cliente)	|Edita un cliente en la base de datos.|
+|public	|void	|editarEmpleado	|(Empleado empleado)|	Edita un empleado en la base de datos.|
+|public|	void	|editarVenta	|(Venta venta)	|Edita una venta en la base de datos.|
+|public	|void|	eliminarProducto|(int id)|	Elimina un producto de la base de datos.|
+|public	|void	|eliminarEmpleado	|(int id)|	Elimina un empleado de la base de datos.|
+|public	|void|	eliminarPuesto|	(int id)	|Elimina un puesto de la base de datos.|
+|public|	void|	eliminarCliente|	(int id)|	Elimina un cliente de la base de datos.|
+|public|	void|	eliminarVenta	|(int id)	|Elimina una venta de la base de datos.|
+
+### Clase ControladorProducto
+Esta clase actúa como controlador para interactuar con la lista de productos y realizar operaciones de búsqueda y verificación.
+#### Variables
+| Tipo	| Nombre	| Descripción  |
+| :------------ |---------------| -----|
+|List<Producto>|	productos	|Lista de productos disponibles.|
+|Producto	|producto	|Producto actual seleccionado.|
+
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|ControladorProducto|	()	|Constructor que inicializa el controlador sin conexión, obteniendo la lista de productos de la base de datos.|
+|ControladorProducto	|(List<Producto> productos)	|Constructor que inicializa el controlador con una lista de productos proporcionada.|
+
+#### Metodos
+| Tipo	| Return	| Nombre	| Parámetros	| Descripción|
+| :--------| :------------ |---------------| --------| --------|
+|public|	Producto|	buscarProducto	|(int id)|	Busca un producto por su ID en la lista de productos.|
+|public|	Producto	|buscarProducto|	(String id)	|Busca un producto por su ID en la lista de productos.|
+|public|	boolean|	existeProducto	|(int id)	|Verifica si un producto existe en la lista por su ID.|
+|public|	boolean|	existeProducto|	(String id)|	Verifica si un producto existe en la lista por su ID.|
+
+### Clase ControladorUsuarioLogin
+Esta clase actúa como controlador para manejar las interacciones entre la vista de login, el modelo de usuario y la vista general de la aplicación.
+#### Variables
+| Tipo	| Nombre	| Descripción  |
+| :------------ |---------------| -----|
+|login|	vLogin|	Instancia de la vista de login.|
+|Usuario	|mUsuario|	Instancia del modelo de usuario.|
+|vistaGeneral|	vGeneral	|Instancia de la vista general de la aplicación.|
+
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|ControladorUsuarioLogin|	(Usuario mUsuario, login vLogin, vistaGeneral vGeneral)|	Constructor que inicializa el controlador con las instancias proporcionadas de usuario, vista de login y vista general. También agrega un ActionListener al botón de entrada en la vista de login.|
+
+#### Metodos
+| Tipo	| Return	| Nombre	| Parámetros	| Descripción|
+| :--------| :------------ |---------------| --------| --------|
+|public|	void	|iniciar	|()	|Hace visible la vista de login.|
+|public|	void|	actionPerformed	|(ActionEvent e)|	Método sobrescrito para manejar el evento de acción del botón "Entrar" en la vista de login.|
+|public|	void|	verificarUsuario|	(String usuario, String contraseña)|	Verifica las credenciales del usuario proporcionadas y muestra la vista general si son correctas, de lo contrario, muestra un mensaje de error en la vista de login.|
+
+### Clase controladorInicio
+Esta clase actúa como controlador para manejar las interacciones entre la vista inicial de sesión, la vista de login, el modelo de usuario y la vista general de la aplicación.
+#### Variables
+| Tipo	| Nombre	| Descripción  |
+| :------------ |---------------| -----|
+|login|	vLogin	|Instancia de la vista de login.|
+|Usuario	|mUsuario	|Instancia del modelo de usuario.|
+|vistaGeneral|	vGeneral	|Instancia de la vista general de la aplicación.|
+|vistaInicial	|vInicio	|Instancia de la vista inicial de sesión.|
+|JPanel	|pL|	Panel lateral para la vista de login.|
+|JPanel|	pG	|Panel general para la vista principal.|
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|controladorInicio	|(vistaInicial vInicio, login vLogin, Usuario mUsuario, vistaGeneral vGeneral)|	Constructor que inicializa el controlador con las instancias proporcionadas de la vista inicial, la vista de login, el modelo de usuario y la vista general. Además, agrega un ActionListener al botón de entrada en la vista de login.|
+#### Metodos
+| Tipo	| Return	| Nombre	| Parámetros	| Descripción|
+| :--------| :------------ |---------------| --------| --------|
+|public|	void	|iniciar|	()	|Hace visible la vista inicial de sesión con el panel de login.|
+|public	|void	|definirVista|	()|	Define la vista según el nivel de usuario proporcionado.|
+|public|	void|	verificarUsuario|	(String usuario, String contraseña)|	Verifica las credenciales del usuario proporcionadas y muestra la vista general si son correctas, de lo contrario, muestra un mensaje de error en la vista de login.|
+|public	|void	|actionPerformed	|(ActionEvent e)	|Método sobrescrito para manejar el evento de acción del botón "Entrar" en la vista de login. Llama a los métodos definirVista() y verificarUsuario() para cambiar la vista y verificar las credenciales respectivamente.|
+
+
+### Paquete de DataBase
+
+### Clase ConexionBD
+Esta clase se encarga de establecer la conexión con la base de datos MySQL utilizada por la aplicación.
+
+#### Variables
+| Tipo	| Nombre	| Descripción  |
+| :------------ |---------------| -----|
+|Connection|	con|	Objeto de conexión utilizado para interactuar con la base de datos.|
+|String	|URL|	URL de conexión a la base de datos MySQL.|
+|String|	USER|	Nombre de usuario para acceder a la base de datos.|
+|String|	CLAVE|	Contraseña para acceder a la base de datos.|
+
+#### Metodos
+| Tipo	| Return	| Nombre	| Parámetros	| Descripción|
+| :--------| :------------ |---------------| --------| --------|
+|public|	Connection	|conectar	|()	|Establece la conexión con la base de datos utilizando la URL, nombre de usuario y contraseña especificados. Retorna el objeto de conexión establecido. Si ocurre algún error durante la conexión, muestra un mensaje de error en la consola.|
+
+### Clase BaseDeDatos
+Esta clase se encarga de gestionar la conexión con la base de datos y cargar los datos necesarios en listas de objetos correspondientes a las entidades de la base de datos.
+#### Variables
+| Tipo	| Nombre	| Descripción  |
+| :------------ |---------------| -----|
+|ConexionBD	|conexion	|Objeto para establecer la conexión con la base de datos.|
+|Connection|	con	|Objeto de conexión utilizado para interactuar con la base de datos.|
+|List<Producto>	|productos	|Lista de productos cargados desde la base de datos.|
+|List<Empleado>	|empleados	|Lista de empleados cargados desde la base de datos.|
+|List<Puesto>|	puestos	|Lista de puestos cargados desde la base de datos.|
+|List<Venta>	|ventas	|Lista de ventas cargadas desde la base de datos.|
+|List<Cliente>|	clientes	|Lista de clientes cargados desde la base de datos.|
+|List<DescripcionVenta>|	descripcionesVentas|	Lista de descripciones de ventas cargadas desde la base de datos.|
+#### Constructor
+| Nombre	| Descripción|
+| :------------ | -----|
+|BaseDeDatos()|	Constructor |que inicializa las listas de objetos y carga los datos desde la base de datos.
+
+
+
+
+
+
+
+
 
 
 
