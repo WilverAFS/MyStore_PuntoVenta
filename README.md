@@ -142,9 +142,161 @@ Esta clase representa a un empleado y extiende la clase Usuario. Contiene inform
 |`Puesto`	|`puestoE`	|`Almacena el objeto puesto relacionado con el empleado.`|
 
 #### Constructor
+|Nombre|	Parámetros	|Descripción|
+| :------------ |---------------| -----|
+|`Empleado`|	`()`|	`Constructor de prueba que inicializa un empleado con valores predeterminados.`|
+|`Empleado`|	`(int nivel)`|	`Constructor de prueba que inicializa un empleado con valores predeterminados y asigna un nivel de usuario.`|
+|`Empleado`|	`(int idEmpleado, String nombre, String apellidoP, String apellidoM, String usuario, String contraseña, int id_puesto)`|	`Constructor completo que inicializa un empleado con los valores proporcionados para idEmpleado, nombre, apellidoP, apellidoM, usuario, contraseña e id_puesto.`|
+|`Empleado`	|`(int idEmpleado, String nombre, String apellidoP, String apellidoM, String usuario, String contraseña, Puesto puesto)`	|`Constructor completo que inicializa un empleado con los valores proporcionados para idEmpleado, nombre, apellidoP, apellidoM, usuario, contraseña, y un objeto puesto.`|
+
 
 #### Metodos
+|Tipo	|Return	|Nombre|	Parámetros	|Descripción|
+| :--------| :------------ |---------------| --------| --------|
+|`public`|	`int`	|`getIdEmpleado`| `()`|	`Devuelve el identificador único del empleado.`|
+|`public`	|`void`|	`setIdEmpleado`|	`(int idEmpleado)`	|`Establece el identificador único del empleado.`|
+|`public`|	`String`|	`getNombre`|	`()`|	`Devuelve el nombre del empleado.`|
+|`public`|	`void`	|`setNombre`	|`(String nombre)`	|`Establece el nombre del empleado.`|
+|`public`	|`String`|	`getApellidoP`|	`()`	|`Devuelve el apellido paterno del empleado.`|
+|`public`	|`void`|	`setApellidoP`|	`(String apellidoP)`|	`Establece el apellido paterno del empleado.`|
+|`public`|	`String`|	`getApellidoM`	|`()`|	`Devuelve el apellido materno del empleado.`|
+|`public`|	`void`|	`setApellidoM`	|`(String apellidoM)`|	`Establece el apellido materno del empleado.`|
+|`public`	|`int|	`getId_puesto`|	`()`	|`Devuelve el identificador del puesto del empleado.`|
+|`public`|	`void`	|`setId_puesto`	|`(int id_puesto)`|	`Establece el identificador del puesto del empleado.`|
 
+
+### Clase Producto
+Esta clase representa un producto y contiene información relevante como nombre, descripción, código, existencia, categoría, precio de compra y precio de venta.
+#### Variables
+
+|Tipo|	Nombre	|Descripción|
+| :------------ |---------------| -----|
+|String	|nombre	|Almacena el nombre del producto.|
+|String|	descripcion|	Almacena la descripción del producto.|
+|int	|codigo	|Almacena el código del producto.|
+|int	|existencia|	Almacena la cantidad de productos en existencia.|
+|int|	categoria	|Almacena la categoría del producto.|
+|double	|precioC|	Almacena el precio de compra del producto.|
+|double|	precioV	|Almacena el precio de venta del producto.|
+
+#### Constructor
+|Nombre|	Parámetros	|Descripción|
+| :------------ |---------------| -----|
+|Producto|	()	|Constructor de prueba que inicializa un producto con valores predeterminados.|
+|Producto	|(int codigo, String nombre, double precioC, double precioV, int categoria, String descripcion, int existencia)	|Constructor completo que inicializa un producto con los valores proporcionados para codigo, nombre, precioC, precioV, categoria, descripcion y existencia.|
+
+#### Metodos
+|Tipo	|Return	|Nombre|	Parámetros	|Descripción|
+| :--------| :------------ |---------------| --------| --------|
+|public	|String	|getNombre	|()	|Devuelve el nombre del producto.|
+|public	|void	|setNombre	|(String nombre)	|Establece el nombre del producto.|
+|public|	String	|getDescripcion	|()|	Devuelve la descripción del producto.|
+|public|	void|	setDescripcion	|(String descripcion)	|Establece la descripción del producto.|
+|public|	int|	getCategoria|	()	|Devuelve la categoría del producto.|
+|public|	void	|setCategoria|	(int categoria)	|Establece la categoría del producto.|
+|public|	int	|getCodigo|	()	|Devuelve el código del producto.|
+|public	|void|	setCodigo	|(int codigo)|	Establece el código del producto.|
+|public|	int	|getExistencia	|()|	Devuelve la cantidad de productos en existencia.|
+|public|	void|	setExistencia|	(int existencia)	|Establece la cantidad de productos en existencia.|
+|public	|double	|getPrecioC|	()|	Devuelve el precio de compra del producto.|
+|public	|void|	setPrecioC	|(double precioC)	|Establece el precio de compra del producto.|
+|public	|double	|getPrecioV|	()|	Devuelve el precio de venta del producto.|
+|public|	void|	setPrecioV	|(double precioV)	|Establece el precio de venta del producto.|
+
+
+### Clase Puesto
+Esta clase representa un puesto dentro de una organización, incluyendo detalles como el identificador del puesto, nombre, descripción, sueldo y nivel.
+#### Variables
+
+|Tipo|	Nombre	|Descripción|
+| :------------ |---------------| -----|
+|int|	id_puesto	|Almacena el identificador único del puesto.|
+|int	|nivel	|Almacena el nivel asignado al puesto, que puede ser usado para determinar jerarquías o permisos.|
+|String|	nombre|	Almacena el nombre del puesto.|
+|String	|descripcion|	Almacena la descripción del puesto.|
+|double	|sueldo|	Almacena el sueldo asociado al puesto.|
+
+#### Constructor
+|Nombre|	Parámetros	|Descripción|
+| :------------ |---------------| -----|
+|Puesto|	()|	Constructor de prueba que inicializa un puesto sin valores.|
+|Puesto	|(int id_puesto, String nombre, String descripcion, double sueldo, int nivel)	|Constructor completo que inicializa un puesto con los valores proporcionados para id_puesto, nombre, descripcion, sueldo y nivel.|
+
+#### Metodos
+|Tipo	|Return	|Nombre|	Parámetros	|Descripción|
+| :--------| :------------ |---------------| --------| --------|
+|public|	int	|getId_puesto	|()|	Devuelve el identificador único del puesto.|
+|public	|void	|setId_puesto	|(int id_puesto)	|Establece el identificador único del puesto.|
+|public	|String	|getNombre	|()	|Devuelve el nombre del puesto.|
+|public|	void	|setNombre	|(String nombre)|	Establece el nombre del puesto.|
+|public	|String|	getDescripcion	|()|	Devuelve la descripción del puesto.|
+|public	|void|	setDescripcion|	(String descripcion)|	Establece la descripción del puesto.|
+|public|	double|	getSueldo|	()|	Devuelve el sueldo asociado al puesto.|
+|public|	void|	setSueldo|	(double sueldo)|	Establece el sueldo asociado al puesto.|
+|public|	int|	getNivel|	()	|Devuelve el nivel asignado al puesto.|
+|public	|void|	setNivel|	(int nivel)	|Establece el nivel asignado al puesto.|
+
+
+### Clase Usuario
+Esta clase representa un usuario del sistema, incluyendo detalles como el nombre de usuario, contraseña y nivel de acceso.
+#### Variables
+
+|Tipo|	Nombre	|Descripción|
+| :------------ |---------------| -----|
+|String|	usuario|	Almacena el nombre de usuario.|
+|String|	contraseña	|Almacena la contraseña del usuario.|
+|int|	nivel	|Almacena el nivel de acceso del usuario.|
+
+#### Constructor
+|Nombre|	Parámetros	|Descripción|
+| :------------ |---------------| -----|
+|Usuario	|()|	Constructor de prueba que inicializa un usuario con valores predeterminados.|
+|Usuario|	(int nivel)|	Constructor de prueba que inicializa un usuario con un nivel de acceso especificado y valores predeterminados para el nombre de usuario y contraseña.|
+|Usuario|	(String usuario, String contraseña, int nivel)	|Constructor completo que inicializa un usuario con los valores proporcionados para usuario, contraseña y nivel.|
+
+#### Metodos
+|Tipo	|Return	|Nombre|	Parámetros	|Descripción|
+| :--------| :------------ |---------------| --------| --------|
+|public	|String	|getUsuario|	()	|Devuelve el nombre de usuario.|
+|public|	void	|setUsuario|	(String usuario)|	Establece el nombre de usuario.|
+|public	|String	|getContraseña	|()	|Devuelve la contraseña del usuario.|
+|public|	void	|setContraseña|	(String contraseña)	|Establece la contraseña del usuario.|
+|public|	int	getNivel|	()	|Devuelve el nivel de acceso del usuario.|
+|public|	void	|setNivel|	(int nivel)|	Establece el nivel de acceso del usuario.|
+|public	|boolean	validarUsuario|	(String nombreUsuario, String contrasena)|	Comprueba si las credenciales proporcionadas coinciden con las del usuario.|
+
+
+### Clase Venta
+
+#### Variables
+
+|Tipo|	Nombre	|Descripción|
+| :------------ |---------------| -----|
+|int	|folio_venta	|Almacena el folio de la venta, un identificador único.|
+|int	|id_empleado	|Almacena el identificador del empleado que realizó la venta.|
+|int|	id_cliente	|Almacena el identificador del cliente que realizó la compra.|
+|Date|	fecha	|Almacena la fecha en que se realizó la venta.|
+|Time	|hora|	Almacena la hora en que se realizó la venta.|
+
+#### Constructor
+|Nombre|	Parámetros	|Descripción|
+| :------------ |---------------| -----|
+|Venta|	()|	Constructor vacío utilizado para pruebas.|
+|Venta	|(int folio_venta, Date fecha, Time hora, int id_empleado, int id_cliente)	|Constructor completo que inicializa una venta con los valores proporcionados para folio_venta, fecha, hora, id_empleado e id_cliente.|
+
+#### Metodos
+|Tipo	|Return	|Nombre|	Parámetros	|Descripción|
+| :--------| :------------ |---------------| --------| --------|
+|public	|int	|getFolio_venta|	()	|Devuelve el folio de la venta.|
+|public	|void	|setFolio_venta	|(int folio_venta)	|Establece el folio de la venta.|
+|public|	int	|getId_empleado	|()	|Devuelve el identificador del empleado que realizó la venta.|
+|public|	void|	setId_empleado	|(int id_empleado)	|Establece el identificador del empleado que realizó la venta.|
+|public|	int|	getId_cliente|	()	|Devuelve el identificador del cliente que realizó la compra.|
+|public|	void|	setId_cliente|	(int id_cliente)|	Establece el identificador del cliente que realizó la compra.|
+|public|	Date|	getFecha	|()	|Devuelve la fecha en que se realizó la venta.|
+|public	|void|	setFecha	|(Date fecha)|	Establece la fecha en que se realizó la venta.|
+|public|	Time|	getHora|	()|	Devuelve la hora en que se realizó la venta.|
+|public|	void	|setHora	|(Time hora)|	Establece la hora en que se realizó la venta.|
 
 
 
