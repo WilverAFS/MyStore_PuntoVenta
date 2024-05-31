@@ -487,6 +487,147 @@ Esta clase se encarga de gestionar la conexión con la base de datos y cargar lo
 
 
 
+### Paquete de Vistas
+### Clase centroAdministracion
+Esta clase representa la vista del centro de administración en la interfaz de usuario.
+
+#### Variables
+| Tipo	| Nombre	| Descripción  |
+| :------------ |---------------| -----|
+|BaseDeDatos	|BD|	Objeto para acceder a la base de datos.|
+|List<Empleado>	|empleados	|Lista de empleados.|
+
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|centroAdministracion()|	-	|Constructor predeterminado. Inicializa la interfaz y carga los empleados desde la base de datos.|
+|centroAdministracion(BaseDeDatos bd)	|BaseDeDatos bd	|Constructor que inicializa la interfaz y utiliza una instancia específica de la base de datos para cargar los empleados.|
+|centroAdministracion(List<Empleado> empleados)|	List<Empleado> empleados	|Constructor que inicializa la interfaz con una lista preexistente de empleados.|
+
+### Vista previa del diseño
+![WhatsApp Image 2024-05-30 at 11 00 50 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/971aa41b-49e7-4ce9-8607-b30736baa2ee)
+
+### Clase centroAlmacen
+Esta clase representa la vista del centro de almacenamiento en la interfaz de usuario.
+
+#### Variables
+| Tipo	| Nombre	| Descripción  |
+| :------------ |---------------| -----|
+|BaseDeDatos|	BD|	Objeto para acceder a la base de datos.|
+|List<Producto>	|productos|	Lista de productos en el almacen.|
+
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|centroAlmacen()|	-	|Constructor predeterminado. Inicializa la interfaz y carga los productos desde la base de datos.|
+|centroAlmacen(BaseDeDatos bd)|	BaseDeDatos bd|	Constructor que inicializa la interfaz y utiliza una instancia específica de la base de datos para cargar los productos.|
+|centroAlmacen(List<Producto> productos)|	List<Producto> productos	|Constructor que inicializa la interfaz con una lista preexistente de productos.|
+
+### Vista previa del diseño
+![WhatsApp Image 2024-05-30 at 11 10 59 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/83e1a269-a5d7-43c9-ae54-d9800abdb160)
+
+### Clase centroCajero
+Esta clase representa la vista del centro de cajero en la interfaz de usuario.
+#### Variables
+| Tipo	| Nombre	| Descripción  |
+| :------------ |---------------| -----|
+|JPanel|	jPanel1|	Panel principal que contiene los elementos de la interfaz.|
+|JLabel|	jLabel42	|Etiqueta para mostrar el símbolo de moneda.|
+|JLabel	|jLabel43|	Etiqueta para mostrar el texto "TOTAL".|
+|JTable	|tablaCentroCajero	|Tabla que muestra los elementos relacionados con las transacciones del cajero.|
+|JLabel|	lblresultado|Etiqueta para mostrar el total de la transacción.|
+|JSeparator	|jSeparator4|	Separador para dividir visualmente los elementos.|
+
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|centroCajero()	|-	|Constructor predeterminado que inicializa la interfaz.|
+### Vista previa del diseño
+![WhatsApp Image 2024-05-30 at 11 13 42 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/7a1e7e12-9a4b-4641-9518-7ff7f6e995c8)
+
+### Clase dialogoTabla
+Esta clase representa un diálogo que muestra una tabla con un título.
+#### Variables
+| Tipo	| Nombre	| Descripción  |
+| :------------ |---------------| -----|
+|JPanel|	panelTabla|	Panel principal que contiene la tabla y otros componentes.|
+|JLabel	|lblTitulo	|Etiqueta para mostrar el título de la tabla.|
+|JLabel|	jLabel1|	Etiqueta para diseño visual.|
+|JTable|	tabla	|Tabla que muestra los datos.|
+|JScrollPane|jScrollPane1	|Panel de desplazamiento para la tabla.|
+|JSeparator|	jSeparator1	|Separador visual.|
+|JLabel|	jLabel5|	Etiqueta para diseño visual.|
+|JLabel	|jLabel9|	Etiqueta para diseño visual.|
+
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|dialogoTabla(Frame parent, boolean modal)|	Frame parent, boolean modal|	Constructor que inicializa el diálogo con un padre y establece si es modal o no.|
+
+### Vista previa del diseño
+![WhatsApp Image 2024-05-30 at 11 20 55 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/d65a1571-b6b5-4d33-b3cc-f6747ff23e8c)
+
+
+### Clase dlaBuscarProducto
+Esta clase representa un diálogo para buscar un producto en el sistema.
+
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|dlaBuscarProducto(Frame parent, boolean modal)|	Frame parent, boolean modal|	Constructor que inicializa el diálogo con un padre y establece si es modal o no.|
+### Vista previa del diseño
+![WhatsApp Image 2024-05-30 at 11 26 55 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/5af9adc1-6e64-4362-b406-89d64107f3af)
+
+
+### Clase dlcAplicarDescuento
+Esta clase representa un diálogo para aplicar un descuento a un producto en el sistema.
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|dlcAplicarDescuento|	Frame parent, boolean modal|	Constructor que inicializa el diálogo con un padre y establece si es modal o no.|
+### Vista previa del diseño
+![WhatsApp Image 2024-05-30 at 11 30 01 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/a6d1352b-8da1-4171-9456-53c7803e3127)
+
+### Clase dlcCambiarCliente
+Esta clase representa un diálogo para cambiar el cliente en el sistema.
+
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|dlcCambiarCliente	|Frame parent, boolean modal	|Constructor que inicializa el diálogo con un padre y establece si es modal o no.|
+### Vista previa del diseño
+![WhatsApp Image 2024-05-30 at 11 32 15 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/7aacd534-4198-4066-9a9c-e209eb14c229)
+
+### Clase dlcCobrarCuenta
+Esta clase representa un diálogo para cobrar una cuenta en el sistema.
+
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|dlcCobrarCuenta	|Frame parent, boolean modal	|Constructor que inicializa el diálogo con un padre y establece si es modal o no.|
+### Vista previa del diseño
+![WhatsApp Image 2024-05-30 at 11 33 44 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/01ae5ddc-0519-4658-96ae-b37edeaa21ab)
+
+
+### Clase dlcTicket
+Esta clase representa un diálogo para mostrar un ticket de compra.
+
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|dlcTicket	|Frame parent, boolean modal	|Constructor que inicializa el diálogo del ticket.|
+### Vista previa del diseño
+![WhatsApp Image 2024-05-30 at 11 37 02 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/0120399f-c2d0-49a8-9660-7ce3991e2712)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
