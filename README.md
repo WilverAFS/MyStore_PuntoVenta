@@ -581,6 +581,7 @@ Esta clase representa un diálogo para buscar un producto en el sistema.
 
 ### Clase dlcAplicarDescuento
 Esta clase representa un diálogo para aplicar un descuento a un producto en el sistema.
+#### Constructor
 | Nombre	| Parámetros	| Descripción|
 | :------------ |---------------| -----|
 |dlcAplicarDescuento|	Frame parent, boolean modal|	Constructor que inicializa el diálogo con un padre y establece si es modal o no.|
@@ -589,7 +590,7 @@ Esta clase representa un diálogo para aplicar un descuento a un producto en el 
 
 ### Clase dlcCambiarCliente
 Esta clase representa un diálogo para cambiar el cliente en el sistema.
-
+#### Constructor
 | Nombre	| Parámetros	| Descripción|
 | :------------ |---------------| -----|
 |dlcCambiarCliente	|Frame parent, boolean modal	|Constructor que inicializa el diálogo con un padre y establece si es modal o no.|
@@ -598,7 +599,7 @@ Esta clase representa un diálogo para cambiar el cliente en el sistema.
 
 ### Clase dlcCobrarCuenta
 Esta clase representa un diálogo para cobrar una cuenta en el sistema.
-
+#### Constructor
 | Nombre	| Parámetros	| Descripción|
 | :------------ |---------------| -----|
 |dlcCobrarCuenta	|Frame parent, boolean modal	|Constructor que inicializa el diálogo con un padre y establece si es modal o no.|
@@ -608,7 +609,7 @@ Esta clase representa un diálogo para cobrar una cuenta en el sistema.
 
 ### Clase dlcTicket
 Esta clase representa un diálogo para mostrar un ticket de compra.
-
+#### Constructor
 | Nombre	| Parámetros	| Descripción|
 | :------------ |---------------| -----|
 |dlcTicket	|Frame parent, boolean modal	|Constructor que inicializa el diálogo del ticket.|
@@ -616,10 +617,146 @@ Esta clase representa un diálogo para mostrar un ticket de compra.
 ![WhatsApp Image 2024-05-30 at 11 37 02 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/0120399f-c2d0-49a8-9660-7ce3991e2712)
 
 
+### Clase dlcVerDisponibilidad
+Esta clase representa un diálogo para verificar la disponibilidad de un producto.
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|dlcVerDisponibilidad	|(java.awt.Frame parent, boolean modal)	|Constructor que inicializa el diálogo de disponibilidad con el frame principal y el estado modal.|
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 11 33 20 AM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/a48459e2-cd5d-499e-b2a9-cf177460c2c9)
+
+
+### Clase dldBajaEmpleado
+Esta clase representa un diálogo para dar de baja a un empleado.
+
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|dldBajaEmpleado	|(java.awt.Frame parent, boolean modal)	|Constructor que inicializa el diálogo con el frame principal y el estado modal.|
+|dldBajaEmpleado	|(java.awt.Frame parent, boolean modal, ControladorBD con)|	Constructor que inicializa el diálogo con el frame principal, el estado modal y un controlador de base de datos.|
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 11 36 24 AM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/40c8a84f-1661-4c3a-ae0b-9377960ab2b3)
+
+
+### Clase dldBuscarEmpleado
+Esta clase representa un diálogo para buscar un empleado.
+
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|dldBuscarEmpleado	|(java.awt.Frame parent, boolean modal)	|Constructor que inicializa el diálogo con el frame principal y el estado modal.|
+|dldBuscarEmpleado	|(java.awt.Frame parent, boolean modal, ControladorBD cbd)	|Constructor que inicializa el diálogo con el frame principal, el estado modal y un controlador de base de datos.|
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 11 38 55 AM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/84a8e2a1-5635-4a3e-90ce-30bb3c4d4270)
 
 
 
+### Clase dldEditarEmpleado
+Esta clase representa un diálogo para editar la información de un empleado en la base de datos.
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|dldEditarEmpleado|	(java.awt.Frame parent, boolean modal)	|Constructor que inicializa el diálogo con el frame principal y el estado modal.|
+|dldEditarEmpleado|	(java.awt.Frame parent, boolean modal, ControladorBD cbd)	|Constructor que inicializa el diálogo con el frame principal, el estado modal y un controlador de base de datos.|
 
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 11 46 34 AM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/a460fb9f-632e-47d2-bc75-dffe400a2f62)
+
+
+### Clase dvgAltaCliente
+Esta clase representa un diálogo para registrar un nuevo cliente en la base de datos.
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|dvgAltaCliente	|(java.awt.Frame parent, boolean modal)|	Constructor que inicializa el diálogo con el frame principal y el estado modal.|
+|dvgAltaCliente	|(java.awt.Frame parent, boolean modal, ControladorBD controlbd)	|Constructor que inicializa el diálogo con el frame principal, el estado modal y un controlador de base de datos.|
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 11 49 14 AM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/5c839680-1574-4031-baed-7c2b53b9a48e)
+
+
+### Clase dvgAltaEmpleado
+Esta clase representa un diálogo para dar de alta a un nuevo empleado en la base de datos.
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|dvgAltaEmpleado	|java.awt.Frame parent, boolean modal	|Constructor que inicializa el diálogo con el frame principal y el estado modal.|
+|dvgAltaEmpleado	|java.awt.Frame parent, boolean modal, ControladorBD cbd	|Constructor que inicializa el diálogo con el frame principal, el estado modal y un controlador de base de datos.|
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 11 51 20 AM (3)](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/1669ba99-cf48-41a7-8f74-8371ac5000a9)
+
+
+### Clase dvgAltaProducto
+Esta clase representa un diálogo para registrar un nuevo producto en la base de datos.
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|dvgAltaProducto	|java.awt.Frame parent, boolean modal|	Constructor que inicializa el diálogo con el frame principal y el estado modal, y crea una nueva instancia del controlador de base de datos |(ControladorBD).
+|dvgAltaProducto	|java.awt.Frame parent, boolean modal, ControladorBD cbd	|Constructor que inicializa el diálogo con el frame principal, el estado modal y un controlador de base de datos proporcionado.|
+### Vista previa del diseño
+ ![WhatsApp Image 2024-05-31 at 11 57 23 AM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/b0570a32-64d5-4d89-9894-2261e0801c4b)
+
+### Clase dvgConsultarPrecio
+Esta clase representa un diálogo para consultar el precio de un producto en la base de datos.
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|dvgConsultarPrecio	|java.awt.Frame parent, boolean modal	|Constructor que inicializa el diálogo con el frame principal y el estado modal.|
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 18 12 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/4b3e9c5e-3250-40bf-8602-05bcfed83686)
+
+### Clase dvgMovimientosAlmacen
+Esta clase representa un diálogo para visualizar los movimientos realizados en el almacén.
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+| dvgMovimientosAlmacen| java.awt.Frame parent, boolean modal | Constructor que inicializa el diálogo con el frame principal y el estado modal. |
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 21 03 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/af554c37-e634-4207-b988-679c1b99c2e1)
+
+
+### Clase dvgOpciones
+Esta clase representa un diálogo de opciones especializadas para el sistema de punto de venta.
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+| dvgOpciones          | java.awt.Frame parent, boolean modal | Constructor que inicializa el diálogo con el frame principal y el estado modal. |
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 22 44 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/0948471b-c998-4e87-b180-3a4afe9be7ba)
+
+
+### Clase dvgSuper
+Esta clase representa un diálogo para cambiar el nivel de usuario en el sistema.
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+| dvgSuper        | java.awt.Frame parent, boolean modal, vistaGeneral vG | Constructor que inicializa el diálogo con el frame principal, el estado modal y una instancia de `vistaGeneral`. |
+
+#### Métodos
+| Nombre          | Parámetros                    | Descripción                                           |
+| :-------------- | ---------------------------- | ---------------------------------------------------- |
+| cambiarNivel    | int n                         | Cambia el nivel de usuario según el parámetro `n`.  |
+| revalidarVista  | Ninguno                       | Elimina y vuelve a dibujar los componentes de la vista general. |
+
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 24 37 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/60028d5d-d720-410d-b0ef-06367772472a)
+
+
+### Clase dvlRecuperarContraseña
+
+Esta clase representa un diálogo para recuperar la contraseña de acceso al sistema.
+
+#### Constructor
+| Nombre                | Parámetros                   | Descripción                                           |
+| :-------------------- | ---------------------------- | ---------------------------------------------------- |
+| dvlRecuperarContraseña| java.awt.Frame parent, boolean modal | Constructor que inicializa el diálogo con el frame principal y el estado modal. |
+
+#### Métodos
+| Nombre          | Parámetros                    | Descripción                                           |
+| :-------------- | ---------------------------- | ---------------------------------------------------- |
+| btnAceptar      | java.awt.event.ActionEvent evt | Abre un nuevo diálogo para recuperar la contraseña del usuario. |
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 26 18 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/01e1eb04-1d27-433b-ac05-c3af3cfa1362)
 
 
 
