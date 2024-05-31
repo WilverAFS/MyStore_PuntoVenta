@@ -32,38 +32,23 @@ public class vistaGeneral extends javax.swing.JFrame {
     /**
      * Creates new form vistaGeneral
      */
+    //Contructos general
     public vistaGeneral() {
         initComponents();
         this.btnCambiarVista.setEnabled(false);
         this.btnCambiarVista.setVisible(false);
-        this.setLocationRelativeTo(null);
-        
+        this.setLocationRelativeTo(null);        
         //Desactivamos todos los botones
-        boolean b=false;
-        this.btnVenta.setEnabled(b);
-        this.btnAltaDeClientes.setEnabled(b);
-        this.btnConsultarPrecio.setEnabled(b);
-        this.btnAltaDeProducto.setEnabled(b);
-        this.btnMovimientosDeAlmacen.setEnabled(b);
-        this.btnAltaDeTrabajadores.setEnabled(b);        
-        this.btnGraficas.setEnabled(b);
-        this.btnImprimirReportes.setEnabled(b);
+        this.activarBotones(false);
     }
     
-    //Constructor para hacer pruebas
-    public vistaGeneral(boolean b) {
+    //Constructor para hacer pruebas inicializar con un nivel de usuario
+    public vistaGeneral(int n) {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.btnCambiarVista.setEnabled(false);
-        this.btnCambiarVista.setVisible(b);
-        this.btnVenta.setEnabled(b);
-        this.btnAltaDeClientes.setEnabled(b);
-        this.btnConsultarPrecio.setEnabled(b);
-        this.btnAltaDeProducto.setEnabled(b);
-        this.btnMovimientosDeAlmacen.setEnabled(b);
-        this.btnAltaDeTrabajadores.setEnabled(b);        
-        this.btnGraficas.setEnabled(b);
-        this.btnImprimirReportes.setEnabled(b);        
+        //desactivamos todos los botones
+        this.activarBotones(false);
+        this.activarVistaUsuario(n); 
     }
     
     public JPanel getPanelVistaGeneral(){return this.panelVistaGeneral;}
@@ -72,12 +57,35 @@ public class vistaGeneral extends javax.swing.JFrame {
     public JPanel getPanelLateral(){ return this.panelLateral;}
    // public JButton getBotonCambiarVista(){return this.btnCambiarVista; }
     
+    private void activarBotones(boolean b){
+        this.btnVenta.setEnabled(b);
+        this.btnAltaDeClientes.setEnabled(b);
+        this.btnConsultarPrecio.setEnabled(b);
+        this.btnAltaDeProducto.setEnabled(b);
+        this.btnMovimientosDeAlmacen.setEnabled(b);
+        this.btnAltaDeTrabajadores.setEnabled(b);        
+        this.btnGraficas.setEnabled(b);
+        this.btnImprimirReportes.setEnabled(b);
+        this.btnOk.setEnabled(b);
+        this.txtBuscar.setEnabled(b);
+        this.btnCambiarVista.setEnabled(b);
+        this.btnCambiarVista.setVisible(b);
+        this.btnOk.setVisible(b);
+        this.txtBuscar.setVisible(b);
+        this.lblLupa.setVisible(b);
+    }
     
+    ///Activa los botones correspondientes al nivel de usuario en el login
     public void activarNivelUsuario(int n){
         if(n==1){
             this.btnVenta.setEnabled(true);
             this.btnAltaDeClientes.setEnabled(true);
             this.btnConsultarPrecio.setEnabled(true);
+            this.btnOk.setEnabled(true);
+            this.btnOk.setVisible(true);
+            this.txtBuscar.setEnabled(true);
+            this.txtBuscar.setVisible(true);
+            this.lblLupa.setVisible(true);
         }
         if(n==2){
             this.btnAltaDeProducto.setEnabled(true);
@@ -89,17 +97,38 @@ public class vistaGeneral extends javax.swing.JFrame {
             this.btnImprimirReportes.setEnabled(true);
         }
         if(n==10){            
-            this.btnVenta.setEnabled(true);
-            this.btnAltaDeClientes.setEnabled(true);
-            this.btnConsultarPrecio.setEnabled(true);
-            this.btnAltaDeProducto.setEnabled(true);
-            this.btnMovimientosDeAlmacen.setEnabled(true);
-            this.btnAltaDeTrabajadores.setEnabled(true);        
-            this.btnGraficas.setEnabled(true);
-            this.btnImprimirReportes.setEnabled(true);
-            this.btnCambiarVista.setEnabled(true);
-            this.btnCambiarVista.setVisible(true);
+            this.activarBotones(true);
         }           
+    }
+    
+    
+    //Activa los paneles correspondientes al nivel de usuario -> configurar en el login tmb por default el de caja
+    public void activarVistaUsuario(int nivel){        
+        switch (nivel) { //Vista de usuario nivel 1 = CAJERO
+            case 1 ->{
+                this.panelCentral.add(new centroCajero().getPanelCentroCajero() );
+                this.panelLateral.add(new lateralCajero().getPanelLateralCajero() );
+                this.activarNivelUsuario(nivel);
+            }            
+            case 2 ->{// //Vista de usuario nivel 2 = ALMACEN
+                this.panelCentral.add(new centroAlmacen().getPanelCentroAlmacen() );
+                this.panelLateral.add(new lateralAlmacen().getPanelLateralAlmacen() );
+                this.activarNivelUsuario(nivel);                
+            }
+            case 3 -> { //Vista de usuario nivel 3 = ADMINISTRACION
+                this.panelCentral.add(new centroAdministracion().getPanelCentroAsministracion());
+                this.panelLateral.add(new lateralAdministracion().getPanelLateralAdministracion());
+                this.activarNivelUsuario(nivel);                
+            }
+            case 10 -> { //Vista de usuario nivel 3 = ADMINISTRACION
+                this.panelCentral.setVisible(false);
+                this.panelLateral.setVisible(false);
+                this.activarNivelUsuario(nivel);
+            }
+            default -> {
+                System.out.println("Error fatal en el nivel de usuario, revisarlo desde el construtor o en la base de datos");                                 
+            }
+        }        
     }
 
     /**
@@ -114,11 +143,12 @@ public class vistaGeneral extends javax.swing.JFrame {
         panelVistaGeneral = new javax.swing.JPanel();
         btnTresLineas = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
+        lblLupa = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        btnOk = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -136,7 +166,6 @@ public class vistaGeneral extends javax.swing.JFrame {
         panelCentral = new javax.swing.JPanel();
         panelLateral = new javax.swing.JPanel();
         btnCambiarVista = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MY STORE");
@@ -180,10 +209,10 @@ public class vistaGeneral extends javax.swing.JFrame {
                 txtBuscarActionPerformed(evt);
             }
         });
-        panelVistaGeneral.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 890, 40));
+        panelVistaGeneral.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 900, 40));
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (13).png"))); // NOI18N
-        panelVistaGeneral.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        lblLupa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (13).png"))); // NOI18N
+        panelVistaGeneral.add(lblLupa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jLabel13.setForeground(new java.awt.Color(255, 255, 102));
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (11).png"))); // NOI18N
@@ -201,6 +230,10 @@ public class vistaGeneral extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (8).png"))); // NOI18N
         panelVistaGeneral.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, -10, 37, 60));
 
+        btnOk.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnOk.setText("OK");
+        panelVistaGeneral.add(btnOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 100, 60, 40));
+
         jLabel8.setBackground(new java.awt.Color(0, 63, 100));
         jLabel8.setOpaque(true);
         panelVistaGeneral.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 1400, 20));
@@ -217,7 +250,7 @@ public class vistaGeneral extends javax.swing.JFrame {
         jLabel22.setBackground(new java.awt.Color(255, 255, 255));
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setOpaque(true);
-        panelVistaGeneral.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 960, 40));
+        panelVistaGeneral.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1040, 40));
 
         jLabel23.setBackground(new java.awt.Color(204, 204, 204));
         jLabel23.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
@@ -374,10 +407,6 @@ public class vistaGeneral extends javax.swing.JFrame {
         });
         panelVistaGeneral.add(btnCambiarVista, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 220, 200, 60));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("OK");
-        panelVistaGeneral.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 100, 60, 40));
-
         getContentPane().add(panelVistaGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, -1));
 
         pack();
@@ -518,7 +547,7 @@ public class vistaGeneral extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new vistaGeneral(true).setVisible(true);
+                new vistaGeneral(10).setVisible(true);
             }
         });
     }
@@ -532,20 +561,20 @@ public class vistaGeneral extends javax.swing.JFrame {
     private javax.swing.JButton btnGraficas;
     private javax.swing.JButton btnImprimirReportes;
     private javax.swing.JButton btnMovimientosDeAlmacen;
+    private javax.swing.JButton btnOk;
     private javax.swing.JButton btnTresLineas;
     private javax.swing.JButton btnVenta;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel lblLupa;
     private javax.swing.JPanel panelCentral;
     private javax.swing.JPanel panelLateral;
     private javax.swing.JPanel panelVistaGeneral;

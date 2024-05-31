@@ -4,8 +4,7 @@
  */
 package view;
 
-//import controler.ControladorConsultarPrecio;
-import controler.ControladorProducto;
+import controler.ControladorBD;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import model.Producto;
@@ -16,7 +15,8 @@ import model.Producto;
  */
 public class dvgConsultarPrecio extends javax.swing.JDialog {
     //ControladorConsultarPrecio controlador;
-    ControladorProducto cP;
+    private ControladorBD con;
+    private int id = -1;
     
     /**
      * Creates new form dvgConsultarPrecio
@@ -24,23 +24,40 @@ public class dvgConsultarPrecio extends javax.swing.JDialog {
     public dvgConsultarPrecio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        con = new ControladorBD();
     }
     
+    public dvgConsultarPrecio(java.awt.Frame parent, boolean modal, ControladorBD cbd) {
+        super(parent, modal);
+        initComponents();
+        con = cbd;
+    }
+    
+    
     private void busqueda(){
-        cP = new ControladorProducto();
-        int id = Integer.parseInt(this.txtCodigoDeProducto.getText());
-        //cP.existeProducto(id);
-        if(cP.existeProducto(id)){
-            Producto p = cP.bucarProducto(id);
-            
-            this.lblNombre.setText(p.getNombre());
-            this.lblDescripcion.setText(p.getDescripcion());
-            this.txtPrecio.setText( "$ " +String.valueOf(p.getPrecioV()) );
-        } else{
-            this.lblNombre.setText("Este producto no existe");
-            this.lblDescripcion.setText("-");
-            this.txtPrecio.setText("-");
+        
+        try{
+            int id = Integer.parseInt(this.txtCodigoDeProducto.getText());
+
+            if (con.buscarProducto(id) == null) {
+                this.lblNombre.setText("Este producto no existe");
+                this.lblDescripcion.setText("-");
+                this.txtPrecio.setText("-");
+            } else {
+                Producto p = con.buscarProducto(id);
+                this.lblNombre.setText(p.getNombre());
+                this.lblDescripcion.setText(p.getDescripcion());
+                this.txtPrecio.setText("$ " + String.valueOf(p.getPrecioV()));
+            }
+        } catch(NumberFormatException e){
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "El codigo ingresado no es valido");
         }
+        
+        
+        
+        
+        
     }
     
     /**
@@ -178,13 +195,16 @@ public class dvgConsultarPrecio extends javax.swing.JDialog {
 
     private void txtCodigoDeProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoDeProductoActionPerformed
         // TODO add your handling code here:
-        this.busqueda();
+        if(this.txtCodigoDeProducto.getText().isEmpty() || this.txtCodigoDeProducto.getText().isBlank()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar un codigo de producto ");
+            this.txtCodigoDeProducto.setText("");
+        }else{
+            this.busqueda();
+        }        
     }//GEN-LAST:event_txtCodigoDeProductoActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        //Limpiar y cerrar
-        //this.txtCodigoDeProducto.setText("Introduce el codigo del produto");
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 

@@ -5,7 +5,7 @@
 package controler;
 
 import database.BaseDeDatos;
-import database.ConexionBD;
+//import database.ConexionBD;
 
  //LIBRERIAS NECESARIAS PARA CONECCION Y MOSTRAR  DATOS    
     import java.sql.Connection;

@@ -4,43 +4,38 @@
  */
 package ejecutable;
 
-import controler.ControladorBD;
+
 import controler.ControladorGeneral;
-//import controler.controladorInicio;
-import database.BaseDeDatos;
-//import model.Empleado;
-//import model.Usuario;
-import view.login;
-import view.vistaGeneral;
-import view.vistaInicial;
 
 /**
  *
  * @author Wilver
  */
-public class Prueba1 {
+public class Prueba2 {
+    
     
     public static void main(String ... args){
                 
         //Objetos de tipo Model con datos de la BD
-        BaseDeDatos BD = new BaseDeDatos();
+        //BaseDeDatos BD = new BaseDeDatos();
         
         //Realizar acciones sobre la BD
-        ControladorBD cBD= new ControladorBD( BD);
-        
+        //ControladorBD cBD= new ControladorBD( BD);        
         
         
         //Objetos de tipo View
-        login vLogin=new login();        
-        vistaGeneral vGeneral= new vistaGeneral();        
-        vistaInicial vInicio = new vistaInicial();
+        //login vLogin=new login();    
+        
+        //vistaGeneral vGeneral= new vistaGeneral();        
+        
+        //vistaInicial vInicio = new vistaInicial();
         
         //Verficar el envio del usuario
         // public ControladorAlfa(vistaInicial vInicio, login vLogin, vistaGeneral vGeneral, List<Empleado> listaEmpleados ){        
         
-        //VER PRUEBA 2 Y LA POSIBILIDAD DE SUSITUIR ESTE CONTROLADOR
-        ControladorGeneral cAlfa = new ControladorGeneral (vInicio, vLogin, vGeneral, BD.getEmpleados()); 
-        cAlfa.iniciar();
+        
+        ControladorGeneral cGeneral = new ControladorGeneral();
+        cGeneral.iniciar();
                 
     }
     
