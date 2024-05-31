@@ -67,16 +67,91 @@ A continuacion se muestra detalladamente los paquetes con sus contenidos.
 
 
 ### Paquete de Modelo
-#### Clase Cliente
-
+### Clase Cliente
+Esta clase representa un cliente y contiene información relevante como su nombre, teléfono, correo electrónico y un identificador único.
 
 #### Variables
+| Tipo	| Nombre	| Descripción  |
+| :------------ |---------------| -----|
+|`String`	|`nombre`|	`Almacena el nombre del cliente.`|
+|`String`	|`telefono`	|`Almacena el número de teléfono del cliente.`|
+|`String`|	`correo`	|`Almacena la dirección de correo electrónico del cliente.`|
+|`int`	|`id_cliente`	|`Almacena el identificador único del cliente.`|
+
+#### Constructor
+| Nombre	| Parámetros	| Descripción|
+| :------------ |---------------| -----|
+|`Cliente`	|`()`|	`Constructor de pruebas que inicializa un cliente sin datos específicos.`|
+|`Cliente`	|`(int id_cliente, String nombre, String telefono, String correo)`|	`Constructor completo que inicializa un cliente con los valores proporcionados para id_cliente, nombre, telefono y correo.`|
+
+#### Metodos
+| Tipo	| Return	| Nombre	| Parámetros	| Descripción|
+| :--------| :------------ |---------------| --------| --------|
+|`public`|	`int`	|`getId_cliente`	|`()`|	`Devuelve el identificador único del cliente.``|
+|`public`|	`void`|	`setId_cliente`	|`(int id_cliente)`|	`Establece el identificador único del cliente.`|
+|`public`|	`String`	|`getNombre`|	`()`|	`Devuelve el nombre del cliente.`|
+|`public`|	`void`|	`setNombre`|	`(String nombre)`|	`Establece el nombre del cliente.`|
+|`public`|	`String`|	`getTelefono`|	`()`|	`Devuelve el número de teléfono del cliente.`|
+|`public`|	`void`|	`setTelefono`|	`(String telefono)`|	`Establece el número de teléfono del cliente.`|
+|`public`|	`String`	|`getCorreo`|	`()`|	`Devuelve la dirección de correo electrónico del cliente.`|
+|`public`|	`void`|	`setCorreo`|	`(String correo)`|	`Establece la dirección de correo electrónico del cliente.`|
 
 
+### Clase DescripcionVenta
+Esta clase representa la descripción de una venta y contiene detalles como el folio de la venta, código del producto, cantidad vendida y una descripción adicional.
+#### Variables
+| Tipo	| Nombre	| Descripción  |
+| :------------ |---------------| -----|
+|`int`|	`folio_venta`	|`Almacena el folio de la venta.`|
+|`int`|	`codigo_producto`	|`Almacena el código del producto vendido.`|
+|`int`|	`cantidad`	|`Almacena la cantidad del producto vendido.`|
+|`String`|	`descripcion`	|`Almacena una descripción adicional de la venta.`|
+
+
+#### Constructor
+|Nombre|	Parámetros	|Descripción|
+| :------------ |---------------| -----|
+|`DescripcionVenta`	|`()`	|`Constructor de prueba que inicializa una descripción de venta con valores predeterminados.`|
+|`DescripcionVenta`|	`(int folio_venta, int codigo_producto, String descripcion, int cantidad)`|	`Constructor completo que inicializa una descripción de venta con los valores proporcionados para folio_venta, codigo_producto, descripcion y cantidad.`|
+
+#### Metodos
+
+|Tipo	|Return	|Nombre|	Parámetros	|Descripción|
+| :--------| :------------ |---------------| --------| --------|
+|`public`|	`int`|	`getFolio_venta`|	`()`|	`Devuelve el folio de la venta.`|
+|`public`|	`int`|	`getCodigo_producto`|	`()`	|`Devuelve el código del producto vendido.`|
+|`public`|	`int`|	`getCantidad`	|`()`	|`Devuelve la cantidad del producto vendido.`|
+|`public`|	`String`|	`getDescripcion`|	`()`|	`Devuelve la descripción adicional de la venta.`|
+|`public`|	`void`|	`setFolio_venta`|	`(int folio_venta)`|	`Establece el folio de la venta.`|
+|`public`|	`void`|	`setCodigo_producto`|	`(int codigo_producto)`|	`Establece el código del producto vendido.`|
+|`public`|	`void`|	`setCantidad`|	`(int cantidad)`|	`Establece la cantidad del producto vendido.`|
+|`public`|	`void`|	`setDescripcion`	|`(String descripcion)`|	`Establece la descripción adicional de la venta.`|
+
+
+### Clase Empleado
+Esta clase representa a un empleado y extiende la clase Usuario. Contiene información relevante como nombre, apellidos, identificador del empleado y del puesto, así como detalles de autenticación heredados de Usuario.
+#### Variables
+
+|Tipo|	Nombre	|Descripción|
+| :------------ |---------------| -----|
+|`String`	|`nombre`|	`Almacena el nombre del empleado.`
+|`String`	|`apellidoP`	|`Almacena el apellido paterno del empleado.`|
+|`String`|	`apellidoM`|	`Almacena el apellido materno del empleado.`|
+|`int`	|`idEmpleado`	|`Almacena el identificador único del empleado.`|
+|`int`	|`id_puesto`|	`Almacena el identificador del puesto del empleado.`|
+|`Puesto`	|`puestoE`	|`Almacena el objeto puesto relacionado con el empleado.`|
 
 #### Constructor
 
 #### Metodos
+
+
+
+
+
+
+
+
 
 
 
