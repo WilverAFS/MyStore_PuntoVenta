@@ -895,7 +895,10 @@ Esta clase representa la interfaz principal de un sistema de gestión de tienda.
 | :----------- | ---------- | ---------------------------------------- |
 |vistaGeneral	|Ninguno|	Constructor que inicializa la interfaz de usuario y establece el estado inicial de los componentes.|
 |vistaGeneral(boolean b)	|boolean b|	Constructor utilizado para realizar pruebas, permitiendo establecer el estado de visibilidad de los botones.|
-![WhatsApp Image 2024-05-31 at 12 47 34 PM (1)](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/063bc39d-8629-4530-828c-69270feea1d2)
+
+### Vista previa del diseño
+![WhatsApp Image 2024-05-31 at 12 47 34 PM](https://github.com/WilverAFS/MyStore_PuntoVenta/assets/168376977/96cfa7fc-0ab6-4084-96d0-6347e7001103)
+
 
 
 
