@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="9">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="16">
         <file>
-            <url>src/view/vistaGeneral.java</url>
-            <bookmark id="6">
+            <url>src/mysistem/Test.java</url>
+            <bookmark id="2">
                 <name/>
-                <line>503</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>src/mysistem/pruebaInicioSuper.java</url>
-            <bookmark id="7">
-                <name/>
-                <line>8</line>
+                <line>22</line>
                 <key/>
             </bookmark>
         </file>
@@ -26,10 +18,10 @@
             </bookmark>
         </file>
         <file>
-            <url>src/mysistem/Test.java</url>
-            <bookmark id="2">
+            <url>src/mysistem/pruebaInicioSuper.java</url>
+            <bookmark id="7">
                 <name/>
-                <line>22</line>
+                <line>8</line>
                 <key/>
             </bookmark>
         </file>
@@ -37,18 +29,27 @@
             <url>src/controler/ControladorGeneral.java</url>
             <bookmark id="9">
                 <name/>
-                <line>85</line>
+                <line>82</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/view/vistaGeneral.java</url>
+            <bookmark id="11">
+                <name/>
+                <line>615</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem_PV/src/controler/ControladorGeneral.java</file>
-            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem_PV/src/ejecutable/Prueba2.java</file>
-            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem_PV/src/ejecutable/Prueba1.java</file>
+            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem_PV/src/mystore/ejecutable.java</file>
+            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem_PV/src/controler/ControladorBD.java</file>
+            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem_PV/src/email/EnviarEmail.java</file>
+            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem_PV/src/pdf/GenerarPdf.java</file>
+            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem_PV/src/view/flcTicket.java</file>
             <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem_PV/src/view/vistaGeneral.java</file>
-            <file>file:/C:/Users/Wilver/OneDrive/Documentos/NetBeansProjects/MySistem_PV/src/database/BaseDeDatos.java</file>
         </group>
     </open-files>
 </project-private>

@@ -29,47 +29,6 @@ public class dvgSuper extends javax.swing.JDialog {
         initComponents();
     }
     
-    public void cambiarNivel(int n){
-        if(n==1){
-            if(vGeneral.getPanelLateral().isVisible() && vGeneral.getPanelCentral().isVisible()){
-                revalidarVista();                 
-                vGeneral.getPanelCentral().add(new centroCajero().getPanelCentroCajero());
-                vGeneral.getPanelLateral().add(new lateralCajero().getPanelLateralCajero());                
-            }else{
-                vGeneral.getPanelCentral().add(new centroCajero().getPanelCentroCajero());
-                vGeneral.getPanelLateral().add(new lateralCajero().getPanelLateralCajero());
-                vGeneral.getPanelCentral().setVisible(true);
-                vGeneral.getPanelLateral().setVisible(true);
-            }                
-        }
-        
-        if(n==2){
-            if(vGeneral.getPanelLateral().isVisible() && vGeneral.getPanelCentral().isVisible()){
-                revalidarVista();  
-                vGeneral.getPanelCentral().add(new centroAlmacen().getPanelCentroAlmacen());
-                vGeneral.getPanelLateral().add(new lateralAlmacen().getPanelLateralAlmacen());
-            }else{
-                vGeneral.getPanelCentral().add(new centroAlmacen().getPanelCentroAlmacen());
-                vGeneral.getPanelLateral().add(new lateralAlmacen().getPanelLateralAlmacen());
-                vGeneral.getPanelCentral().setVisible(true);
-                vGeneral.getPanelLateral().setVisible(true);
-            }                        
-        }
-        
-        if(n==3){
-            if(vGeneral.getPanelLateral().isVisible() && vGeneral.getPanelCentral().isVisible() ){
-                revalidarVista();  
-                vGeneral.getPanelCentral().add(new centroAdministracion().getPanelCentroAsministracion() );
-                vGeneral.getPanelLateral().add(new lateralAdministracion().getPanelLateralAdministracion() );
-                
-            }else{
-                vGeneral.getPanelCentral().add(new centroAdministracion().getPanelCentroAsministracion() );
-                vGeneral.getPanelLateral().add(new lateralAdministracion().getPanelLateralAdministracion() );
-                vGeneral.getPanelCentral().setVisible(true);
-                vGeneral.getPanelLateral().setVisible(true);
-            }                    
-        }        
-    }
     
     private void revalidarVista(){
         vGeneral.getPanelCentral().removeAll();
@@ -187,17 +146,26 @@ public class dvgSuper extends javax.swing.JDialog {
 
     private void btnUsuarioCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioCajaActionPerformed
         // TODO add your handling code here:
-        cambiarNivel(1);
+        //cambiarNivel(1);
+        this.revalidarVista();
+        this.vGeneral.activarVistaUsuario(1);
+        this.dispose();
     }//GEN-LAST:event_btnUsuarioCajaActionPerformed
 
     private void btnUsuarioAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioAlmacenActionPerformed
         // TODO add your handling code here:
-        cambiarNivel(2);   
+        //cambiarNivel(2);   
+        this.revalidarVista();
+        this.vGeneral.activarVistaUsuario(2);
+        this.dispose();
     }//GEN-LAST:event_btnUsuarioAlmacenActionPerformed
 
     private void btnUsuarioAdministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioAdministracionActionPerformed
         // TODO add your handling code here:
-        cambiarNivel(3);   
+        //cambiarNivel(3);   
+        this.revalidarVista();
+        this.vGeneral.activarVistaUsuario(3);
+        this.dispose();
     }//GEN-LAST:event_btnUsuarioAdministracionActionPerformed
 
     /**

@@ -16,7 +16,7 @@ public class dldEditarEmpleado extends javax.swing.JDialog {
     
     private ControladorBD con;
     private int id=-1;
-
+    private Empleado editEmpleado;
     /**
      * Creates new form dldEditarEmpleado
      */
@@ -32,6 +32,25 @@ public class dldEditarEmpleado extends javax.swing.JDialog {
         con = cbd;
     }
     
+    private void limpiarCampos(){
+        this.txtID.setText("");
+        this.txtApellidoMaterno.setText("");
+        this.txtApellidoPaterno.setText("");
+        this.txtContraseña.setText("");
+        this.txtNombre.setText("");
+        this.txtPuesto.setText("");
+        this.txtUsuario.setText("");
+    }
+    
+    private void activarEdicion(boolean bandera){
+        this.btnEdicion.setEnabled(bandera);
+        this.txtApellidoMaterno.setEnabled(bandera);
+        this.txtApellidoPaterno.setEnabled(bandera);
+        //this.txtContraseña.setEnabled(bandera);
+        this.txtNombre.setEnabled(bandera);
+        this.txtPuesto.setEnabled(bandera);
+        //this.txtUsuario.setEnabled(bandera);
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -231,49 +250,37 @@ public class dldEditarEmpleado extends javax.swing.JDialog {
         boolean b = true;
         if(txtID.getText().isBlank() || txtID.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un ID de trabajador", "CAMPO INCOMPLETO", 2); //Advertencia  
-            this.txtID.setText("");
-            b=false;
+            this.limpiarCampos();
+            this.activarEdicion(false);
         }else{
             
             try{
-                id = Integer.parseInt(this.txtID.getText());
+                id = Integer.parseInt(this.txtID.getText());                
+                ControladorBD cbd = new ControladorBD();
+                Empleado empleado = cbd.buscarEmpleado(id);                
+                if(empleado == null){
+                    JOptionPane.showMessageDialog(null, "El ID ingresado no corresponde a ningun empleado", "EMPLEDO NO ENCONTRADO", 2); //Advertencia
+                    this.limpiarCampos();
+                    this.activarEdicion(false);
+                }else{
+                    this.activarEdicion(true);
+                    //Mostramos los datos del empleado
+                    this.txtNombre.setText(empleado.getNombre());
+                    this.txtApellidoMaterno.setText(empleado.getApellidoM());
+                    this.txtApellidoPaterno.setText(empleado.getApellidoP());
+                    this.txtPuesto.setText(String.valueOf(empleado.getId_puesto()));
+                    this.txtUsuario.setText(empleado.getUsuario());
+                    this.txtContraseña.setText(empleado.getContraseña());
+                    editEmpleado = new Empleado(empleado);
+                }                
+                
             } catch(NumberFormatException e){
                 System.out.println(e);
-                this.txtID.setText("");
+                JOptionPane.showMessageDialog(null, "Ingrese un ID de trabajador valido", "ID INVALIDO", 2); //Advertencia  
+                this.limpiarCampos();
+                this.activarEdicion(false);
             }
-            
-            Empleado empleado = con.buscarEmpleado(id);
-            
-            if (empleado == null) {
-                b = false;
-                String s = "";
-                JOptionPane.showMessageDialog(null, "El ID ingresado no corresponde a ningun empleado", "EMPLEDO NO ENCONTRADO", 2); //Advertencia
-                this.txtID.setText("");
-                this.txtNombre.setText(s);
-                this.txtApellidoMaterno.setText(s);
-                this.txtApellidoPaterno.setText(s);
-                this.txtPuesto.setText(s);
-                this.txtUsuario.setText(s);
-                this.txtContraseña.setText(s);
-                this.btnEdicion.setEnabled(false);
-            } else {
-                this.txtNombre.setText(empleado.getNombre());
-                this.txtApellidoMaterno.setText(empleado.getApellidoM());
-                this.txtApellidoPaterno.setText(empleado.getApellidoP());
-                this.txtPuesto.setText(String.valueOf(empleado.getId_puesto()));
-                this.txtUsuario.setText(empleado.getUsuario());
-                this.txtContraseña.setText(empleado.getContraseña());
-                this.btnEdicion.setEnabled(true);
-            }
-            
-        }
-        txtNombre.setEnabled(b);
-            txtApellidoMaterno.setEnabled(b);                
-            txtApellidoPaterno.setEnabled(b);
-            txtPuesto.setEnabled(b);
-            txtUsuario.setEnabled(b);
-            //txtContraseña.setEnabled(b);          
-            
+        }            
     }//GEN-LAST:event_txtIDActionPerformed
 
     private void txtPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPuestoActionPerformed
@@ -289,26 +296,43 @@ public class dldEditarEmpleado extends javax.swing.JDialog {
     }//GEN-LAST:event_txtContraseñaActionPerformed
 
     private void btnEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdicionActionPerformed
-        //R        
-        
+        //READY
         if(this.txtID.getText().isBlank() || this.txtID.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un ID de trabajador", "CAMPO INCOMPLETO", 2); //Advertencia
         } else{
-            String n, ap, am, u, c, p;
+            String n, ap, am, u,  p;
             n= this.txtNombre.getText();
             ap = this.txtApellidoPaterno.getText();
             am=this.txtApellidoMaterno.getText();
             u= this.txtUsuario.getText();
-            c= String.valueOf(this.txtContraseña.getPassword());            
+            //c= String.valueOf(this.txtContraseña.getPassword());            
             p = this.txtPuesto.getText();
-            if(n.isBlank() || n.isEmpty() || ap.isBlank() || ap.isEmpty() || am.isBlank() || am.isEmpty() || u.isBlank() || u.isEmpty() || c.isBlank() || c.isEmpty()  || p.isBlank() || p.isEmpty()){
+            
+            if(n.isBlank() || n.isEmpty() || ap.isBlank() || ap.isEmpty() || am.isBlank() || am.isEmpty() || u.isBlank() || u.isEmpty() || p.isBlank() || p.isEmpty()){
                 JOptionPane.showMessageDialog(null, "No puede dejar campos en blaco", "CAMPOS INCOMPLETOS", 2); //Advertencia
             }else{
-                int ip = Integer.parseInt(p);
-                Empleado em = new Empleado(id, n, ap, am, u, c, ip );
-                con.editarEmpleado(em);
-            }            
-        }        
+                ControladorBD conBD = new ControladorBD();
+                try{
+                    int idPuesto = Integer.parseInt(p);
+                    if(idPuesto >= conBD.getnPuesto() || idPuesto <0 ){
+                        //Mensaje de error puesto no existente
+                        JOptionPane.showMessageDialog(null, "El id de puesto ingresado no corresponde a ningun puesto", "ID DE PUESTO INVALIDO", 2); //Advertencia
+                    }else{                        
+                        this.editEmpleado.setNombre(n);
+                        this.editEmpleado.setApellidoP(ap);
+                        this.editEmpleado.setApellidoM(am);
+                        //this.editEmpleado.setUsuario(u);
+                        this.editEmpleado.setId_puesto(idPuesto);
+                        conBD.editarEmpleado(editEmpleado);
+                    }                    
+                } catch(Exception e){
+                    System.out.println(e);
+                    JOptionPane.showMessageDialog(null, "El id de puesto no es una entrada valida", "CAMPO INVALIDO", 2); //Advertencia
+                }
+            }
+        }
+
+        this.dispose();
     }//GEN-LAST:event_btnEdicionActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

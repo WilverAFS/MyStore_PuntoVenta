@@ -32,7 +32,7 @@ public class ControladorBD {
     
     int nCliente, nVenta, nEmpleado, nPuesto; 
     
-    
+    //CONSTRUCTO con una conexion ya establecida
     public ControladorBD( BaseDeDatos BD ){
         con = BD.getConexion();
         nCliente = BD.getClientes().size();
@@ -106,7 +106,7 @@ public class ControladorBD {
     }
     
 
-    //Metodos getters con el numero total de elemetnos en la lista determinada
+    //Metodos getters con el numero total de elemetnos en la lista determinada usar para definir los id's
     public int getnCliente() {        return nCliente;    }
     public int getnVenta() {        return nVenta;    }
     public int getnEmpleado() {        return nEmpleado;    }
@@ -248,9 +248,31 @@ public class ControladorBD {
     //------------------------------------------------------------------//
     //Metodos de tipo UPDATE para EDITAR
     
+    //Editamos solo la existencia de los producto
+    public void modExistenciaProducto(int codigo, int existencia){
+        //UPDATE `mystore`.`producto` SET `existencia_p` = '5' WHERE (`codigo_producto` = '500002');
+        String query = "UPDATE producto SET existencia_p=? WHERE codigo_producto=?";
+        
+        try{
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, existencia);
+            ps.setInt(2, codigo);
+            
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Datos guardados correctamente", "ACTUALIZACION EXISTOSA", 1);
+            
+        } catch(SQLException e){
+            System.out.println("ERROR al editar el PRODUCTO en la BD: " + e);
+            JOptionPane.showMessageDialog(null, "No se pudieron modificar los datos", "EDICION FALLIDA", 0); //Error            
+        }    
+        
+    }
+    
+    
+    //Editamos todos los campos 
     public void editarProducto(Producto producto){
         //UPDATE `mystore`.`producto` SET `nombre_p` = 's', `precio_compra_p` = '1', `precio_venta_p` = '2', `categoria_p` = '2', `descripcion_p` = '1', `existencia_p` = '1' WHERE (`codigo_producto` = '400001');
-        String query ="UPDATE producto SET nombre_p=?, precio_compra_p=?, precio_venta_p=?, categoria_p=?,  descripcion_p=?, existencia_p=?,  WHERE codigo_producto=?";
+        String query = "UPDATE producto SET nombre_p=?, precio_compra_p=?, precio_venta_p=?, categoria_p=?, descripcion_p=?, existencia_p=? WHERE codigo_producto=?";
         try{
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, producto.getNombre());
@@ -261,7 +283,7 @@ public class ControladorBD {
             ps.setInt(6, producto.getExistencia());
             ps.setInt(7, producto.getCodigo());
             
-            ps.executeQuery();
+            ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Datos guardados correctamente", "ACTUALIZACION EXISTOSA", 1);
             
         } catch(SQLException e){
@@ -277,7 +299,7 @@ public class ControladorBD {
             ps.setInt(1, existencia);
             ps.setInt(2, id);
             
-            ps.executeQuery();
+            ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Datos guardados correctamente", "ACTUALIZACION EXISTOSA", 1);
         } catch(SQLException e){
             System.out.println("ERROR al editar el PRODUCTO en la BD: " + e);
@@ -297,7 +319,7 @@ public class ControladorBD {
             ps.setInt(4, x.getNivel());
             ps.setInt(5, x.getId_puesto());
             
-            ps.executeQuery();
+            ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Datos guardados correctamente", "ACTUALIZACION EXISTOSA", 1);
             
         } catch(SQLException e){
@@ -318,7 +340,7 @@ public class ControladorBD {
             ps.setString(3, cliente.getCorreo() );
             ps.setInt(4, cliente.getId_cliente() );
             
-            ps.executeQuery();
+            ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Datos guardados correctamente", "ACTUALIZACION EXISTOSA", 1);
             
         } catch(SQLException e){
@@ -330,8 +352,8 @@ public class ControladorBD {
     
     public void editarEmpleado(Empleado empleado){
         //UPDATE `mystore`.`empleado` SET `nombre_e` = 'a', `apellido_paterno_e` = 'a', `apellido_materno_e` = 'a', `usuario_e` = 'a', `contrasena_e` = 'a', `id_puesto` = 'a' WHERE (`id_empleado` = '5');
-        String query ="UPDATE empleado SET nombre_e=?, apellido_paterno_e=?, apellido_materno_e=?, usuario_e=?, contrasena_e=?, id_puesto=?, WHERE id_empleado=?";
-        
+        String query = "UPDATE empleado SET nombre_e=?, apellido_paterno_e=?, apellido_materno_e=?, usuario_e=?, contrasena_e=?, id_puesto=? WHERE id_empleado=?";
+        //UPDATE `mystore`.`empleado` SET `nombre_e` = 'Delet', `apellido_paterno_e` = 'cd', `apellido_materno_e` = 'cd', `usuario_e` = 'cdc', `contrasena_e` = 'sdsc', `id_puesto` = '2' WHERE (`id_empleado` = '7');
          try{
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, empleado.getNombre() );
@@ -342,7 +364,7 @@ public class ControladorBD {
             ps.setInt(6, empleado.getId_puesto());
             ps.setInt(7, empleado.getIdEmpleado());
             
-            ps.executeQuery();
+            ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Datos guardados correctamente", "ACTUALIZACION EXISTOSA", 1);
             
         } catch(SQLException e){
@@ -364,7 +386,7 @@ public class ControladorBD {
             ps.setInt(4, venta.getId_cliente() );
             ps.setInt(5,  venta.getFolio_venta() );
                     
-            ps.executeQuery();
+            ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Datos guardados correctamente", "ACTUALIZACION EXISTOSA", 1);
             
         } catch(SQLException e){
@@ -383,7 +405,7 @@ public class ControladorBD {
         
         if(JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar el producto?", "¿ELIMINAR PRODUCTO?", 
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-                try {                    
+                try {
                     PreparedStatement ps = con.prepareStatement(query);                    
                     ps.setInt(1, id);
                     ps.executeUpdate();                    

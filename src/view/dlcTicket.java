@@ -4,18 +4,72 @@
  */
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import model.Cliente;
+import model.Empleado;
+import model.Producto;
+import model.Venta;
+
 /**
  *
  * @author Wilver
  */
 public class dlcTicket extends javax.swing.JDialog {
-
+        //TICKET CON SCROLL 
+    //Necesitamos los siguientes datos
+    private Cliente clienteLogueado;
+    private Empleado empleadoLogueado;
+    private List<Producto> listaCuenta = new ArrayList<>();
+    private double totalFinal;
+    
     /**
      * Creates new form dlcTicket
      */
+    //CONTRUCTOR PRINCIPAL
     public dlcTicket(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    //Contructo prueba
+    public dlcTicket(java.awt.Frame parent, boolean modal, int n) {
+        super(parent, modal);
+        initComponents();
+        this.valoresPrueba();
+    }
+    
+    private void valoresPrueba(){
+        String datos[] = new String[4]; 
+        
+        //modelo para la tabla        
+        //modelo para la tabla
+        DefaultTableModel modelo =new DefaultTableModel(new Object[]{"Articulo", "Precio", "Unidades", "Subtotal"}, 0);
+        this.tabla.setModel(modelo);
+        
+        //Alineacion a la dereche con las columnas de valores numericos
+        DefaultTableCellRenderer alineacionDerecha = new DefaultTableCellRenderer();
+        alineacionDerecha.setHorizontalAlignment(SwingConstants.RIGHT);
+        tabla.getColumnModel().getColumn(1).setCellRenderer(alineacionDerecha);
+        tabla.getColumnModel().getColumn(2).setCellRenderer(alineacionDerecha);
+        tabla.getColumnModel().getColumn(3).setCellRenderer(alineacionDerecha);
+        
+        
+        this.tabla.setModel(modelo);
+        String data[] = new String [5];        
+        for(int i=0; i<40; i++){
+            data[0] = "Producto1";
+            data[1] =  "$120.00";
+            data[2] = "3";
+            data[3] = "$360.00";                
+            modelo.addRow(data); //Enviamos una fila al modelo;
+        }   
+        
+        
+    
     }
 
     /**
@@ -27,73 +81,214 @@ public class dlcTicket extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelTicket = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        panelTicketVista = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        panelDatos = new javax.swing.JPanel();
+        lblNombreEmpresa1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        lblRfcEmpresa1 = new javax.swing.JLabel();
+        lblSucursalEmpresa1 = new javax.swing.JLabel();
+        lblDireccionEmpresa1 = new javax.swing.JLabel();
+        lblCiudadEmpresa1 = new javax.swing.JLabel();
+        panelDesgloce = new javax.swing.JPanel();
+        lblPago1 = new javax.swing.JLabel();
+        lblHoraVenta = new javax.swing.JLabel();
+        lblCambio1 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        lblTotal1 = new javax.swing.JLabel();
+        lblPuntos1 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        lblNombreCajero1 = new javax.swing.JLabel();
+        lblFolioVenta1 = new javax.swing.JLabel();
+        lblFechaVenta = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        scrollPaneTitle = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("TICKET");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelTicket.setBackground(new java.awt.Color(255, 255, 255));
-        panelTicket.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelTicketVista.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setBackground(new java.awt.Color(0, 63, 100));
-        jLabel1.setOpaque(true);
-        panelTicket.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 0, 10, 710));
+        jLabel4.setBackground(new java.awt.Color(0, 63, 100));
+        jLabel4.setOpaque(true);
 
-        jLabel2.setBackground(new java.awt.Color(0, 63, 100));
-        jLabel2.setOpaque(true);
-        panelTicket.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 10, 720));
+        jLabel6.setBackground(new java.awt.Color(0, 63, 100));
+        jLabel6.setOpaque(true);
 
-        jLabel9.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 63, 100));
-        jLabel9.setText("MY STORE SA DE CV");
-        panelTicket.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, 20));
+        panelDatos.setBackground(new java.awt.Color(255, 255, 255));
+        panelDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (9).png"))); // NOI18N
-        panelTicket.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, 70));
+        lblNombreEmpresa1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        lblNombreEmpresa1.setForeground(new java.awt.Color(0, 63, 100));
+        lblNombreEmpresa1.setText("MY STORE SA DE CV");
+        panelDatos.add(lblNombreEmpresa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, 20));
 
-        jLabel3.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel3.setText("--------------------------------------------------------------------------------");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelTicket.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 320, 20));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (9).png"))); // NOI18N
+        panelDatos.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, 70));
 
-        jLabel4.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel4.setText("R. F. C. DMRH041224-RHM");
-        panelTicket.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, 20));
+        jLabel8.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel8.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel8.setText("--------------------------------------------------------------------------------");
+        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelDatos.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 320, 20));
 
-        jLabel6.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel6.setText("SUCURSAL OAXACA 1 (001)");
-        panelTicket.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, 20));
+        lblRfcEmpresa1.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        lblRfcEmpresa1.setText("R. F. C. DMRH041224-RHM");
+        panelDatos.add(lblRfcEmpresa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, 20));
 
-        jLabel7.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel7.setText("Calzada Francisco I. Madero 1332");
-        panelTicket.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, 20));
+        lblSucursalEmpresa1.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        lblSucursalEmpresa1.setText("SUCURSAL OAXACA 1 (001)");
+        panelDatos.add(lblSucursalEmpresa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, 20));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        lblDireccionEmpresa1.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        lblDireccionEmpresa1.setText("Calzada Francisco I. Madero 1332");
+        panelDatos.add(lblDireccionEmpresa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, 20));
+
+        lblCiudadEmpresa1.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        lblCiudadEmpresa1.setText("Oaxaca de Juarez, Oaxaca");
+        panelDatos.add(lblCiudadEmpresa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, 20));
+
+        panelDesgloce.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblPago1.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        lblPago1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPago1.setText("0.00");
+
+        lblHoraVenta.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        lblHoraVenta.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblHoraVenta.setText("21:23:00");
+
+        lblCambio1.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        lblCambio1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblCambio1.setText("0.00");
+
+        jLabel15.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        jLabel15.setText("TOTAL M.N. $");
+
+        lblTotal1.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        lblTotal1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotal1.setText("0.00");
+
+        lblPuntos1.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        lblPuntos1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPuntos1.setText("0.00");
+
+        jLabel21.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        jLabel21.setText("Efectivo $");
+
+        jLabel22.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        jLabel22.setText("Cambio $");
+
+        jLabel23.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        jLabel23.setText("CAMBIO EN MONEDERO:");
+
+        jLabel25.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        jLabel25.setText("LE ATENDIO:");
+
+        lblNombreCajero1.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        lblNombreCajero1.setText("ROQUE HERNANDEZ DIEGO");
+
+        lblFolioVenta1.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        lblFolioVenta1.setText("FOLIO: 000001");
+
+        lblFechaVenta.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
+        lblFechaVenta.setText("19/05/2024");
+
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (50).png"))); // NOI18N
+        jLabel26.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        javax.swing.GroupLayout panelDesgloceLayout = new javax.swing.GroupLayout(panelDesgloce);
+        panelDesgloce.setLayout(panelDesgloceLayout);
+        panelDesgloceLayout.setHorizontalGroup(
+            panelDesgloceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDesgloceLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelDesgloceLayout.createSequentialGroup()
+                .addGroup(panelDesgloceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDesgloceLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel25)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblNombreCajero1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDesgloceLayout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(lblFechaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblHoraVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDesgloceLayout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(lblFolioVenta1))
+                    .addGroup(panelDesgloceLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel26))
+                    .addGroup(panelDesgloceLayout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addGroup(panelDesgloceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panelDesgloceLayout.createSequentialGroup()
+                                .addComponent(jLabel21)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblPago1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelDesgloceLayout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelDesgloceLayout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addGroup(panelDesgloceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panelDesgloceLayout.createSequentialGroup()
+                                .addComponent(jLabel22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblCambio1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelDesgloceLayout.createSequentialGroup()
+                                .addComponent(jLabel23)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblPuntos1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelDesgloceLayout.setVerticalGroup(
+            panelDesgloceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDesgloceLayout.createSequentialGroup()
+                .addGroup(panelDesgloceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelDesgloceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPago1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(panelDesgloceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPuntos1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelDesgloceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCambio1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(panelDesgloceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombreCajero1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelDesgloceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFechaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHoraVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblFolioVenta1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE))
+        );
+
+        scrollPaneTitle.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPaneTitle.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -101,85 +296,58 @@ public class dlcTicket extends javax.swing.JDialog {
                 {null, null, null, null}
             },
             new String [] {
-                "CANT.", "ARTICULO", "PRECIO UNI", "SUBTOTAL"
+                "Articulo", "Precio", "Unidades", "Subtotal"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        panelTicket.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 217, 300, 190));
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        jLabel10.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel10.setText("Oaxaca de Juarez, Oaxaca");
-        panelTicket.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, 20));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        scrollPaneTitle.setViewportView(tabla);
 
-        jLabel11.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel11.setText("0.00");
-        panelTicket.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 430, -1, 20));
-
-        jLabel12.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel12.setText("21:23");
-        panelTicket.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 570, 70, 20));
-
-        jLabel13.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel13.setText("0.00");
-        panelTicket.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 490, -1, 20));
-
-        jLabel14.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel14.setText("TOTAL M.N. $");
-        panelTicket.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, -1, 20));
-
-        jLabel15.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel15.setText("0.00");
-        panelTicket.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, -1, 20));
-
-        jLabel16.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel16.setText("0.00");
-        panelTicket.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 470, -1, 20));
-
-        jLabel17.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel17.setText("Efectivo $");
-        panelTicket.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, -1, 20));
-
-        jLabel19.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel19.setText("Cambio $");
-        panelTicket.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, -1, 20));
-
-        jLabel18.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel18.setText("CAMBIO EN MONEDERO:");
-        panelTicket.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 470, -1, 20));
-
-        jLabel20.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel20.setText("LE ATENDIO:");
-        panelTicket.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, 20));
-
-        jLabel21.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel21.setText("ROQUE HERNANDEZ DIEGO");
-        panelTicket.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 550, 220, 20));
-
-        jLabel22.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel22.setText("FOLIO: 000001");
-        panelTicket.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 590, -1, 20));
-
-        jLabel23.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel23.setText("19/05/2024");
-        panelTicket.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 570, 70, 20));
-
-        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (50).png"))); // NOI18N
-        jLabel24.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        panelTicket.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 610, -1, 40));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout panelTicketVistaLayout = new javax.swing.GroupLayout(panelTicketVista);
+        panelTicketVista.setLayout(panelTicketVistaLayout);
+        panelTicketVistaLayout.setHorizontalGroup(
+            panelTicketVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTicketVistaLayout.createSequentialGroup()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelTicketVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelTicketVistaLayout.createSequentialGroup()
+                        .addGroup(panelTicketVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelDesgloce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTicketVistaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrollPaneTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panelTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE))
+        panelTicketVistaLayout.setVerticalGroup(
+            panelTicketVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelTicketVistaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollPaneTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelDesgloce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        getContentPane().add(panelTicketVista, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 660));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -214,7 +382,7 @@ public class dlcTicket extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                dlcTicket dialog = new dlcTicket(new javax.swing.JFrame(), true);
+                dlcTicket dialog = new dlcTicket(new javax.swing.JFrame(), true, 1);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -227,31 +395,34 @@ public class dlcTicket extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JPanel panelTicket;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblCambio1;
+    private javax.swing.JLabel lblCiudadEmpresa1;
+    private javax.swing.JLabel lblDireccionEmpresa1;
+    private javax.swing.JLabel lblFechaVenta;
+    private javax.swing.JLabel lblFolioVenta1;
+    private javax.swing.JLabel lblHoraVenta;
+    private javax.swing.JLabel lblNombreCajero1;
+    private javax.swing.JLabel lblNombreEmpresa1;
+    private javax.swing.JLabel lblPago1;
+    private javax.swing.JLabel lblPuntos1;
+    private javax.swing.JLabel lblRfcEmpresa1;
+    private javax.swing.JLabel lblSucursalEmpresa1;
+    private javax.swing.JLabel lblTotal1;
+    private javax.swing.JPanel panelDatos;
+    private javax.swing.JPanel panelDesgloce;
+    private javax.swing.JPanel panelTicketVista;
+    private javax.swing.JScrollPane scrollPaneTitle;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

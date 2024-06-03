@@ -6,6 +6,7 @@ package view;
 
 import controler.ControladorBD;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import model.Empleado;
 
@@ -222,15 +223,16 @@ public class dldBajaEmpleado extends javax.swing.JDialog {
         //Traer los datos del empleado y mostrarlos
         String i = txtClave.getText();
         if(i.isBlank() || i.isEmpty()){
-            
+            //Si no ingresa nada
+            JOptionPane.showMessageDialog(null, "Ingrese un ID de trabajador", "CAMPO INCOMPLETO", 2); //Advertencia  
+            limpiarCampos();
+        } else {            
             try {
                 int id = Integer.parseInt(this.txtClave.getText());
-                Empleado empleado = con.buscarEmpleado(id);
-                
+                Empleado empleado = con.buscarEmpleado(id);                
                 if(empleado == null){
                     JOptionPane.showMessageDialog(null, "El ID ingresado no corresponde a ningun empleado", "EMPLEDO NO ENCONTRADO", 2); //Advertencia
-                    limpiarCampos();
-                    
+                    limpiarCampos();                    
                 } else{
                     this.btnBaja.setEnabled(true);
                     this.txtNombre.setText(empleado.getNombre());
@@ -238,19 +240,13 @@ public class dldBajaEmpleado extends javax.swing.JDialog {
                     this.txtApellidoPaterno.setText(empleado.getApellidoP());
                     this.txtPuesto.setText(String.valueOf(empleado.getId_puesto()));
                     this.txtUsuario.setText(empleado.getUsuario());
-                }
-                
-                
-            } catch (Exception e) {
+                }                
+            } catch (HeadlessException | NumberFormatException e) {
                     System.out.println(e);
                     JOptionPane.showMessageDialog(null, "El ID ingresado no es valido a ningun empleado", "ID INVALIDO", 2); //Advertencia
                     limpiarCampos();
-            }
-            
+            }   
         }
-        
-       
-        
     }//GEN-LAST:event_txtClaveActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
@@ -294,8 +290,15 @@ public class dldBajaEmpleado extends javax.swing.JDialog {
         if(this.txtClave.getText().isBlank() || this.txtClave.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un ID de trabajador", "CAMPO INCOMPLETO", 2); //Advertencia
         } else{
-            int codigo = Integer.parseInt(txtClave.getText());
-            con.eliminarEmpleado(codigo);
+            try{
+                int codigo = Integer.parseInt(txtClave.getText());
+                con.eliminarEmpleado(codigo);
+            } catch(Exception e){
+                System.out.println(e);
+                JOptionPane.showMessageDialog(null, "ID de trabajador invalido", "CAMPO INCOMPLETO", 2); //Advertencia
+            }
+            
+            this.dispose();
         }
     }//GEN-LAST:event_btnBajaActionPerformed
 

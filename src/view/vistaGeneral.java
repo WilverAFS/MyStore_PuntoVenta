@@ -4,20 +4,43 @@
  */
 package view;
 
-//import javax.swing.JButton;
-import database.BaseDeDatos;
+import controler.ControladorBD;
 import java.awt.Color;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import model.Cliente;
+import model.Empleado;
+import model.Producto;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.Timer;
+
 
 /**
- *
- * @author diego & wilver
+ *@author diego & wilver
  */
-public class vistaGeneral extends javax.swing.JFrame {
+public class vistaGeneral extends javax.swing.JFrame {          
     
-    private BaseDeDatos BD = new BaseDeDatos();
+    //Variables para la venta
+    private ControladorBD con = new ControladorBD(); //Iniciamos conexion a la BD
+    private int id =-1; //Id para el buscador
+    //Entes
+    private Empleado empleadoLogueado;
+    private Cliente clienteLogueado;
+    //Datos de la cuenta
+    private List<Producto> listaCuenta = new ArrayList<>(); //Iniciamos una cuenta vacia
+    private double total=0; //Iniciamos la varibel para el total de la cuenta
     
+    //Inicializamos los aspectos visuales de la caja
+    private centroCajero cCaja = new centroCajero(); //Inicializamos el centro para ser usada
+    private lateralCajero lCaja = new lateralCajero(this); //Inicializamos el lateral de caja mandando el acceso a this
+    private JTable tablaCuenta = cCaja.getTablaCuenta(); //Traemos la Tabla de cuenta        
         
     //dialogos de los botones principales
     private dvgVentaCliente dVenta;
@@ -29,17 +52,24 @@ public class vistaGeneral extends javax.swing.JFrame {
     private dvgImprimirReporte dImprimirReporte;
     private dvgGrafica dGrafica;
     private dvgAltaEmpleado dAltaEmpleado;
-    /**
-     * Creates new form vistaGeneral
-     */
-    //Contructos general
+    
+   
+    //CONTRUCTOR PRINCIPAL invocado por el controlador general
     public vistaGeneral() {
         initComponents();
         this.btnCambiarVista.setEnabled(false);
         this.btnCambiarVista.setVisible(false);
-        this.setLocationRelativeTo(null);        
-        //Desactivamos todos los botones
+        this.setLocationRelativeTo(null); 
         this.activarBotones(false);
+        crearModelo();
+        //RELOJ FUNCIONAL del sistema
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarFechaYHora();
+            }
+        });
+        timer.start();
     }
     
     //Constructor para hacer pruebas inicializar con un nivel de usuario
@@ -49,14 +79,104 @@ public class vistaGeneral extends javax.swing.JFrame {
         //desactivamos todos los botones
         this.activarBotones(false);
         this.activarVistaUsuario(n); 
+        crearModelo();
+        //Inicializamos el reloj
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarFechaYHora();
+            }
+        });
+        timer.start();
     }
     
-    public JPanel getPanelVistaGeneral(){return this.panelVistaGeneral;}
-    //public JButton getBtnTresLineas(){ return this.btnTresLineas;}   //Sustituir el uso e implementralo aqui mismo.
-    public JPanel getPanelCentral(){ return this.panelCentral;}
-    public JPanel getPanelLateral(){ return this.panelLateral;}
-   // public JButton getBotonCambiarVista(){return this.btnCambiarVista; }
     
+    //Algunos metodos getters y setters
+    public JPanel getPanelVistaGeneral(){return this.panelVistaGeneral;}
+    public JPanel getPanelCentral(){ return this.panelCentral;}
+    public JPanel getPanelLateral(){ return this.panelLateral;} 
+    
+    //Necesarios para acceder a los datos de la venta
+    public List<Producto> getListaCuenta() {         return  this.listaCuenta;     }    
+    public Double getTotal(){ return total;}    
+    public void establecerEmpleado (Empleado empleado) { this.empleadoLogueado = empleado ;}
+    public Empleado traerEmpleado () {return this.empleadoLogueado; }    
+    public void establecerCliente (Cliente cliente){ this.clienteLogueado = cliente; }
+    public Cliente traerCliente(){ return this.clienteLogueado; }
+    
+    //Metodo que limpia los campos de entrada de datos
+    private void limpiarCampo(){
+        this.txtBuscar.setText("");
+    }
+    
+    //Reinicia la cuenta de productsp
+    public void limpiarCuenta(){
+        //Por crea un metodo que limpie la lista de los producto en la venta 
+        this.listaCuenta.removeAll(listaCuenta);
+        total=0;
+        this.actualizarTabla();
+    }
+    
+    public void removerProducto(int codigoProducto){
+        //Buscarlo en la cuenta
+        boolean productoExiste = false;
+        for(Producto p: listaCuenta){
+            if(p.getCodigo() == codigoProducto){ //Buscar el producto
+                productoExiste=true;
+                int uni = p.getExistencia();
+                if( uni>1 ) { p.setExistencia(uni--); }
+                else{ listaCuenta.remove(p); } //Eliminarlo de la lista si solo es uno                
+                break;
+            }
+        }
+        
+        if(!productoExiste){
+            JOptionPane.showMessageDialog(null, "El producto no se encuentra en la cuenta", "CANCELAR PRODUCTO", 2); //Advertencia
+        }
+        
+        this.actualizarTabla();
+    }
+    
+    //Pendiente
+    private void actualizaCentro(int nivel){
+        //Metodo que vuelve a invocar la tabla central segun el nivel cuando se haga una modificacion directa en la base de datos
+        //Convertir a public cuando sea implementado
+    }
+    
+    //Inicializa la modelo para la tabla de cuenta vacia
+    private void crearModelo(){        
+         DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("CODIGO");
+        modelo.addColumn("NOMBRE");
+        modelo.addColumn("PRECIO UNITARIO");
+        modelo.addColumn("CANTIDAD");
+        modelo.addColumn("IMPORTE");  
+        this.tablaCuenta.setModel(modelo);           
+    }
+    
+    //Revalida los datos de la tabla de cuenta
+    private void actualizarTabla(){
+        DefaultTableModel nmodelo = new DefaultTableModel( );        
+        nmodelo.addColumn("CODIGO");
+        nmodelo.addColumn("NOMBRE");
+        nmodelo.addColumn("PRECIO UNITARIO");
+        nmodelo.addColumn("CANTIDAD");
+        nmodelo.addColumn("IMPORTE");          
+        
+        String datos[] = new String [5];
+        for(Producto p:  listaCuenta ){            
+            datos[0] = String.valueOf(p.getCodigo());
+            datos[1] = p.getNombre();
+            datos[2] = String.valueOf(p.getPrecioV());            
+            datos[3] = String.valueOf(p.getExistencia()); 
+            datos[4] = String.valueOf(p.getImporte());
+            nmodelo.addRow(datos);
+        }        
+        this.tablaCuenta.setModel(nmodelo);          
+        cCaja.setTotal(total); //Cada que se actualiza la tabla se vuelve a enviar el total
+    }
+    
+    //Activa o desactiva todos los botones 
     private void activarBotones(boolean b){
         this.btnVenta.setEnabled(b);
         this.btnAltaDeClientes.setEnabled(b);
@@ -66,11 +186,11 @@ public class vistaGeneral extends javax.swing.JFrame {
         this.btnAltaDeTrabajadores.setEnabled(b);        
         this.btnGraficas.setEnabled(b);
         this.btnImprimirReportes.setEnabled(b);
-        this.btnOk.setEnabled(b);
+        //this.btnOk.setEnabled(b);
         this.txtBuscar.setEnabled(b);
         this.btnCambiarVista.setEnabled(b);
         this.btnCambiarVista.setVisible(b);
-        this.btnOk.setVisible(b);
+        //this.btnOk.setVisible(b);
         this.txtBuscar.setVisible(b);
         this.lblLupa.setVisible(b);
     }
@@ -81,8 +201,8 @@ public class vistaGeneral extends javax.swing.JFrame {
             this.btnVenta.setEnabled(true);
             this.btnAltaDeClientes.setEnabled(true);
             this.btnConsultarPrecio.setEnabled(true);
-            this.btnOk.setEnabled(true);
-            this.btnOk.setVisible(true);
+            //this.btnOk.setEnabled(true);
+            //this.btnOk.setVisible(true);
             this.txtBuscar.setEnabled(true);
             this.txtBuscar.setVisible(true);
             this.lblLupa.setVisible(true);
@@ -103,11 +223,11 @@ public class vistaGeneral extends javax.swing.JFrame {
     
     
     //Activa los paneles correspondientes al nivel de usuario -> configurar en el login tmb por default el de caja
-    public void activarVistaUsuario(int nivel){        
+    public final void activarVistaUsuario(int nivel){        
         switch (nivel) { //Vista de usuario nivel 1 = CAJERO
             case 1 ->{
-                this.panelCentral.add(new centroCajero().getPanelCentroCajero() );
-                this.panelLateral.add(new lateralCajero().getPanelLateralCajero() );
+                this.panelCentral.add( cCaja.getPanelCentroCajero());
+                this.panelLateral.add(lCaja.getPanelLateralCajero() );
                 this.activarNivelUsuario(nivel);
             }            
             case 2 ->{// //Vista de usuario nivel 2 = ALMACEN
@@ -121,8 +241,8 @@ public class vistaGeneral extends javax.swing.JFrame {
                 this.activarNivelUsuario(nivel);                
             }
             case 10 -> { //Vista de usuario nivel 3 = ADMINISTRACION
-                this.panelCentral.setVisible(false);
-                this.panelLateral.setVisible(false);
+                this.panelCentral.setVisible(true);
+                this.panelLateral.setVisible(true);
                 this.activarNivelUsuario(nivel);
             }
             default -> {
@@ -131,6 +251,19 @@ public class vistaGeneral extends javax.swing.JFrame {
         }        
     }
 
+    
+    //Define la fecha y hora en el sistema
+    private void actualizarFechaYHora(){        
+        LocalDateTime ahora = LocalDateTime.now();
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String fechaFormateada = ahora.format(formatoFecha);
+        String horaFormateada = ahora.format(formatoHora);
+        //Enviamos los datos del tiempo a las etiquetas
+        lblFecha.setText("Fecha:  " + fechaFormateada);
+        lblHora.setText("Hora:  " + horaFormateada);
+    }  
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -148,10 +281,9 @@ public class vistaGeneral extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        btnOk = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        lblHora = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         btnConsultarPrecio = new javax.swing.JButton();
@@ -166,6 +298,7 @@ public class vistaGeneral extends javax.swing.JFrame {
         panelCentral = new javax.swing.JPanel();
         panelLateral = new javax.swing.JPanel();
         btnCambiarVista = new javax.swing.JButton();
+        lblFecha = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MY STORE");
@@ -230,10 +363,6 @@ public class vistaGeneral extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (8).png"))); // NOI18N
         panelVistaGeneral.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, -10, 37, 60));
 
-        btnOk.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnOk.setText("OK");
-        panelVistaGeneral.add(btnOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 100, 60, 40));
-
         jLabel8.setBackground(new java.awt.Color(0, 63, 100));
         jLabel8.setOpaque(true);
         panelVistaGeneral.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 1400, 20));
@@ -244,8 +373,11 @@ public class vistaGeneral extends javax.swing.JFrame {
         jLabel12.setText("MY STORE 1.000.001 (Punto de Venta)");
         panelVistaGeneral.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
-        jLabel18.setText("Aqui poner el dia que marca la computadora");
-        panelVistaGeneral.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 60, 240, -1));
+        lblHora.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblHora.setForeground(new java.awt.Color(0, 0, 153));
+        lblHora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblHora.setText("Hora:  10:10:10");
+        panelVistaGeneral.add(lblHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 50, 140, 30));
 
         jLabel22.setBackground(new java.awt.Color(255, 255, 255));
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
@@ -314,6 +446,7 @@ public class vistaGeneral extends javax.swing.JFrame {
         btnMovimientosDeAlmacen.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
         btnMovimientosDeAlmacen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (22).png"))); // NOI18N
         btnMovimientosDeAlmacen.setText("Movimientos de almacen");
+        btnMovimientosDeAlmacen.setEnabled(false);
         btnMovimientosDeAlmacen.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btnMovimientosDeAlmacen.setOpaque(true);
         btnMovimientosDeAlmacen.addActionListener(new java.awt.event.ActionListener() {
@@ -327,6 +460,7 @@ public class vistaGeneral extends javax.swing.JFrame {
         btnImprimirReportes.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
         btnImprimirReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (24).png"))); // NOI18N
         btnImprimirReportes.setText("Imprimir reportes");
+        btnImprimirReportes.setEnabled(false);
         btnImprimirReportes.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btnImprimirReportes.setOpaque(true);
         btnImprimirReportes.addActionListener(new java.awt.event.ActionListener() {
@@ -379,7 +513,7 @@ public class vistaGeneral extends javax.swing.JFrame {
             .addGap(0, 480, Short.MAX_VALUE)
         );
 
-        panelVistaGeneral.add(panelCentral, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 1030, 480));
+        panelVistaGeneral.add(panelCentral, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 1030, 480));
 
         panelLateral.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -407,6 +541,12 @@ public class vistaGeneral extends javax.swing.JFrame {
         });
         panelVistaGeneral.add(btnCambiarVista, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 220, 200, 60));
 
+        lblFecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblFecha.setForeground(new java.awt.Color(0, 0, 153));
+        lblFecha.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblFecha.setText("Fecha:  2024-01-01");
+        panelVistaGeneral.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 50, 150, 30));
+
         getContentPane().add(panelVistaGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, -1));
 
         pack();
@@ -417,14 +557,56 @@ public class vistaGeneral extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarMousePressed
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
-        // TODO add your handling code here:
-        //Traeel el producto con el mismo codigo
+        // Ready
+        //Trae el producto con el mismo codigo
+        String codigo = this.txtBuscar.getText();
+        if(codigo.isBlank() || codigo.isEmpty()){ //Si no ingreso un codigo o ingreso solo espacios entonces...
+            JOptionPane.showMessageDialog(null, "Ingrese un CODIGO de producto", "CAMPO INCOMPLETO", 2); //Advertencia
+            this.limpiarCampo();
+        }else{            
+            try{
+                id = Integer.parseInt(codigo);
+                Producto producto = con.buscarProducto(id);                
+                if(producto == null){ //Si el producto con ese codigo existe o no
+                    JOptionPane.showMessageDialog(null, "El CODIGO ingresado no corresponde a ningun producto", "PRODUCTO    NO ENCONTRADO", 2); //Advertencia
+                    this.limpiarCampo();
+                }else{//Si el producto existe entonces..
+                    //Hacemos una copia del producto pero con los datos del anterior                     
+                    Producto nuevoP = new Producto( producto);
+                    nuevoP.setExistencia(1); //Utilisaremos existencia del nuevo producto para contarlos en la venta;
+                    total = total + nuevoP.getPrecioV();
+                    //NOTA: al hacer la venta final es necesario sacarlos del inventario con ayuda del metodo disminuir stock                  
+                    
+                    //Ver si el mismo producto esta en la lista 
+                    boolean productoExiste = false;
+                    for(Producto p: listaCuenta){                        
+                        if(p.getCodigo() == nuevoP.getCodigo()){ //SI ya esta solo aumentamos en uno su valor
+                            p.addExistencia();
+                            productoExiste = true;
+                            break;
+                            //this.actualizarTabla();  //Revalidamos la tabla 
+                        }                        
+                    }
+                    
+                    if(!productoExiste){ //Si el producto no existe lo agregamos
+                        this.listaCuenta.add(nuevoP);
+                    }
+                    
+                    this.actualizarTabla(); //Revalidamos la tabla al final                    
+                }
+                
+            } catch (NumberFormatException e){
+                System.out.println(e);
+                JOptionPane.showMessageDialog(null, "El CODIGO ingresado no es una entrada valida", "ENTRADA INVALIDA", 2); //Advertencia
+                this.limpiarCampo();        
+            }
+            
+        }
         
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnConsultarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarPrecioActionPerformed
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:        
         this.dConsultarPrecio = new dvgConsultarPrecio(new javax.swing.JFrame(), true);
         this.dConsultarPrecio.setLocationRelativeTo(null);
         this.dConsultarPrecio.setVisible(true);
@@ -433,13 +615,14 @@ public class vistaGeneral extends javax.swing.JFrame {
     private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
         // TODO add your handling code here:
         this.dVenta = new dvgVentaCliente( new javax.swing.JFrame(), true );
+        //Enviar el clienteLogueado para dar acceso a sus datos
+        this.dVenta.establecerCliente(clienteLogueado);
         this.dVenta.setLocationRelativeTo(null);
         this.dVenta.setVisible(true);
     }//GEN-LAST:event_btnVentaActionPerformed
 
     private void btnAltaDeClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaDeClientesActionPerformed
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:        
         this.dAltaCliente = new dvgAltaCliente(new javax.swing.JFrame(), true);
         this.dAltaCliente.setLocationRelativeTo(null);
         this.dAltaCliente.setVisible(true);
@@ -486,13 +669,14 @@ public class vistaGeneral extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         this.dOpciones = new dvgOpciones(new javax.swing.JFrame(), true);
+        //Enviar datos del empleado logueado
+        this.dOpciones.establecerEmpleado(empleadoLogueado);
         this.dOpciones.setLocation(WIDTH, WIDTH);
         this.dOpciones.setVisible(true);
     }//GEN-LAST:event_btnTresLineasActionPerformed
 
     private void btnTresLineasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTresLineasMouseClicked
         // TODO add your handling code here:
-       //
     }//GEN-LAST:event_btnTresLineasMouseClicked
 
     private void btnCambiarVistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarVistaActionPerformed
@@ -561,7 +745,6 @@ public class vistaGeneral extends javax.swing.JFrame {
     private javax.swing.JButton btnGraficas;
     private javax.swing.JButton btnImprimirReportes;
     private javax.swing.JButton btnMovimientosDeAlmacen;
-    private javax.swing.JButton btnOk;
     private javax.swing.JButton btnTresLineas;
     private javax.swing.JButton btnVenta;
     private javax.swing.JLabel jLabel10;
@@ -569,11 +752,12 @@ public class vistaGeneral extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblLupa;
     private javax.swing.JPanel panelCentral;
     private javax.swing.JPanel panelLateral;

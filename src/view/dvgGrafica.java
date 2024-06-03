@@ -4,6 +4,10 @@
  */
 package view;
 
+import graphics.GraficoInventario;
+import graphics.GraficoMasVendido;
+import graphics.GraficoMenosVendido;
+
 /**
  *
  * @author Wilver
@@ -27,32 +31,147 @@ public class dvgGrafica extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelGraficas = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        btnInventario = new javax.swing.JButton();
+        btnMasVendido = new javax.swing.JButton();
+        btnMenosVendido = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("GRAFICA DE VENTAS");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (53).png"))); // NOI18N
+        panelGraficas.setBackground(new java.awt.Color(255, 255, 255));
+        panelGraficas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Roboto Slab", 0, 18)); // NOI18N
+        jLabel3.setText("Graficas");
+        panelGraficas.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 80, 40));
+
+        jLabel1.setBackground(new java.awt.Color(0, 63, 100));
+        jLabel1.setOpaque(true);
+        panelGraficas.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 32, 780, 10));
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 102));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (11).png"))); // NOI18N
+        panelGraficas.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, 30, 30));
+        panelGraficas.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 780, 10));
+
+        jLabel9.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 63, 100));
+        jLabel9.setText("MY STORE");
+        panelGraficas.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 400, 70, 20));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (8).png"))); // NOI18N
+        panelGraficas.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 370, 40, 70));
+
+        btnInventario.setFont(new java.awt.Font("Roboto Slab", 1, 18)); // NOI18N
+        btnInventario.setForeground(new java.awt.Color(51, 51, 255));
+        btnInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (57).png"))); // NOI18N
+        btnInventario.setText("Inventario por Categoría");
+        btnInventario.setToolTipText("");
+        btnInventario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnInventario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnInventario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInventarioActionPerformed(evt);
+            }
+        });
+        panelGraficas.add(btnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, -1, 220));
+
+        btnMasVendido.setFont(new java.awt.Font("Roboto Slab", 1, 18)); // NOI18N
+        btnMasVendido.setForeground(new java.awt.Color(51, 255, 51));
+        btnMasVendido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (55).png"))); // NOI18N
+        btnMasVendido.setText("Producto Mas Vendido");
+        btnMasVendido.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnMasVendido.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnMasVendido.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnMasVendido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasVendidoActionPerformed(evt);
+            }
+        });
+        panelGraficas.add(btnMasVendido, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+
+        btnMenosVendido.setFont(new java.awt.Font("Roboto Slab", 1, 18)); // NOI18N
+        btnMenosVendido.setForeground(new java.awt.Color(255, 0, 51));
+        btnMenosVendido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (56).png"))); // NOI18N
+        btnMenosVendido.setText("Producto Menos Vendido");
+        btnMenosVendido.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnMenosVendido.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnMenosVendido.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnMenosVendido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenosVendidoActionPerformed(evt);
+            }
+        });
+        panelGraficas.add(btnMenosVendido, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, -1, 220));
+
+        jLabel2.setFont(new java.awt.Font("Roboto Slab", 3, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 63, 100));
+        jLabel2.setText("REPORTE GRAFICO SOBRE LOS PRODUCTOS");
+        panelGraficas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1)
-                .addContainerGap(21, Short.MAX_VALUE))
+            .addGap(0, 780, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelGraficas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(27, 27, 27))
+            .addGap(0, 430, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelGraficas, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
+        // TODO add your handling code here:
+        GraficoInventario example = new GraficoInventario();
+        example.setSize(800, 600);
+        example.setLocationRelativeTo(null);
+            //example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        example.setVisible(true);
+        example.setAlwaysOnTop(true);
+        this.dispose();
+    }//GEN-LAST:event_btnInventarioActionPerformed
+
+    private void btnMasVendidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasVendidoActionPerformed
+        // TODO add your handling code here:
+        GraficoMasVendido grafico = new GraficoMasVendido();
+        grafico.setSize(800,600);
+        grafico.setLocationRelativeTo(null);
+        grafico.setVisible(true);
+        grafico.setAlwaysOnTop(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMasVendidoActionPerformed
+
+    private void btnMenosVendidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenosVendidoActionPerformed
+        // TODO add your handling code here:
+        GraficoMenosVendido grafico = new GraficoMenosVendido();
+        grafico.setSize(800,600);
+        grafico.setLocationRelativeTo(null);
+        grafico.setVisible(true);
+        grafico.setAlwaysOnTop(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMenosVendidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,6 +216,16 @@ public class dvgGrafica extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInventario;
+    private javax.swing.JButton btnMasVendido;
+    private javax.swing.JButton btnMenosVendido;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPanel panelGraficas;
     // End of variables declaration//GEN-END:variables
 }

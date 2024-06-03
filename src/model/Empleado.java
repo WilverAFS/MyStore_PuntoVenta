@@ -32,6 +32,16 @@ public class Empleado  extends Usuario{
         this.apellidoM = "Hernandez";
         this.id_puesto = 1;
     }
+    
+    //Constructor para hacer una copia
+    public Empleado(Empleado empleado){
+        super(empleado.getUsuario(), empleado.getContraseña(), empleado.getNivel() ) ;
+        this.idEmpleado = empleado.getIdEmpleado();
+        this.nombre = empleado.getNombre();
+        this.apellidoP = empleado.getApellidoP();
+        this.apellidoM = empleado.getApellidoM();
+        this.id_puesto = empleado.getId_puesto();
+    }
 
     //Constructor completo
     public Empleado(int idEmpleado, String nombre, String apellidoP, String apellidoM, String usuario, String contraseña, int id_puesto) {
@@ -65,6 +75,12 @@ public class Empleado  extends Usuario{
     public void setId_puesto(int id_puesto) {        this.id_puesto = id_puesto;    }
 
     //Agregar los metodos que pueda manejar
-    
+    public String getPuestoNombre(){
+        if(id_puesto == 1){ return "Cajero"; }
+        if(id_puesto == 2){ return "Almacenista"; }
+        if(id_puesto == 3){ return "Administrativo"; }
+        if(id_puesto == 0){ return "Gerente General"; }        
+        return "UNKNOW";
+    }
     
 }

@@ -39,6 +39,17 @@ public class Producto {
         this.existencia = existencia;
     }
     
+    //Constructor para hacer copias
+    public Producto(Producto otroP){
+        this.codigo = otroP.codigo;
+        this.categoria = otroP.categoria;
+        this.descripcion = otroP.descripcion;
+        this.existencia = otroP.existencia;
+        this.nombre = otroP.nombre;
+        this.precioC = otroP.precioC;
+        this.precioV = otroP.precioV;    
+    }
+    
     //Metodos getters y setters
     public String getNombre() {         return nombre;    }
     public void setNombre(String nombre) {        this.nombre = nombre;    }
@@ -68,5 +79,11 @@ public class Producto {
         return c;
     }
     
+    public Double getImporte(){
+        double importe = precioV * existencia;
+        return importe;
+    }    
+    
+    public void addExistencia(){        existencia++;    }
     
 }

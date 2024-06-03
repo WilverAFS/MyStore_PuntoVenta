@@ -4,11 +4,16 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Wilver
  */
 public class dlcAplicarDescuento extends javax.swing.JDialog {
+    
+    private dlcCobrarCuenta cobrarCuenta;
+    private double total, descuento, totalFinal;
 
     /**
      * Creates new form dlcCapturarDescuento
@@ -18,6 +23,16 @@ public class dlcAplicarDescuento extends javax.swing.JDialog {
     public dlcAplicarDescuento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    public dlcAplicarDescuento(java.awt.Frame parent, boolean modal, dlcCobrarCuenta cobrarCuenta) {
+        super(parent, modal);
+        initComponents();
+        this.cobrarCuenta = cobrarCuenta;
+    }
+    
+    public void setTotal(double total){
+        this.total = total;        
     }
 
     /**
@@ -33,10 +48,10 @@ public class dlcAplicarDescuento extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        txtPorcentaje = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        txtNumTelefono = new javax.swing.JTextField();
+        txtImporte = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -57,40 +72,43 @@ public class dlcAplicarDescuento extends javax.swing.JDialog {
         jLabel1.setOpaque(true);
         panelDescuento.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 2, 280, 40));
 
-        txtNombre.setText("0.0000");
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+        txtPorcentaje.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtPorcentaje.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPorcentaje.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
+                txtPorcentajeActionPerformed(evt);
             }
         });
-        panelDescuento.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 150, 30));
+        panelDescuento.add(txtPorcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 150, 30));
 
         jLabel8.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel8.setText("%");
-        panelDescuento.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 10, 20));
+        jLabel8.setText("Porcentaje %:");
+        panelDescuento.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 80, 30));
 
         jLabel11.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel11.setText("Importe: ");
-        panelDescuento.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 50, 20));
+        jLabel11.setText("Importe $: ");
+        panelDescuento.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 60, 30));
 
-        txtNumTelefono.setText("$0.00");
-        txtNumTelefono.addActionListener(new java.awt.event.ActionListener() {
+        txtImporte.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtImporte.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtImporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumTelefonoActionPerformed(evt);
+                txtImporteActionPerformed(evt);
             }
         });
-        panelDescuento.add(txtNumTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 150, 30));
+        panelDescuento.add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 150, 30));
 
         btnAceptar.setBackground(new java.awt.Color(0, 63, 100));
         btnAceptar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.setText("Aceptar");
+        btnAceptar.setEnabled(false);
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
             }
         });
-        panelDescuento.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 150, -1));
+        panelDescuento.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 150, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,17 +132,54 @@ public class dlcAplicarDescuento extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+    private void txtPorcentajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPorcentajeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
+        if(this.txtPorcentaje.getText().isBlank() || txtPorcentaje.getText().isEmpty() ){
+        JOptionPane.showMessageDialog(null, "Ingrese un PORCENTAJE de descuento ", "CAMPO INCOMPLETO", 2); //Advertencia  
+        this.txtPorcentaje.setText("");
+        }else{            
+            try{                
+                double porce = Double.parseDouble(txtPorcentaje.getText() );
+                descuento = porce * total  / 100;
+                totalFinal = total - descuento;
+                this.txtImporte.setText(String.valueOf(descuento));            
+                this.btnAceptar.setEnabled(true);
+            }catch(Exception e){
+                System.out.println(e);
+                JOptionPane.showMessageDialog(null, "El dato ingresado no es una entrada valida", "ENTRADA INVALIDA", 2); //Advertencia
+                this.txtPorcentaje.setText("");
+            }       
+        }
+        
+    }//GEN-LAST:event_txtPorcentajeActionPerformed
 
-    private void txtNumTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumTelefonoActionPerformed
+    private void txtImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImporteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumTelefonoActionPerformed
+        
+        if(this.txtImporte.getText().isBlank() || txtImporte.getText().isEmpty() ){
+        JOptionPane.showMessageDialog(null, "Ingrese un IMPORTE de descuento ", "CAMPO INCOMPLETO", 2); //Advertencia  
+        this.txtImporte.setText("");
+        }else{            
+            try{                
+                double des = Double.parseDouble(txtImporte.getText() );
+                descuento = des*100/ total;
+                totalFinal = total - des;
+                this.txtPorcentaje.setText(String.valueOf(descuento));          
+                this.btnAceptar.setEnabled(true);
+            }catch(Exception e){
+                System.out.println(e);
+                JOptionPane.showMessageDialog(null, "El dato ingresado no es una entrada valida", "ENTRADA INVALIDA", 2); //Advertencia
+                this.txtImporte.setText("");
+            }       
+        }
+        
+    }//GEN-LAST:event_txtImporteActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        
+        //Enviar este dato a la ventana anterior              
+        this.cobrarCuenta.setTotalFinal(totalFinal);
+        this.cobrarCuenta.establecerCambio();
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -179,7 +234,7 @@ public class dlcAplicarDescuento extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel panelDescuento;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNumTelefono;
+    private javax.swing.JTextField txtImporte;
+    private javax.swing.JTextField txtPorcentaje;
     // End of variables declaration//GEN-END:variables
 }

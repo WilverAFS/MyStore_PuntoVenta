@@ -62,7 +62,7 @@ public class dvgAltaProducto extends javax.swing.JDialog {
         jLabel16 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
         cmbCategoria = new javax.swing.JComboBox<>();
-        spExistencia = new javax.swing.JSpinner();
+        txtExistencia = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("REGISTRAR NUEVO PRODUCTO");
@@ -172,7 +172,9 @@ public class dvgAltaProducto extends javax.swing.JDialog {
 
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Telefonia", "Computo", "Tablets", "Accesorios", "Otros" }));
         panelAltaDeProductos.add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 110, 30));
-        panelAltaDeProductos.add(spExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 110, -1));
+
+        txtExistencia.setText("0");
+        panelAltaDeProductos.add(txtExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 90, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,20 +217,27 @@ public class dvgAltaProducto extends javax.swing.JDialog {
         int x = categoria*100000;
         int id = x + con.getNPCategoria(categoria) +1;
         String nombre = txtNombre.getText();
-        String descripcion = txtDescripcion.getText();
-        int existencia = spExistencia.getComponentCount();
+        String descripcion = txtDescripcion.getText();        
         
         if( nombre.isBlank() || nombre.isEmpty() ||  txtprecioCompra.getText().isEmpty() || txtprecioCompra.getText().isBlank() || txtPrecioVenta.getText().isBlank() || txtPrecioVenta.getText().isEmpty() || descripcion.isBlank() || descripcion.isEmpty()){
             JOptionPane.showMessageDialog(null, "Rellene todos los campos por favor", "CAMPOS INCOMPLETOS", 2); //Advertencia    
         }else{
-            double pC= Double.parseDouble(txtprecioCompra.getText());
-            double pV = Double.parseDouble( txtPrecioVenta.getText());
-            if( pC==0 || pC<0 || pV <pC ){
-                JOptionPane.showMessageDialog(null, "Los precios ingresados no son validos, modifiquelos por favor", "CAMPOS INCONSISTENTES", 2); //Advertencia    
-            }else{
-                Producto nuevoProducto = new Producto(id, nombre, pC, pV, categoria, descripcion, existencia );
-                con.insertarProducto(nuevoProducto);                
-            }
+            
+            try{
+                int existencia = Integer.parseInt(this.txtExistencia.getText());
+                double pC = Double.parseDouble(txtprecioCompra.getText());
+                double pV = Double.parseDouble(txtPrecioVenta.getText());
+                if (pC == 0 || pC < 0 || pV < pC) {
+                    JOptionPane.showMessageDialog(null, "Los precios ingresados no son validos, modifiquelos por favor", "CAMPOS INCONSISTENTES", 2); //Advertencia    
+                } else {
+                    Producto nuevoProducto = new Producto(id, nombre, pC, pV, categoria, descripcion, existencia);
+                    con.insertarProducto(nuevoProducto);
+                }
+                
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Ingrese solo datos numericos en precio y existencia por favor", "DATOS INCONSISTENTES", 2); //Advertencia    
+            }            
+            
         }        
         this.dispose();        
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -296,9 +305,9 @@ public class dvgAltaProducto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel panelAltaDeProductos;
-    private javax.swing.JSpinner spExistencia;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtExistencia;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecioVenta;
     private javax.swing.JTextField txtprecioCompra;

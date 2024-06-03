@@ -9,13 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JPanel;
+import model.Cliente;
 import model.Empleado;
-import view.centroAdministracion;
-import view.centroAlmacen;
-import view.centroCajero;
-import view.lateralAdministracion;
-import view.lateralAlmacen;
-import view.lateralCajero;
 import view.login;
 import view.vistaGeneral;
 import view.vistaInicial;
@@ -33,11 +28,12 @@ public class ControladorGeneral  implements ActionListener  {
     private vistaInicial vInicio;
     private JPanel pL, pG;     
     
-    private BaseDeDatos BD;
+    private BaseDeDatos BD = new BaseDeDatos();
     private List<Empleado> listaEmpleados;
+    private Empleado empleadoLogueado;
+    private Cliente clienteLogueado;
     
-    
-    //Contructor especializado que comprueba el inicio de sesion DELET
+    //CONSTRUCTO especializado que comprueba el inicio de sesion DELET
     public ControladorGeneral(vistaInicial vInicio, login vLogin, vistaGeneral vGeneral, List<Empleado> listaEmpleados ){
         this.vInicio= vInicio;    
         this.vLogin = vLogin;
@@ -51,15 +47,17 @@ public class ControladorGeneral  implements ActionListener  {
     }    
     
     
-    //CONTRUCTOR MAESTRO SIN REQUISITOS 
+    //CONTRUCTOR MAESTRO SIN REQUISITOS PARA SER EJECUTADO
     public ControladorGeneral(){
         //Inicializa sus propias vistas
         this.vInicio= new vistaInicial();    
         this.vLogin = new login();        
         this.vGeneral = new vistaGeneral();
         //Datos de la BD
-        BD = new BaseDeDatos();
+        //BD = new BaseDeDatos();
         listaEmpleados = BD.getEmpleados();        
+        ControladorBD con = new ControladorBD();
+        clienteLogueado = con.buscarCliente(1); //por defecto el cliente logueado es el de publico general (1)
          //Damos Forma a los paneles para ser sustituidos en Inicio
         this.pL = vLogin.getPanelVistaLogin();
         //Agrgamos el evento al boton.
@@ -67,9 +65,8 @@ public class ControladorGeneral  implements ActionListener  {
     }    
     
     
-       
-    public void iniciar(){       
-        //Hace visible los paneles de login  en el Inicio
+       //Hace visible los paneles de login  en el Inicio
+    public void iniciar(){        
         vInicio.setTitle("INICIAR SESION");
         vInicio.setSize(this.vGeneral.getSize());
         vInicio.add(pL);
@@ -97,12 +94,15 @@ public class ControladorGeneral  implements ActionListener  {
                 //Si es true econtramos al empleado y definimos el nivel de vista segun esta coincidencia
                 existe = true;
                 nivel = empleado.getNivel();
+                
+                empleadoLogueado = empleado; //Definimos un alias para optener sus datos
+                
                 break; //Salimos del bucle al encontrarlo ahorrando recursos
             }
         }        
         if(existe){ //Si ecxiste inicializamos todo
                 this.iniciarVista(nivel);
-        } else {
+        } else { //Si no existe entonces mostramos un error
             vLogin.mostrarMensaje("ERROR  en las credenciales");
         }        
     }
@@ -111,6 +111,8 @@ public class ControladorGeneral  implements ActionListener  {
         vLogin.mostrarMensaje("Bienvenido usuario de nivel: " + nivel );
         //vGeneral = new vistaGeneral(nivel);        
         vGeneral.activarVistaUsuario(nivel);
+        vGeneral.establecerEmpleado(empleadoLogueado); //Le doy acceso al empleado a la instancia de vistaGeneral
+        vGeneral.establecerCliente(clienteLogueado); //Acceso al cliente por deafult 
         pG = vGeneral.getPanelVistaGeneral();        
         
         //---vGeneral.activarVistaUsuario(nivel);

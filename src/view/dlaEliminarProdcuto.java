@@ -156,7 +156,7 @@ public class dlaEliminarProdcuto extends javax.swing.JDialog {
                 txtNombreActionPerformed(evt);
             }
         });
-        panelEliminarProducto.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 270, 30));
+        panelEliminarProducto.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 270, 30));
 
         jLabel8.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
         jLabel8.setText("Nombre:");
@@ -219,39 +219,14 @@ public class dlaEliminarProdcuto extends javax.swing.JDialog {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-
         if(this.txtID.getText().isBlank() || this.txtID.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un CODIGO de producto", "CAMPO INCOMPLETO", 2); //Advertencia
         } else{
-            
-            String n, pc, pv,  d; //Componentes editables
-            n= txtNombre.getText();
-            pc = txtprecioCompra.getText();
-            pv = txtPrecioVenta.getText();
-            d = txtDescripcion.getText();
-            int c =cmbCategoria.getSelectedIndex() +1;
-            int e = spExistencia.getComponentCount();
-
-            if(n.isBlank() || n.isEmpty() || pc.isBlank() || pc.isEmpty() || pv.isBlank() || pv.isEmpty() || d.isBlank() || d.isEmpty()  ){
-                JOptionPane.showMessageDialog(null, "No puede dejar campos en blaco", "CAMPOS INCOMPLETOS", 2); //Advertencia
-            }else{
-                Double precioC, precioV;
-                try{
-                    precioC = Double.parseDouble(pc);
-                    precioV = Double.parseDouble(pv);
-
-                    Producto producto = new Producto( id, n, precioC, precioV, c, d, e);
-                    con.editarProducto(producto);
-
-                } catch(NumberFormatException exception){
-                    JOptionPane.showMessageDialog(null, "Ingrese valores numericos en los campos de precio", "VALORES IRRECONOCIBLES", 2); //Advertencia
-                    System.out.println(exception);
-                    txtprecioCompra.setText("");
-                    txtPrecioVenta.setText("");
-                }
-
-            }
+            this.con.eliminarProducto(id);            
         }
+        
+        this.dispose();
+        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed

@@ -4,6 +4,8 @@
  */
 package view;
 
+import model.Empleado;
+
 /**
  *
  * @author Wilver
@@ -17,6 +19,14 @@ public class dvgOpciones extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    
+    public void establecerEmpleado(Empleado empleado){
+        this.txtNombre.setText(empleado.getNombre());
+        this.txtId.setText( String.valueOf(empleado.getIdEmpleado() ) );
+        this.txtUsuario.setText(empleado.getUsuario());                
+        this.txtPuesto.setText(empleado.getPuestoNombre());
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,12 +39,7 @@ public class dvgOpciones extends javax.swing.JDialog {
 
         panelTresLineas = new javax.swing.JPanel();
         jSeparator5 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        Nombre = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel55 = new javax.swing.JLabel();
         jLabel56 = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
         btnReportes = new javax.swing.JButton();
@@ -46,6 +51,23 @@ public class dvgOpciones extends javax.swing.JDialog {
         btnMiNegocio = new javax.swing.JButton();
         btnChatDeSoporte = new javax.swing.JButton();
         btnAyuda = new javax.swing.JButton();
+        panelUsuarioLogueado = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        Nombre1 = new javax.swing.JLabel();
+        Nombre2 = new javax.swing.JLabel();
+        txtPuesto = new javax.swing.JLabel();
+        Nombre3 = new javax.swing.JLabel();
+        Nombre4 = new javax.swing.JLabel();
+        pswContraseña = new javax.swing.JPasswordField();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
+        jSeparator9 = new javax.swing.JSeparator();
+        Nombre5 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JLabel();
+        txtId = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JLabel();
+        jLabel55 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("OPCIONES ESPECIALIZADAS");
@@ -56,28 +78,8 @@ public class dvgOpciones extends javax.swing.JDialog {
         jSeparator5.setBackground(new java.awt.Color(255, 255, 255));
         panelTresLineas.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 680, 20));
 
-        jLabel2.setText("Cerrar sesion ");
-        panelTresLineas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, 130, -1));
-
-        jLabel1.setText("Cambiar usuario");
-        panelTresLineas.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 130, -1));
-
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (33).png"))); // NOI18N
         panelTresLineas.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, 220));
-
-        Nombre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        Nombre.setForeground(new java.awt.Color(102, 255, 255));
-        Nombre.setText("Nombre");
-        panelTresLineas.add(Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 310, -1));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(102, 255, 255));
-        jLabel3.setText("Bienvenido:");
-        panelTresLineas.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 300, -1));
-
-        jLabel55.setBackground(new java.awt.Color(0, 63, 100));
-        jLabel55.setOpaque(true);
-        panelTresLineas.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 340, 670));
 
         jLabel56.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel56.setForeground(new java.awt.Color(204, 204, 204));
@@ -230,6 +232,74 @@ public class dvgOpciones extends javax.swing.JDialog {
         });
         panelTresLineas.add(btnAyuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 510, -1, 140));
 
+        panelUsuarioLogueado.setBackground(new java.awt.Color(0, 63, 100));
+        panelUsuarioLogueado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 204, 255));
+        jLabel4.setText("Bienvenido");
+        panelUsuarioLogueado.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, -1));
+
+        Nombre1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Nombre1.setForeground(new java.awt.Color(102, 255, 255));
+        Nombre1.setText("ID:");
+        panelUsuarioLogueado.add(Nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 30, -1));
+
+        Nombre2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Nombre2.setForeground(new java.awt.Color(102, 255, 255));
+        Nombre2.setText("Puesto:");
+        panelUsuarioLogueado.add(Nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 110, -1));
+
+        txtPuesto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtPuesto.setForeground(new java.awt.Color(102, 204, 255));
+        txtPuesto.setText("name p");
+        panelUsuarioLogueado.add(txtPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 230, 30));
+
+        Nombre3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Nombre3.setForeground(new java.awt.Color(102, 255, 255));
+        Nombre3.setText("Usuario:");
+        panelUsuarioLogueado.add(Nombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 80, -1));
+
+        Nombre4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Nombre4.setForeground(new java.awt.Color(102, 255, 255));
+        Nombre4.setText("Contraseña:");
+        panelUsuarioLogueado.add(Nombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 110, -1));
+
+        pswContraseña.setBackground(new java.awt.Color(0, 63, 100));
+        pswContraseña.setForeground(new java.awt.Color(102, 204, 255));
+        pswContraseña.setText("jPasswordField1");
+        panelUsuarioLogueado.add(pswContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 160, -1));
+        panelUsuarioLogueado.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 290, 10));
+        panelUsuarioLogueado.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 290, 10));
+        panelUsuarioLogueado.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 290, 10));
+        panelUsuarioLogueado.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 290, 10));
+
+        Nombre5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Nombre5.setForeground(new java.awt.Color(102, 255, 255));
+        Nombre5.setText("Nombre:");
+        panelUsuarioLogueado.add(Nombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 80, -1));
+
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(102, 204, 255));
+        txtNombre.setText("name");
+        panelUsuarioLogueado.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 210, 30));
+
+        txtId.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtId.setForeground(new java.awt.Color(102, 204, 255));
+        txtId.setText("id");
+        panelUsuarioLogueado.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 250, 30));
+
+        txtUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(102, 204, 255));
+        txtUsuario.setText("user");
+        panelUsuarioLogueado.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 220, 30));
+
+        panelTresLineas.add(panelUsuarioLogueado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 340, 290));
+
+        jLabel55.setBackground(new java.awt.Color(0, 63, 100));
+        jLabel55.setOpaque(true);
+        panelTresLineas.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 340, 670));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -243,7 +313,7 @@ public class dvgOpciones extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -329,7 +399,11 @@ public class dvgOpciones extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Nombre;
+    private javax.swing.JLabel Nombre1;
+    private javax.swing.JLabel Nombre2;
+    private javax.swing.JLabel Nombre3;
+    private javax.swing.JLabel Nombre4;
+    private javax.swing.JLabel Nombre5;
     private javax.swing.JButton btnAyuda;
     private javax.swing.JButton btnChatDeSoporte;
     private javax.swing.JButton btnCliente;
@@ -339,14 +413,22 @@ public class dvgOpciones extends javax.swing.JDialog {
     private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnResultados;
     private javax.swing.JButton btnVentaRapida;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JPanel panelTresLineas;
+    private javax.swing.JPanel panelUsuarioLogueado;
+    private javax.swing.JPasswordField pswContraseña;
+    private javax.swing.JLabel txtId;
+    private javax.swing.JLabel txtNombre;
+    private javax.swing.JLabel txtPuesto;
+    private javax.swing.JLabel txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

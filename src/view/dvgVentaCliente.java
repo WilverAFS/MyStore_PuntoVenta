@@ -4,6 +4,8 @@
  */
 package view;
 
+import model.Cliente;
+
 /**
  *
  * @author Wilver
@@ -17,6 +19,15 @@ public class dvgVentaCliente extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    
+    //Muestra los valores del cliente logueado
+    public void establecerCliente(Cliente cliente){
+        
+        this.txtIdCliente.setText( String.valueOf(cliente.getId_cliente()) );
+        this.txtNombre.setText(cliente.getNombre());
+        this.txtTelefonoContacto.setText(cliente.getTelefono());
+        this.txtCorreo.setText(cliente.getCorreo());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,44 +38,122 @@ public class dvgVentaCliente extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelCambiarCliente = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        btnAceptar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lbl1 = new javax.swing.JLabel();
+        txtIdCliente = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        lbl2 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        lbl3 = new javax.swing.JLabel();
+        txtTelefonoContacto = new javax.swing.JLabel();
+        jSeparator6 = new javax.swing.JSeparator();
+        lbl4 = new javax.swing.JLabel();
+        txtCorreo = new javax.swing.JLabel();
+        jSeparator7 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ESTE CLIENTE");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setText("Pagina en construcion...");
+        panelCambiarCliente.setBackground(new java.awt.Color(255, 255, 255));
+        panelCambiarCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Nombre Cliente");
+        jLabel9.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 63, 100));
+        jLabel9.setText("MY STORE");
+        panelCambiarCliente.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, -1, 20));
+        panelCambiarCliente.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 37, 60));
+        panelCambiarCliente.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 370, 10));
+
+        btnAceptar.setBackground(new java.awt.Color(0, 63, 100));
+        btnAceptar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
+        panelCambiarCliente.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 90, -1));
+
+        jLabel1.setBackground(new java.awt.Color(0, 63, 100));
+        jLabel1.setOpaque(true);
+        panelCambiarCliente.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 36, 370, 6));
+
+        jLabel3.setFont(new java.awt.Font("Roboto Slab", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel3.setText("Cliente");
+        panelCambiarCliente.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 70, 40));
+
+        lbl1.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
+        lbl1.setText("ID del Cliente:");
+        panelCambiarCliente.add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, 40));
+
+        txtIdCliente.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        txtIdCliente.setText("id");
+        panelCambiarCliente.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 240, 40));
+        panelCambiarCliente.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 320, 10));
+
+        lbl2.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
+        lbl2.setText("Nombre:");
+        panelCambiarCliente.add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 70, 40));
+
+        txtNombre.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        txtNombre.setText("name");
+        panelCambiarCliente.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 270, 40));
+        panelCambiarCliente.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 320, 10));
+
+        lbl3.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
+        lbl3.setText("Telefono de contacto:");
+        panelCambiarCliente.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 150, 40));
+
+        txtTelefonoContacto.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        txtTelefonoContacto.setText("tel");
+        panelCambiarCliente.add(txtTelefonoContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 190, 40));
+        panelCambiarCliente.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 320, 10));
+
+        lbl4.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
+        lbl4.setText("Correo:");
+        panelCambiarCliente.add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 70, 40));
+
+        txtCorreo.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        txtCorreo.setText("c@c");
+        panelCambiarCliente.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 270, 40));
+        panelCambiarCliente.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 320, 10));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (8).png"))); // NOI18N
+        panelCambiarCliente.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 280, 40, 70));
+
+        jLabel8.setForeground(new java.awt.Color(255, 255, 102));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (11).png"))); // NOI18N
+        panelCambiarCliente.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 30, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(126, Short.MAX_VALUE))
+            .addComponent(panelCambiarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addContainerGap(155, Short.MAX_VALUE))
+            .addComponent(panelCambiarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,7 +199,26 @@ public class dvgVentaCliente extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JLabel lbl1;
+    private javax.swing.JLabel lbl2;
+    private javax.swing.JLabel lbl3;
+    private javax.swing.JLabel lbl4;
+    private javax.swing.JPanel panelCambiarCliente;
+    private javax.swing.JLabel txtCorreo;
+    private javax.swing.JLabel txtIdCliente;
+    private javax.swing.JLabel txtNombre;
+    private javax.swing.JLabel txtTelefonoContacto;
     // End of variables declaration//GEN-END:variables
 }

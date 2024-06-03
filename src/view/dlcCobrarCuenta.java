@@ -4,18 +4,116 @@
  */
 package view;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.Cliente;
+import model.Empleado;
+import model.Producto;
+
 /**
  *
  * @author Wilver
  */
+//en esta clase definimos con cuanto nos pagan, si hay algun descuento y cual es cambio correspondiente
 public class dlcCobrarCuenta extends javax.swing.JDialog {
-
+   
+    //Datos de la venta
+    private double total; //Traerlo de donde se invoca este elemento
+    private List<Producto> listaCuenta;    
+    private Empleado empleadoLogueado;
+    private Cliente clienteLogueado;
+    
+    //Datos calculables aqui
+    private int b1Mil, b2Quinientos, b3Dos, b4Cien, b6Veinte, b5Cincuenta;  
+    private double pago =-1; ;    //Lo calculamos aqui    
+    private double totalFinal =-1;  //se calcula aqui
+    private double cambio =-1; //Se calcula aqui
+    
+     
     /**
      * Creates new form dlcCobrarCuenta
      */
+    //contructor de pruebas
     public dlcCobrarCuenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
+        initComponents();        
+    }
+    
+    //CONSTRUCTOR PRINCIPAL con acceso a los datos 
+    public dlcCobrarCuenta(Empleado e, Cliente c, List<Producto> listaCuenta, double total ) {
+        super(new javax.swing.JFrame(), true);
+        initComponents();        
+        this.empleadoLogueado = e;
+        this.clienteLogueado = c;
+        this.listaCuenta = listaCuenta;
+        this.setTotal(total);
+    }
+    
+    //Metodo deprecado mandar datos desde el constructor principal
+    public void setListaCuenta( List<Producto> cuenta ){        this.listaCuenta = cuenta;    }
+    //public void setEmpleadoL
+   // public void setEmplea
+        
+    
+    private void setTotal(double total ){
+        this.total = total;
+        this.totalFinal= total;
+        this.lblTotal.setText(String.valueOf(total));
+    }
+    
+    public void setTotalFinal(double totalF){
+        this.totalFinal = totalF;
+        this.total= totalF;
+        this.lblTexto.setText("Total neto: $");
+        this.lblTotal.setText(String.valueOf(totalF));
+    }
+    
+    public void establecerCambio(){        
+        cambio = pago - totalFinal;
+        this.txtCambio.setText(String.valueOf(cambio));
+    }
+    
+    //declara el contrador de billetes en cero
+    private void iniciarBilletes(){
+        b1Mil =0;
+        b2Quinientos=0;
+        b3Dos=0;
+        b4Cien =0; 
+        b6Veinte=0;
+        b5Cincuenta=0; 
+        pago=0;
+    }
+    
+    //Aumenta en uno el numero del billete que se le proporcione
+    // 1-mil 2-quinientos 3-dosciento 4-cien 5-cincuenta 6-vainte
+    private void aumertarBillete(int n){
+        if(n==1){ b1Mil++;                  pago=pago +1000;  }
+        if(n==2){ b2Quinientos++;        pago=pago +500;  }
+        if(n==3){ b3Dos++;              pago=pago +200;  }
+        if(n==4){ b4Cien++;             pago=pago+100; }
+        if(n==5){ b5Cincuenta++;        pago=pago +50;  }
+        if(n==6){ b6Veinte++;               pago=pago +20;  }
+    }
+    
+    //Lo constrario de aumentarBillete
+    private void disminuirBillete(int n){        
+        if(n==1){   if(b1Mil >0)               {   b1Mil--;             pago=pago - 1000;       }   }
+        if(n==2){   if(b2Quinientos >0)  {   b2Quinientos--;      pago=pago - 500;    }   }
+        if(n==3){   if(b3Dos >0)             {   b3Dos--;            pago=pago - 200;         }   }
+        if(n==4){   if(b4Cien >0)            {   b4Cien--;            pago=pago - 100;        }   }
+        if(n==5){   if(b5Cincuenta >0)   {   b5Cincuenta--;       pago=pago - 50;      }   }
+        if(n==6){   if(b6Veinte >0)         {   b6Veinte--;             pago=pago - 20;      }   }
+    }
+    
+    //Enseña la cantidad de billetes seleccionados de cada tipo
+    private void actualizarEtiquetas(){
+        this.lbl1.setText( String.valueOf( b1Mil  ) );
+        this.lbl2.setText( String.valueOf( b2Quinientos  ) );
+        this.lbl3.setText( String.valueOf( b3Dos  ) );
+        this.lbl4.setText( String.valueOf( b4Cien  ) );
+        this.lbl5.setText( String.valueOf( b5Cincuenta  ) );
+        this.lbl6.setText( String.valueOf( b6Veinte  ) );
+        this.txtPago.setText(String.valueOf(pago));
     }
 
     /**
@@ -28,51 +126,60 @@ public class dlcCobrarCuenta extends javax.swing.JDialog {
     private void initComponents() {
 
         panelCobrarCuenta = new javax.swing.JPanel();
+        btnCapturarDescuento = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        btnCapturarDescuento = new javax.swing.JButton();
-        lblTotal = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        lblSuma1 = new javax.swing.JLabel();
-        lblResta1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        lblSuma2 = new javax.swing.JLabel();
-        lblResta2 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        lblSuma3 = new javax.swing.JLabel();
-        lblResta3 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        lblSuma4 = new javax.swing.JLabel();
-        lblResta4 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        lblSuma5 = new javax.swing.JLabel();
-        lblResta5 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        lblSuma6 = new javax.swing.JLabel();
-        lblResta6 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
+        btn2 = new javax.swing.JButton();
+        btn1 = new javax.swing.JButton();
+        lbl1 = new javax.swing.JLabel();
+        btn7 = new javax.swing.JButton();
+        lbl4 = new javax.swing.JLabel();
+        btn8 = new javax.swing.JButton();
+        btn3 = new javax.swing.JButton();
+        lbl2 = new javax.swing.JLabel();
+        btn4 = new javax.swing.JButton();
+        btn9 = new javax.swing.JButton();
+        lbl5 = new javax.swing.JLabel();
+        btn10 = new javax.swing.JButton();
+        btn5 = new javax.swing.JButton();
+        lbl3 = new javax.swing.JLabel();
+        btn6 = new javax.swing.JButton();
+        btn11 = new javax.swing.JButton();
+        lbl6 = new javax.swing.JLabel();
+        btn12 = new javax.swing.JButton();
         jLabel32 = new javax.swing.JLabel();
         txtPago = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         txtCambio = new javax.swing.JTextField();
         btnCobrar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel5 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
+        lblTexto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("COBRAR ESTA CUENTA");
 
-        panelCobrarCuenta.setBackground(new java.awt.Color(255, 255, 255));
         panelCobrarCuenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnCapturarDescuento.setBackground(new java.awt.Color(255, 255, 51));
+        btnCapturarDescuento.setFont(new java.awt.Font("Roboto Slab", 1, 12)); // NOI18N
+        btnCapturarDescuento.setText("Capturar Descuento");
+        btnCapturarDescuento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapturarDescuentoActionPerformed(evt);
+            }
+        });
+        panelCobrarCuenta.add(btnCapturarDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 150, 30));
 
         jLabel3.setFont(new java.awt.Font("Roboto Slab", 0, 18)); // NOI18N
         jLabel3.setText("Cobrar Cuenta");
@@ -80,157 +187,210 @@ public class dlcCobrarCuenta extends javax.swing.JDialog {
 
         jLabel1.setBackground(new java.awt.Color(0, 63, 100));
         jLabel1.setOpaque(true);
-        panelCobrarCuenta.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 32, 740, 10));
+        panelCobrarCuenta.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 32, 780, 10));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 102));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (11).png"))); // NOI18N
-        panelCobrarCuenta.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 0, 30, 30));
-        panelCobrarCuenta.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 740, 10));
-
-        jLabel9.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 63, 100));
-        jLabel9.setText("MY STORE");
-        panelCobrarCuenta.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 390, -1, 20));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (8).png"))); // NOI18N
-        panelCobrarCuenta.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 370, 37, 60));
-
-        btnCapturarDescuento.setBackground(new java.awt.Color(255, 255, 51));
-        btnCapturarDescuento.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        btnCapturarDescuento.setText("Capturar Descuento");
-        btnCapturarDescuento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCapturarDescuentoActionPerformed(evt);
-            }
-        });
-        panelCobrarCuenta.add(btnCapturarDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 150, -1));
-
-        lblTotal.setFont(new java.awt.Font("Roboto Slab", 1, 48)); // NOI18N
-        lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblTotal.setText("0.00");
-        panelCobrarCuenta.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 320, -1));
-
-        jLabel4.setFont(new java.awt.Font("Roboto Slab", 1, 48)); // NOI18N
-        jLabel4.setText("Total:  $ ");
-        panelCobrarCuenta.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 200, -1));
+        panelCobrarCuenta.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, 30, 30));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Denominaciones en billetes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto Slab", 0, 12))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/1000 (2).jpg"))); // NOI18N
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-        lblSuma1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
-        lblSuma1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel2.add(lblSuma1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 30, 20));
-
-        lblResta1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
-        lblResta1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel2.add(lblResta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 30, 20));
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/500 (1).png"))); // NOI18N
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
-
-        jLabel16.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
-        jLabel16.setText("0");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 10, -1));
-
-        lblSuma2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
-        lblSuma2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel2.add(lblSuma2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 30, 20));
-
-        lblResta2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
-        lblResta2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel2.add(lblResta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 30, 20));
-
-        jLabel19.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
-        jLabel19.setText("0");
-        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 10, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/200 (1).jpg"))); // NOI18N
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
-
-        lblSuma3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
-        lblSuma3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel2.add(lblSuma3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 30, 20));
-
-        lblResta3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
-        lblResta3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel2.add(lblResta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 30, 20));
-
-        jLabel22.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
-        jLabel22.setText("0");
-        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 10, -1));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/100 (1).jpg"))); // NOI18N
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
-
-        lblSuma4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
-        lblSuma4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel2.add(lblSuma4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 30, 20));
-
-        lblResta4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
-        lblResta4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel2.add(lblResta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 30, 20));
-
-        jLabel25.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
-        jLabel25.setText("0");
-        jPanel2.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 10, -1));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/50 (1).jpg"))); // NOI18N
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
-
-        lblSuma5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
-        lblSuma5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel2.add(lblSuma5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 30, 20));
-
-        lblResta5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
-        lblResta5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel2.add(lblResta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 30, 20));
-
-        jLabel28.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
-        jLabel28.setText("0");
-        jPanel2.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, 10, -1));
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/20 (1).jpg"))); // NOI18N
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, -1, -1));
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
 
-        lblSuma6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
-        lblSuma6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel2.add(lblSuma6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 30, 20));
+        btn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
+        btn2.setBorder(null);
+        btn2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 30, 20));
 
-        lblResta6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
-        lblResta6.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel2.add(lblResta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 30, 20));
+        btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
+        btn1.setBorder(null);
+        btn1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 30, 20));
 
-        jLabel31.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
-        jLabel31.setText("0");
-        jPanel2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 10, -1));
+        lbl1.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        lbl1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl1.setText("0");
+        jPanel2.add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 120, -1));
 
-        panelCobrarCuenta.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 510, 140));
+        btn7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
+        btn7.setBorder(null);
+        btn7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btn7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn7ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 30, 20));
+
+        lbl4.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        lbl4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl4.setText("0");
+        jPanel2.add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 100, -1));
+
+        btn8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
+        btn8.setBorder(null);
+        btn8.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btn8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn8ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 30, 20));
+
+        btn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
+        btn3.setBorder(null);
+        btn3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 30, 20));
+
+        lbl2.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        lbl2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl2.setText("0");
+        jPanel2.add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 110, -1));
+
+        btn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
+        btn4.setBorder(null);
+        btn4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btn4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 30, 20));
+
+        btn9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
+        btn9.setBorder(null);
+        btn9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btn9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn9ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 30, 20));
+
+        lbl5.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        lbl5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl5.setText("0");
+        jPanel2.add(lbl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 100, -1));
+
+        btn10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
+        btn10.setBorder(null);
+        btn10.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btn10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn10ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 30, 20));
+
+        btn5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
+        btn5.setBorder(null);
+        btn5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btn5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn5ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 30, 20));
+
+        lbl3.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        lbl3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl3.setText("0");
+        jPanel2.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 110, -1));
+
+        btn6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
+        btn6.setBorder(null);
+        btn6.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btn6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn6ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 40, -1, 20));
+
+        btn11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
+        btn11.setBorder(null);
+        btn11.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btn11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn11ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn11, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 30, 20));
+
+        lbl6.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        lbl6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl6.setText("0");
+        jPanel2.add(lbl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 90, 20));
+
+        btn12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (48).png"))); // NOI18N
+        btn12.setBorder(null);
+        btn12.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btn12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn12ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn12, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, -1, 20));
+
+        panelCobrarCuenta.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 740, 190));
 
         jLabel32.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
         jLabel32.setText("Pago con:    $");
-        panelCobrarCuenta.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 100, 20));
+        panelCobrarCuenta.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 100, 30));
 
+        txtPago.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPagoActionPerformed(evt);
             }
         });
-        panelCobrarCuenta.add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 130, 20));
+        panelCobrarCuenta.add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 130, 30));
 
         jLabel33.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
         jLabel33.setText("Cambio:    $");
-        panelCobrarCuenta.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 90, 20));
+        panelCobrarCuenta.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, 90, 30));
 
+        txtCambio.setEditable(false);
+        txtCambio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtCambio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCambioActionPerformed(evt);
             }
         });
-        panelCobrarCuenta.add(txtCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 130, 20));
+        panelCobrarCuenta.add(txtCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 130, 30));
 
         btnCobrar.setBackground(new java.awt.Color(51, 255, 51));
         btnCobrar.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
@@ -242,59 +402,192 @@ public class dlcCobrarCuenta extends javax.swing.JDialog {
                 btnCobrarActionPerformed(evt);
             }
         });
-        panelCobrarCuenta.add(btnCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, 120, 50));
+        panelCobrarCuenta.add(btnCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, 120, 50));
+
+        jLabel9.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 63, 100));
+        jLabel9.setText("MY STORE");
+        panelCobrarCuenta.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 500, -1, 20));
+        panelCobrarCuenta.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 780, 10));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (8).png"))); // NOI18N
+        panelCobrarCuenta.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 480, 37, 60));
+
+        lblTotal.setFont(new java.awt.Font("Roboto Slab", 1, 48)); // NOI18N
+        lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotal.setText("0.00");
+        panelCobrarCuenta.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 330, -1));
+
+        lblTexto.setFont(new java.awt.Font("Roboto Slab", 1, 48)); // NOI18N
+        lblTexto.setText("Subtotal: $");
+        panelCobrarCuenta.add(lblTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 320, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelCobrarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(panelCobrarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelCobrarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(panelCobrarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 535, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCapturarDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarDescuentoActionPerformed
-        // TODO add your handling code here:
-        dlcAplicarDescuento dialog = new dlcAplicarDescuento(new javax.swing.JFrame(), true);
+            //Panel de descuento
+        dlcAplicarDescuento dialog = new dlcAplicarDescuento(new javax.swing.JFrame(), true, this);
+        dialog.setTotal(total);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-        
     }//GEN-LAST:event_btnCapturarDescuentoActionPerformed
 
-    private void txtPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPagoActionPerformed
+    private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
         // TODO add your handling code here:
+        this.aumertarBillete(1);
+        this.actualizarEtiquetas();
+        this.establecerCambio();
+    }//GEN-LAST:event_btn1ActionPerformed
+
+    private void btn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7ActionPerformed
+        // TODO add your handling code here:
+        this.aumertarBillete(4);
+        this.actualizarEtiquetas();
+        this.establecerCambio();
+    }//GEN-LAST:event_btn7ActionPerformed
+
+    private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
+        // TODO add your handling code here:
+        this.aumertarBillete(2);
+        this.actualizarEtiquetas();
+        this.establecerCambio();
+    }//GEN-LAST:event_btn3ActionPerformed
+
+    private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
+        // TODO add your handling code here:
+        this.aumertarBillete(5);
+        this.actualizarEtiquetas();
+        this.establecerCambio();
+    }//GEN-LAST:event_btn9ActionPerformed
+
+    private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
+        // TODO add your handling code here:
+        this.aumertarBillete(3);
+        this.actualizarEtiquetas();
+        this.establecerCambio();
+    }//GEN-LAST:event_btn5ActionPerformed
+
+    private void btn11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn11ActionPerformed
+        // TODO add your handling code here:
+        this.aumertarBillete(6);
+        this.actualizarEtiquetas();
+        this.establecerCambio();
+    }//GEN-LAST:event_btn11ActionPerformed
+
+    private void txtPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPagoActionPerformed
+        //READY
+        String z = this.txtPago.getText();
+        if(z.isBlank() || z.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese un monto de pago", "CAMPO INCOMPLETO", 2); //Advertencia     
+            this.txtPago.setText("");
+        } else{
+            
+            try{                
+                double x = Double.parseDouble(z);                
+                if(x <0) { 
+                    JOptionPane.showMessageDialog(null, "No puede ingresar un monto negativo ", "MONTO INVALIDO", 2); //Advertencia     
+                    this.txtPago.setText("");               
+                } else{
+                    //Checamos si lo escribio a mano o si lo hizo con los 
+                    if(! (x == pago)) { //Si es difrente entonces lo escribio a mano
+                        this.iniciarBilletes();
+                        this.actualizarEtiquetas();
+                        this.pago = x;
+                        this.txtPago.setText(z);
+                    }
+                    this.establecerCambio();                    
+                }
+                
+            } catch(NumberFormatException e){
+                System.out.println(e); //Error por ingresar letras
+                JOptionPane.showMessageDialog(null, "El monto ingresado no es una entrada valida", "ENTRADA INVALIDA", 2); //Advertencia
+                this.txtPago.setText("");
+            }            
+            
+        }       
+        
     }//GEN-LAST:event_txtPagoActionPerformed
 
     private void txtCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCambioActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:                
     }//GEN-LAST:event_txtCambioActionPerformed
 
     private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
-        // TODO add your handling code here:
+        //READY        
+        //REGLA DE INTEGRIDAD POR SI PAGO ES NULO O CAMBIO ES NEGATIVO
+        if(pago <0  || pago < totalFinal || cambio < 0 ){
+            //Mensaje de error
+            JOptionPane.showMessageDialog(null, "Ingrese un monto de pago valido porfavor", "MONTO INVALIDO", 2); //Advertencia     
+            this.txtPago.setText("");
+        } else{            
+            //CREAMOS EL TICKET PARA IMPRESION EN PDF
+            flcTicket ticket = new flcTicket(this.empleadoLogueado, this.clienteLogueado, this.listaCuenta, this.totalFinal, this.pago, this.cambio);
+            ticket.setLocationRelativeTo(null);
+            ticket.setVisible(true);
+            
+            /**CREAMOS UN TICKET PARA VISUALISARLO
+            dlcTicket dialog = new dlcTicket(new javax.swing.JFrame(), true, 1);  //Implementacion pendiente
+            Enviar datos necesario
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);             
+             */            
+        }
         this.dispose();
-        
-         //Enviar informacion al ticket
-         
-         
-        dlcTicket dialog = new dlcTicket(new javax.swing.JFrame(), true);
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
     }//GEN-LAST:event_btnCobrarActionPerformed
+
+    private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
+        // TODO add your handling code here:
+        this.disminuirBillete(1);
+        this.actualizarEtiquetas();
+        this.establecerCambio();
+    }//GEN-LAST:event_btn2ActionPerformed
+
+    private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
+        // TODO add your handling code here:
+        this.disminuirBillete(2);
+        this.actualizarEtiquetas();
+        this.establecerCambio();
+    }//GEN-LAST:event_btn4ActionPerformed
+
+    private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
+        // TODO add your handling code here:
+        this.disminuirBillete(3);
+        this.actualizarEtiquetas();
+        this.establecerCambio();
+    }//GEN-LAST:event_btn6ActionPerformed
+
+    private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
+        // TODO add your handling code here:
+        this.disminuirBillete(4);
+        this.actualizarEtiquetas();
+        this.establecerCambio();
+    }//GEN-LAST:event_btn8ActionPerformed
+
+    private void btn10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn10ActionPerformed
+        // TODO add your handling code here:
+        this.disminuirBillete(5);
+        this.actualizarEtiquetas();
+        this.establecerCambio();
+    }//GEN-LAST:event_btn10ActionPerformed
+
+    private void btn12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn12ActionPerformed
+        // TODO add your handling code here:
+        this.disminuirBillete(6);
+        this.actualizarEtiquetas();
+        this.establecerCambio();
+    }//GEN-LAST:event_btn12ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,6 +632,18 @@ public class dlcCobrarCuenta extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn1;
+    private javax.swing.JButton btn10;
+    private javax.swing.JButton btn11;
+    private javax.swing.JButton btn12;
+    private javax.swing.JButton btn2;
+    private javax.swing.JButton btn3;
+    private javax.swing.JButton btn4;
+    private javax.swing.JButton btn5;
+    private javax.swing.JButton btn6;
+    private javax.swing.JButton btn7;
+    private javax.swing.JButton btn8;
+    private javax.swing.JButton btn9;
     private javax.swing.JButton btnCapturarDescuento;
     private javax.swing.JButton btnCobrar;
     private javax.swing.JLabel jLabel1;
@@ -346,16 +651,9 @@ public class dlcCobrarCuenta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -363,18 +661,13 @@ public class dlcCobrarCuenta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblResta1;
-    private javax.swing.JLabel lblResta2;
-    private javax.swing.JLabel lblResta3;
-    private javax.swing.JLabel lblResta4;
-    private javax.swing.JLabel lblResta5;
-    private javax.swing.JLabel lblResta6;
-    private javax.swing.JLabel lblSuma1;
-    private javax.swing.JLabel lblSuma2;
-    private javax.swing.JLabel lblSuma3;
-    private javax.swing.JLabel lblSuma4;
-    private javax.swing.JLabel lblSuma5;
-    private javax.swing.JLabel lblSuma6;
+    private javax.swing.JLabel lbl1;
+    private javax.swing.JLabel lbl2;
+    private javax.swing.JLabel lbl3;
+    private javax.swing.JLabel lbl4;
+    private javax.swing.JLabel lbl5;
+    private javax.swing.JLabel lbl6;
+    private javax.swing.JLabel lblTexto;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JPanel panelCobrarCuenta;
     private javax.swing.JTextField txtCambio;

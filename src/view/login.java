@@ -26,7 +26,12 @@ public class login extends javax.swing.JFrame {
     
     public JButton getBtnEntrar(){return btnEntrar;}
     public String getUsuario(){return txtUsuario.getText();}
-    public String getContraseña(){ return txtContraseña.getText();}
+    public String getContraseña(){ 
+        //return txtContraseña.getText();
+        //Revisar como hacerlo con pasword
+        String pass = new String(txtPassword.getPassword());
+        return pass;
+    }
     public JPanel getPanelVistaLogin(){ return panelLogin;}
     public JLabel getLblOlvideContraseña(){return this.lblOlvideContraseña;}
 
@@ -47,7 +52,7 @@ public class login extends javax.swing.JFrame {
 
         panelLogin = new javax.swing.JPanel();
         txtUsuario = new javax.swing.JTextField();
-        txtContraseña = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -76,12 +81,18 @@ public class login extends javax.swing.JFrame {
         });
         panelLogin.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 350, 140, -1));
 
-        txtContraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraseñaActionPerformed(evt);
+        txtPassword.setText("jPasswordField1");
+        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPasswordFocusGained(evt);
             }
         });
-        panelLogin.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 400, 140, -1));
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+        panelLogin.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 400, 140, -1));
 
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -149,10 +160,6 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
-    private void txtContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraseñaActionPerformed
-
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         
     }//GEN-LAST:event_btnEntrarActionPerformed
@@ -163,6 +170,15 @@ public class login extends javax.swing.JFrame {
        dvlRecuperarC.setLocationRelativeTo(null);
        dvlRecuperarC.setVisible(true);
     }//GEN-LAST:event_lblOlvideContraseñaMouseClicked
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
+        // TODO add your handling code here:
+        this.txtPassword.setText("");
+    }//GEN-LAST:event_txtPasswordFocusGained
 
     /**
      * @param args the command line arguments
@@ -212,7 +228,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lblOlvideContraseña;
     private javax.swing.JPanel panelLogin;
-    private javax.swing.JTextField txtContraseña;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

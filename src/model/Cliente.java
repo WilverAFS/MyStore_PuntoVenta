@@ -13,7 +13,11 @@ public class Cliente {
     private int id_cliente;
 
     //Constructor de pruebas
-    public Cliente() {
+    public Cliente() {        
+        this.nombre = "Cliente Wilver";
+        this.telefono = "9512525298";
+        this.correo = "wilverflores2004@gmail.com";
+        this.id_cliente = 1234;
     }
 
     //Constructor completo

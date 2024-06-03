@@ -233,6 +233,9 @@ public class dlaEditarProducto extends javax.swing.JDialog {
                 
             }            
         }        
+        
+        this.dispose();
+        
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed

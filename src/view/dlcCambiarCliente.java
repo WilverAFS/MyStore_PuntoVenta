@@ -4,18 +4,40 @@
  */
 package view;
 
+import controler.ControladorBD;
+import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
+import model.Cliente;
+
 /**
  *
  * @author Wilver
  */
 public class dlcCambiarCliente extends javax.swing.JDialog {
-
+    
+    private lateralCajero lCajero;
+    private Cliente nuevoCL;
     /**
      * Creates new form dlcCambiarCliente
      */
     public dlcCambiarCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    //Constrictor principal
+    public dlcCambiarCliente(java.awt.Frame parent, boolean modal, lateralCajero latCaja) {
+        super(parent, modal);
+        initComponents();
+        this.lCajero = latCaja;
+    }
+    
+    private void limpiarCampos(){
+        this.txtID.setText("");
+        this.lblCorreo.setText("Correo electronico: ");
+        this.lblID.setText("ID de cliente: ");
+        this.lblNombre.setText("Nombre: ");
+        this.btnAceptar.setEnabled(false);
     }
 
     /**
@@ -32,15 +54,15 @@ public class dlcCambiarCliente extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         btnAceptar = new javax.swing.JButton();
-        lblDescripcion = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txtCodigoDeProducto = new javax.swing.JTextField();
+        lblCorreo = new javax.swing.JLabel();
+        txtID = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        lblNombre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CAMBIAR DE CLIENTE");
@@ -61,30 +83,32 @@ public class dlcCambiarCliente extends javax.swing.JDialog {
         btnAceptar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.setText("Aceptar");
+        btnAceptar.setEnabled(false);
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
         panelCambiarCliente.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 90, -1));
 
-        lblDescripcion.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
-        lblDescripcion.setText("Aqui se mostrara la descripcion del cliente");
-        panelCambiarCliente.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 340, -1));
+        lblCorreo.setFont(new java.awt.Font("Roboto Slab", 1, 12)); // NOI18N
+        lblCorreo.setText("Correo electronico:");
+        panelCambiarCliente.add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel8.setText("correo electronico:");
-        panelCambiarCliente.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
-
-        txtCodigoDeProducto.setForeground(new java.awt.Color(204, 204, 204));
-        txtCodigoDeProducto.setText("Introduce el numero de telefono del cliente");
-        txtCodigoDeProducto.setBorder(null);
-        txtCodigoDeProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtID.setText("Introduce el numero de telefono del cliente");
+        txtID.setBorder(null);
+        txtID.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtCodigoDeProductoMousePressed(evt);
+                txtIDMousePressed(evt);
             }
         });
-        txtCodigoDeProducto.addActionListener(new java.awt.event.ActionListener() {
+        txtID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoDeProductoActionPerformed(evt);
+                txtIDActionPerformed(evt);
             }
         });
-        panelCambiarCliente.add(txtCodigoDeProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 340, 20));
+        panelCambiarCliente.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 290, 30));
 
         jLabel1.setBackground(new java.awt.Color(0, 63, 100));
         jLabel1.setOpaque(true);
@@ -98,14 +122,18 @@ public class dlcCambiarCliente extends javax.swing.JDialog {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (11).png"))); // NOI18N
         panelCambiarCliente.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, -5, 30, 40));
 
-        jLabel10.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel10.setText("numero de cliente:");
-        panelCambiarCliente.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        lblID.setFont(new java.awt.Font("Roboto Slab", 1, 12)); // NOI18N
+        lblID.setText("ID de cliente:");
+        panelCambiarCliente.add(lblID, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Roboto Slab", 0, 12)); // NOI18N
-        jLabel11.setText("nombre:");
-        panelCambiarCliente.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        jLabel11.setText("Telefono:");
+        panelCambiarCliente.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 56, -1, 20));
         panelCambiarCliente.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 340, 10));
+
+        lblNombre.setFont(new java.awt.Font("Roboto Slab", 1, 12)); // NOI18N
+        lblNombre.setText("Nombre:");
+        panelCambiarCliente.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,13 +149,47 @@ public class dlcCambiarCliente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCodigoDeProductoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCodigoDeProductoMousePressed
+    private void txtIDMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIDMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoDeProductoMousePressed
+    }//GEN-LAST:event_txtIDMousePressed
 
-    private void txtCodigoDeProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoDeProductoActionPerformed
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+        // READY
+        String tel = "-";
+        
+        if(txtID.getText().isBlank() || txtID.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese un TELEFONO de un cliente", "CAMPO INCOMPLETO", 2); //Advertencia
+            limpiarCampos();
+        }else{
+            
+            try{
+                tel = txtID.getText();
+                ControladorBD cbd = new ControladorBD();
+                nuevoCL = cbd.buscarTelefonoCliente(tel);
+                if(nuevoCL == null){
+                    JOptionPane.showMessageDialog(null, "El TELEFONO ingresado no corresponde a ningun cliente", "CLIENTE NO ENCONTRADO", 2); //Advertencia
+                    this.limpiarCampos();
+                }else{
+                    this.lblCorreo.setText("Correo electronico: " + nuevoCL.getCorreo());
+                    this.lblID.setText("ID de cliente: " + String.valueOf(nuevoCL.getId_cliente()));
+                    this.lblNombre.setText("Nombre: " + nuevoCL.getNombre()  );
+                    this.btnAceptar.setEnabled(true);
+                }
+                
+            } catch(HeadlessException e){
+                System.out.println(e);
+                JOptionPane.showMessageDialog(null, "El TELEFONO ingresado no es una entrada valida", "ENTRADA INVALIDA", 2); //Advertencia
+                this.limpiarCampos(); 
+            }
+        }        
+        
+    }//GEN-LAST:event_txtIDActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoDeProductoActionPerformed
+        this.lCajero.cambiarClienteLogueado(nuevoCL);
+        this.dispose();
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,17 +236,17 @@ public class dlcCambiarCliente extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lblDescripcion;
+    private javax.swing.JLabel lblCorreo;
+    private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblNombre;
     private javax.swing.JPanel panelCambiarCliente;
-    private javax.swing.JTextField txtCodigoDeProducto;
+    private javax.swing.JTextField txtID;
     // End of variables declaration//GEN-END:variables
 }
