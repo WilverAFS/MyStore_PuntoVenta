@@ -21,6 +21,7 @@ public class login extends javax.swing.JFrame {
     //Constructor de prueba
     public login() {
         initComponents();        
+        this.lblOlvideContraseña.setVisible(false);
     }
            
     

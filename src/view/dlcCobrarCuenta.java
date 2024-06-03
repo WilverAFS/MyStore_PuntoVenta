@@ -29,6 +29,7 @@ public class dlcCobrarCuenta extends javax.swing.JDialog {
     private double totalFinal =-1;  //se calcula aqui
     private double cambio =-1; //Se calcula aqui
     
+    private lateralCajero lcaja;
      
     /**
      * Creates new form dlcCobrarCuenta
@@ -54,6 +55,9 @@ public class dlcCobrarCuenta extends javax.swing.JDialog {
     //public void setEmpleadoL
    // public void setEmplea
         
+    public void establecerAcceso(lateralCajero lc){
+        this.lcaja = lc;
+    }
     
     private void setTotal(double total ){
         this.total = total;
@@ -396,6 +400,7 @@ public class dlcCobrarCuenta extends javax.swing.JDialog {
         btnCobrar.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
         btnCobrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (16).png"))); // NOI18N
         btnCobrar.setText("Cobrar");
+        btnCobrar.setEnabled(false);
         btnCobrar.setOpaque(true);
         btnCobrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -507,6 +512,7 @@ public class dlcCobrarCuenta extends javax.swing.JDialog {
                         this.pago = x;
                         this.txtPago.setText(z);
                     }
+                    this.btnCobrar.setEnabled(true);
                     this.establecerCambio();                    
                 }
                 
@@ -536,13 +542,7 @@ public class dlcCobrarCuenta extends javax.swing.JDialog {
             flcTicket ticket = new flcTicket(this.empleadoLogueado, this.clienteLogueado, this.listaCuenta, this.totalFinal, this.pago, this.cambio);
             ticket.setLocationRelativeTo(null);
             ticket.setVisible(true);
-            
-            /**CREAMOS UN TICKET PARA VISUALISARLO
-            dlcTicket dialog = new dlcTicket(new javax.swing.JFrame(), true, 1);  //Implementacion pendiente
-            Enviar datos necesario
-            dialog.setLocationRelativeTo(null);
-            dialog.setVisible(true);             
-             */            
+            this.lcaja.restablecerCuenta();
         }
         this.dispose();
     }//GEN-LAST:event_btnCobrarActionPerformed

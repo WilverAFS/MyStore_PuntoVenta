@@ -578,6 +578,7 @@
               <Image iconType="3" name="/com/imagenes/pngegg (16).png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cobrar"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>

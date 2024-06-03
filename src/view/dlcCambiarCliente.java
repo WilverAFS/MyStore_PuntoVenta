@@ -96,7 +96,6 @@ public class dlcCambiarCliente extends javax.swing.JDialog {
         panelCambiarCliente.add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
         txtID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtID.setText("Introduce el numero de telefono del cliente");
         txtID.setBorder(null);
         txtID.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {

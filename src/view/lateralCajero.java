@@ -71,6 +71,10 @@ public class lateralCajero extends javax.swing.JFrame {
         this.vG = vG;
     }
     
+    public void restablecerCuenta(){
+        this.vG.limpiarCuenta();
+    }
+    
     public void abrirPDF(String nombrePDF) {
         try {
             File pdfFile = new File(nombrePDF);
@@ -263,6 +267,7 @@ public class lateralCajero extends javax.swing.JFrame {
         btnCancelarProducto.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
         btnCancelarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/imagenes/pngegg (27).png"))); // NOI18N
         btnCancelarProducto.setText("Cancelar un producto");
+        btnCancelarProducto.setEnabled(false);
         btnCancelarProducto.setOpaque(true);
         btnCancelarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -396,8 +401,10 @@ public class lateralCajero extends javax.swing.JFrame {
         }else{
             //Hacemos una instancia de la clase dcCobrarCuenta
             this.dcCobrarCuenta = new dlcCobrarCuenta(this.empleadoLogueado, this.clienteLogueado, this.listaCuenta, this.totalCuenta);
+            this.dcCobrarCuenta.establecerAcceso(this);
             this.dcCobrarCuenta.setLocationRelativeTo(null);
             this.dcCobrarCuenta.setVisible(true);            
+           
         }       
         
     }//GEN-LAST:event_btnCobrarCuentaActionPerformed
