@@ -262,9 +262,9 @@ Esta clase representa un usuario del sistema, incluyendo detalles como el nombre
 |public|	void	|setUsuario|	(String usuario)|	Establece el nombre de usuario.|
 |public	|String	|getContraseña	|()	|Devuelve la contraseña del usuario.|
 |public|	void	|setContraseña|	(String contraseña)	|Establece la contraseña del usuario.|
-|public|	int	getNivel|	()	|Devuelve el nivel de acceso del usuario.|
+|public|	int	|getNivel|	()	|Devuelve el nivel de acceso del usuario.|
 |public|	void	|setNivel|	(int nivel)|	Establece el nivel de acceso del usuario.|
-|public	|boolean	validarUsuario|	(String nombreUsuario, String contrasena)|	Comprueba si las credenciales proporcionadas coinciden con las del usuario.|
+|public	|boolean|	validarUsuario|	(String nombreUsuario, String contrasena)|	Comprueba si las credenciales proporcionadas coinciden con las del usuario.|
 
 
 ### Clase Venta
