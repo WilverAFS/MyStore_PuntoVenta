@@ -13,7 +13,7 @@ import model.Producto;
  */
 public class dlaEliminarProdcuto extends javax.swing.JDialog {
     
-    private ControladorBD con;
+    //OK READY
     private int id=-1;
     /**
      * Creates new form dlaEliminarProdcuto
@@ -21,14 +21,8 @@ public class dlaEliminarProdcuto extends javax.swing.JDialog {
     public dlaEliminarProdcuto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        con = new ControladorBD();
-    }
-    
-    public dlaEliminarProdcuto(java.awt.Frame parent, boolean modal, ControladorBD cbd) {
-        super(parent, modal);
-        initComponents();
-        con = cbd;
-    }
+    }    
+  
     
     private void limpiarCampos(){
         this.txtID.setText("");
@@ -219,10 +213,11 @@ public class dlaEliminarProdcuto extends javax.swing.JDialog {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
+        ControladorBD conbd = new ControladorBD();
         if(this.txtID.getText().isBlank() || this.txtID.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un CODIGO de producto", "CAMPO INCOMPLETO", 2); //Advertencia
         } else{
-            this.con.eliminarProducto(id);            
+            conbd.eliminarProducto(id);            
         }
         
         this.dispose();
@@ -247,6 +242,8 @@ public class dlaEliminarProdcuto extends javax.swing.JDialog {
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         // READY
+        ControladorBD conbd = new ControladorBD();
+        
         if(txtID.getText().isBlank() || txtID.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un CODIGO de producto", "CAMPO INCOMPLETO", 2); //Advertencia
             this.limpiarCampos();
@@ -254,7 +251,7 @@ public class dlaEliminarProdcuto extends javax.swing.JDialog {
             
             try{
                 id = Integer.parseInt(this.txtID.getText());
-                Producto producto = con.buscarProducto(id);
+                Producto producto = conbd.buscarProducto(id);
                 
                 if(producto == null){
                     JOptionPane.showMessageDialog(null, "El CODIGO ingresado no corresponde a ningun producto", "PRODUCTO    NO ENCONTRADO", 2); //Advertencia

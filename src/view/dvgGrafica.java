@@ -14,7 +14,8 @@ import graphics.GraficoMenosVendido;
  */
 public class dvgGrafica extends javax.swing.JDialog {
 
-    /**
+    /**READY 
+     * VER EL PAQUETE GRAPHICS PARA MAS INFO
      * Creates new form dvgGrafica
      */
     public dvgGrafica(java.awt.Frame parent, boolean modal) {

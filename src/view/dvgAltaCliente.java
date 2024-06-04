@@ -13,23 +13,17 @@ import model.Cliente;
  * @author Wilver
  */
 public class dvgAltaCliente extends javax.swing.JDialog {
-    ControladorBD con;
-
-    /**
+    
+    
+    /**OK
      * Creates new form dvgAltaCliente
      */
     public dvgAltaCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        con = new ControladorBD();
     }
     
-    public dvgAltaCliente(java.awt.Frame parent, boolean modal, ControladorBD controlbd) {
-        super(parent, modal);
-        initComponents();
-        this.con = controlbd;
-    }
-    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -213,7 +207,8 @@ public class dvgAltaCliente extends javax.swing.JDialog {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        int id = con.getnCliente() +1;
+        ControladorBD conbd = new ControladorBD();
+        int id = conbd.getnCliente() +1;
         String nombre = txtNombre.getText();
         String tel = txtNumTelefono.getText();
         String correo = txtCorreoElectronico.getText();
@@ -221,8 +216,9 @@ public class dvgAltaCliente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos por favor", "CAMPOS INCOMPLETOS", 2); //Advertencia
         } else {
             Cliente nuenvoCliente = new Cliente(id, nombre, tel, correo);
-            con.insertarCliente(nuenvoCliente);
+            conbd.insertarCliente(nuenvoCliente);            
         }
+        this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void txtNumTelefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumTelefonoKeyPressed

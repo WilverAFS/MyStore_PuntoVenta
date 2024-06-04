@@ -14,7 +14,7 @@ import model.Producto;
  */
 public class dlaEditarProducto extends javax.swing.JDialog {
     
-    private ControladorBD con;
+    //OK
     private int id =-1;
 
     /**
@@ -23,14 +23,27 @@ public class dlaEditarProducto extends javax.swing.JDialog {
     public dlaEditarProducto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        con = new ControladorBD();
     }
     
-    public dlaEditarProducto(java.awt.Frame parent, boolean modal, ControladorBD cbd) {
-        super(parent, modal);
-        initComponents();
-        con = cbd;
-    }
+   private void activarEdicion(boolean b){
+        txtNombre.setEnabled(b);
+        this.txtprecioCompra.setEnabled(b);
+        this.txtPrecioVenta.setEnabled(b);
+        this.cmbCategoria.setEnabled(b);
+        this.txtDescripcion.setEnabled(b);
+        this.spExistencia.setEnabled(b);
+        this.btnAceptar.setEnabled(b);
+   }
+   
+   private void limpiarCampos(){
+       this.txtDescripcion.setText("");
+       this.txtID.setText("");
+       this.txtNombre.setText("");
+       this.txtPrecioVenta.setText("");
+       this.txtprecioCompra.setText("");
+       this.spExistencia.setValue(0);
+       this.cmbCategoria.setSelectedIndex(0);
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -201,9 +214,9 @@ public class dlaEditarProducto extends javax.swing.JDialog {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        
+        ControladorBD conbd = new ControladorBD();        
         if(this.txtID.getText().isBlank() || this.txtID.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Ingrese un CODIGO de producti", "CAMPO INCOMPLETO", 2); //Advertencia
+            JOptionPane.showMessageDialog(null, "Ingrese un CODIGO de producto", "CAMPO INCOMPLETO", 2); //Advertencia
         } else{
             String n, pc, pv,  d; //Componentes editables
             n= txtNombre.getText();
@@ -216,25 +229,25 @@ public class dlaEditarProducto extends javax.swing.JDialog {
             if(n.isBlank() || n.isEmpty() || pc.isBlank() || pc.isEmpty() || pv.isBlank() || pv.isEmpty() || d.isBlank() || d.isEmpty()  ){
                 JOptionPane.showMessageDialog(null, "No puede dejar campos en blaco", "CAMPOS INCOMPLETOS", 2); //Advertencia
             }else{
+                
                 Double precioC, precioV;
                 try{
                     precioC = Double.parseDouble(pc);
-                    precioV = Double.parseDouble(pv);
-                    
+                    precioV = Double.parseDouble(pv);                    
                     Producto producto = new Producto( id, n, precioC, precioV, c, d, e);
-                    con.editarProducto(producto);
-                    
+                    conbd.editarProducto(producto);
+                    this.dispose();
                 } catch(NumberFormatException exception){
                     JOptionPane.showMessageDialog(null, "Ingrese valores numericos en los campos de precio", "VALORES IRRECONOCIBLES", 2); //Advertencia
                     System.out.println(exception);
                     txtprecioCompra.setText("");
                     txtPrecioVenta.setText("");
-                } 
+                }
                 
             }            
         }        
         
-        this.dispose();
+        
         
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -255,50 +268,43 @@ public class dlaEditarProducto extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TODO add your handling code here:
-        boolean b = false;
+        // TODO add your handling code here:        
+        ControladorBD conbd = new ControladorBD();
         
         if(txtID.getText().isBlank() || txtID.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un CODIGO de producto", "CAMPO INCOMPLETO", 2); //Advertencia  
-            this.txtID.setText("");
+            this.limpiarCampos();
+            this.activarEdicion(false);
         }else{
+            
             try{
-                id = Integer.parseInt(this.txtID.getText());
+                
+                id = Integer.parseInt(this.txtID.getText());                
+                Producto producto = conbd.buscarProducto(id);
+                if (producto == null) {
+                    JOptionPane.showMessageDialog(null, "El CODIGO ingresado no corresponde a ningun producto", "PRODUCTO    NO ENCONTRADO", 2); //Advertencia
+                    this.limpiarCampos();
+                    this.activarEdicion(false);
+                } else {
+                    this.activarEdicion(true);
+                    txtNombre.setText(producto.getNombre());
+                    txtprecioCompra.setText(String.valueOf(producto.getPrecioC()));
+                    txtPrecioVenta.setText(String.valueOf(producto.getPrecioV()));
+                    cmbCategoria.setSelectedIndex(producto.getCategoria() - 1);
+                    txtDescripcion.setText(producto.getDescripcion());
+                    spExistencia.setValue(producto.getExistencia());
+                    this.btnAceptar.setEnabled(true);
+                }
+                
             } catch(NumberFormatException e){
                 System.out.println(e);
                 JOptionPane.showMessageDialog(null, "El CODIGO ingresado no es una entrada valida", "ENTRADA INVALIDA", 2); //Advertencia
-                this.txtID.setText("");
+                this.limpiarCampos();
+                this.activarEdicion(false);
             }
-            
-            Producto producto = con.buscarProducto(id);            
-            if (producto == null) {
-                String s = "";
-                JOptionPane.showMessageDialog(null, "El CODIGO ingresado no corresponde a ningun producto", "PRODUCTO    NO ENCONTRADO", 2); //Advertencia
-                this.txtID.setText("");
-                this.txtNombre.setText(s);
-                this.txtprecioCompra.setText(s);
-                this.txtPrecioVenta.setText(s);
-                this.cmbCategoria.setSelectedIndex(0);
-                this.txtDescripcion.setText(s);
-                this.spExistencia.setValue(0);
-            } else {
-                b = true;
-                txtNombre.setText(producto.getNombre());
-                txtprecioCompra.setText( String.valueOf(producto.getPrecioC()) );
-                txtPrecioVenta.setText( String.valueOf( producto.getPrecioV() ) );
-                cmbCategoria.setSelectedIndex(producto.getCategoria() -1 );
-                txtDescripcion.setText(producto.getDescripcion());
-                spExistencia.setValue(producto.getExistencia());
-                this.btnAceptar.setEnabled(true);
-            }            
+                      
         }
-        txtNombre.setEnabled(b);
-        this.txtprecioCompra.setEnabled(b);
-        this.txtPrecioVenta.setEnabled(b);
-        this.cmbCategoria.setEnabled(b);
-        this.txtDescripcion.setEnabled(b);
-        this.spExistencia.setEnabled(b);
-        this.btnAceptar.setEnabled(b);
+        
     }//GEN-LAST:event_txtIDActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

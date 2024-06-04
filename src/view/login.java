@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *
+ * SOLO ES LA VISTA NO HACE NADA
  * @author diego
  */
 public class login extends javax.swing.JFrame {

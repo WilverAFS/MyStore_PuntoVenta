@@ -5,7 +5,7 @@
 package view;
 
 /**
- *
+ *PENDIENTE, NO IMPLEMENTADO EN LA BASE DE DATOS
  * @author Wilver
  */
 public class dvgMovimientosAlmacen extends javax.swing.JDialog {

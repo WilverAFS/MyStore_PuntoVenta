@@ -14,7 +14,8 @@ import model.Empleado;
  */
 public class dldEditarEmpleado extends javax.swing.JDialog {
     
-    private ControladorBD con;
+    //OK
+    //private ControladorBD con;
     private int id=-1;
     private Empleado editEmpleado;
     /**
@@ -23,15 +24,8 @@ public class dldEditarEmpleado extends javax.swing.JDialog {
     public dldEditarEmpleado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        con = new ControladorBD();
     }
-    
-    public dldEditarEmpleado(java.awt.Frame parent, boolean modal, ControladorBD cbd) {
-        super(parent, modal);
-        initComponents();
-        con = cbd;
-    }
-    
+         
     private void limpiarCampos(){
         this.txtID.setText("");
         this.txtApellidoMaterno.setText("");
@@ -247,6 +241,7 @@ public class dldEditarEmpleado extends javax.swing.JDialog {
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         // READY
+        //ControladorBD conbd = new ControladorBD();
         boolean b = true;
         if(txtID.getText().isBlank() || txtID.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un ID de trabajador", "CAMPO INCOMPLETO", 2); //Advertencia  
@@ -324,6 +319,7 @@ public class dldEditarEmpleado extends javax.swing.JDialog {
                         //this.editEmpleado.setUsuario(u);
                         this.editEmpleado.setId_puesto(idPuesto);
                         conBD.editarEmpleado(editEmpleado);
+                         this.dispose();
                     }                    
                 } catch(Exception e){
                     System.out.println(e);
@@ -332,7 +328,7 @@ public class dldEditarEmpleado extends javax.swing.JDialog {
             }
         }
 
-        this.dispose();
+       
     }//GEN-LAST:event_btnEdicionActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

@@ -17,13 +17,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-/**
- * 
+/**OK
+ * ESTABLECE SU PROPIA CONEXION
  * @author Wilver
  */
 public class GraficoInventario extends JFrame{
     
-    
+    //
     //CONSTRUCTO
     public GraficoInventario() {
         super("GRAFICO DE INVENTARIO POR CATEGORIA");        

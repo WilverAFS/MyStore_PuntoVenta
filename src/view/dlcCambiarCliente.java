@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import model.Cliente;
 
 /**
- *
+ * OK
  * @author Wilver
  */
 public class dlcCambiarCliente extends javax.swing.JDialog {

@@ -12,11 +12,17 @@ import javax.swing.JPanel;
  */
 public class lateralAdministracion extends javax.swing.JFrame {
     
-    /**
+    /**OK
+     * NO HAY CONEXION DIRECTA
      * Creates new form lateralAdministracion
      */
     public lateralAdministracion() {
         initComponents();
+        
+        this.btnVerCompras.setVisible(false);
+        this.btnModificarPuesto.setVisible(false);
+        this.btnAgregarPuesto.setVisible(false);
+        
     }
         
     public JPanel getPanelLateralAdministracion () { return this.panelLateralAdmin;}
@@ -94,7 +100,7 @@ public class lateralAdministracion extends javax.swing.JFrame {
                 btnAgregarPuestoActionPerformed(evt);
             }
         });
-        panelLateralAdmin.add(btnAgregarPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 310, 60));
+        panelLateralAdmin.add(btnAgregarPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 310, 60));
 
         btnVerCompras.setBackground(new java.awt.Color(204, 204, 204));
         btnVerCompras.setFont(new java.awt.Font("Roboto Slab", 0, 18)); // NOI18N
@@ -131,7 +137,7 @@ public class lateralAdministracion extends javax.swing.JFrame {
                 btnModificarPuestoActionPerformed(evt);
             }
         });
-        panelLateralAdmin.add(btnModificarPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 310, 60));
+        panelLateralAdmin.add(btnModificarPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 310, 60));
 
         btnVerVentas.setBackground(new java.awt.Color(204, 204, 204));
         btnVerVentas.setFont(new java.awt.Font("Roboto Slab", 0, 18)); // NOI18N
@@ -143,7 +149,7 @@ public class lateralAdministracion extends javax.swing.JFrame {
                 btnVerVentasActionPerformed(evt);
             }
         });
-        panelLateralAdmin.add(btnVerVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 310, 60));
+        panelLateralAdmin.add(btnVerVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 310, 60));
 
         getContentPane().add(panelLateralAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 670));
 

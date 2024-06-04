@@ -39,6 +39,7 @@ import java.util.Date;
  * @author diego
  */
 public class lateralCajero extends javax.swing.JFrame {
+    //OK
     
     private vistaGeneral vG;
     
@@ -50,6 +51,7 @@ public class lateralCajero extends javax.swing.JFrame {
     
     
     //Dialogos para los botones
+    //ELIMINARLOS PARA HACER LOS DIALOGOS TEMPORALES EN LOS METODOS
     private dlcAplicarDescuento dcAplicarDescuento;
     private dlcCambiarCliente dcCambiarCliente;
     private dlcCobrarCuenta dcCobrarCuenta;
@@ -69,6 +71,9 @@ public class lateralCajero extends javax.swing.JFrame {
     public lateralCajero(vistaGeneral vG) {
         initComponents();                
         this.vG = vG;
+        
+        this.btnAplicarDescuento.setVisible(false);
+        this.btnCancelarProducto.setVisible(false);
     }
     
     public void restablecerCuenta(){

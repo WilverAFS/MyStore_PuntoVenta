@@ -11,7 +11,8 @@ import model.Empleado;
 import model.Producto;
 
 /**
- *
+ *OK
+ * NO HAY CONEXION AQUI
  * @author Wilver
  */
 //en esta clase definimos con cuanto nos pagan, si hay algun descuento y cual es cambio correspondiente

@@ -14,22 +14,16 @@ import model.Empleado;
  */
 public class dvgAltaEmpleado extends javax.swing.JDialog {
     
-    ControladorBD con;
+    //OK
 
     /**
      * Creates new form dvgAltaEmpleado
      */
     public dvgAltaEmpleado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();        
-        con = new ControladorBD();
+        initComponents();
     }
     
-    public dvgAltaEmpleado(java.awt.Frame parent, boolean modal, ControladorBD cbd) {
-        super(parent, modal);
-        initComponents();        
-        this.con = cbd;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -235,7 +229,8 @@ public class dvgAltaEmpleado extends javax.swing.JDialog {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        int id = con.getnEmpleado() + 1;
+        ControladorBD conbd = new ControladorBD();
+        int id = conbd.getnEmpleado() + 1;
         String nombre = this.txtNombre.getText();
         String apellidoP = this.txtApellidoPaterno.getText();
         String apellidoM = this.txtApellidoMaterno.getText();
@@ -250,7 +245,7 @@ public class dvgAltaEmpleado extends javax.swing.JDialog {
             }else{
                 String contrasenia =  usuario + "_" +id;
                 Empleado nuevoEmpleado = new Empleado(id, nombre, apellidoP, apellidoM, usuario, contrasenia, puesto);
-                con.insertarEmpleado(nuevoEmpleado);
+                conbd.insertarEmpleado(nuevoEmpleado);
             }            
         }        
     }//GEN-LAST:event_btnAgregarActionPerformed

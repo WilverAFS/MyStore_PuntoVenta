@@ -10,7 +10,7 @@ package view;
  */
 public class dldAltaEmpleado extends javax.swing.JDialog {
 
-    /**
+    /**NO IMPLEMENTADO
      * Creates new form dldAltaEmpleado
      */
     public dldAltaEmpleado(java.awt.Frame parent, boolean modal) {

@@ -7,7 +7,7 @@ package view;
 import model.Empleado;
 
 /**
- *
+ * PENDIENTE FALTAN DAR FUNCIONALIDAD A LOS BOTONES
  * @author Wilver
  */
 public class dvgOpciones extends javax.swing.JDialog {

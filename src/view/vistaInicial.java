@@ -7,7 +7,7 @@ package view;
 import java.awt.Image;
 
 /**
- *
+ *SOLO ES LA PLANTILLA NO HACE NADA
  * @author Wilver
  */
 public class vistaInicial extends javax.swing.JFrame {

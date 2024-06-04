@@ -94,9 +94,11 @@ public class flcTicket extends javax.swing.JFrame {
         //Al final imprimir en PDF
         this.imprimirPDF();
         
-        // Mandar correo después de 5 segundos
+        // Mandar correo al cliente
         this.enviarCorreo();
-       
+        
+        //Actualizar la base de datos
+       this.quitarExistencias();
     }
     
     public void setEmpleadoLogueado(Empleado empleado){        this.empleadoLogueado = empleado;    }    
@@ -240,7 +242,12 @@ public class flcTicket extends javax.swing.JFrame {
 
     }
     
-    
+    private void quitarExistencias(){
+        ControladorBD conbd= new ControladorBD();//Establecemos una conexion temporal
+        for(Producto p: listaCuenta){            
+            conbd.quitarExistenciaProductosVendidos(p.getCodigo(), p.getExistencia());
+        }        
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.

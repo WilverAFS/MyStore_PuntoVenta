@@ -13,8 +13,7 @@ import model.Producto;
  * @author Wilver
  */
 public class dlaModificarExistencia extends javax.swing.JDialog {
-    
-    private ControladorBD con;
+    //OK    //private ControladorBD con;
     private int id =-1;
     private Producto producto;
     /**
@@ -23,13 +22,6 @@ public class dlaModificarExistencia extends javax.swing.JDialog {
     public dlaModificarExistencia(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        con = new ControladorBD();
-    }
-    
-    public dlaModificarExistencia(java.awt.Frame parent, boolean modal, ControladorBD cbd) {
-        super(parent, modal);
-        initComponents();
-        con = cbd;
     }
     
     private void limpiarCampos(){
@@ -37,10 +29,10 @@ public class dlaModificarExistencia extends javax.swing.JDialog {
         this.txtDescripcion.setText("Descripcion");
         this.txtID.setText("");
         this.txtExistencia.setText("0");
-        this.spRestar.setValue(0);
+        //this.spRestar.setValue(0);
         this.spSumar.setValue(0);
         this.btnAceptar.setEnabled(false);
-        this.spRestar.setEnabled(false);
+        //this.spRestar.setEnabled(false);
         this.spSumar.setEnabled(false);
     }
 
@@ -62,11 +54,9 @@ public class dlaModificarExistencia extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
-        spRestar = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
         txtNombre = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         txtExistencia = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         spSumar = new javax.swing.JSpinner();
@@ -126,10 +116,6 @@ public class dlaModificarExistencia extends javax.swing.JDialog {
         });
         panelEdicionDeProductos.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 170, 30));
 
-        spRestar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        spRestar.setEnabled(false);
-        panelEdicionDeProductos.add(spRestar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 130, 30));
-
         txtDescripcion.setColumns(20);
         txtDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtDescripcion.setRows(5);
@@ -142,10 +128,6 @@ public class dlaModificarExistencia extends javax.swing.JDialog {
         txtNombre.setText("Producto");
         panelEdicionDeProductos.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 310, 20));
 
-        jLabel14.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
-        jLabel14.setText("Quitar");
-        panelEdicionDeProductos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 50, 20));
-
         txtExistencia.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
         txtExistencia.setText("0");
         panelEdicionDeProductos.add(txtExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 150, 20));
@@ -156,11 +138,11 @@ public class dlaModificarExistencia extends javax.swing.JDialog {
 
         spSumar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         spSumar.setEnabled(false);
-        panelEdicionDeProductos.add(spSumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 130, 30));
+        panelEdicionDeProductos.add(spSumar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 130, 30));
 
         jLabel17.setFont(new java.awt.Font("Roboto Slab", 0, 14)); // NOI18N
-        jLabel17.setText("Añadir");
-        panelEdicionDeProductos.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 50, -1));
+        jLabel17.setText("Añadir o quitar");
+        panelEdicionDeProductos.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 100, -1));
         panelEdicionDeProductos.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 370, 10));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -184,27 +166,36 @@ public class dlaModificarExistencia extends javax.swing.JDialog {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        int valor= (int) spSumar.getValue() - (int) spRestar.getValue();        
+        ControladorBD conbd = new ControladorBD();        
+        int valor= (int) spSumar.getValue();
+        
         if(this.txtID.getText().isBlank() || this.txtID.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un CODIGO de producto", "CAMPO INCOMPLETO", 2); //Advertencia
             this.limpiarCampos();
-        } else{
+        } else{                        
             int nuevaE= producto.getExistencia() + valor;
-            producto.setExistencia(nuevaE);
-            con.editarProducto(producto);
+            
+            if( nuevaE< 0 ){
+                //No se pueden quitar mas productos de los que esxisten
+                JOptionPane.showMessageDialog(null, "No puede quitar mas productos de los hay en stock", "ERROR DE STOCK", 0); //Error
+                this.spSumar.setValue(0);
+            } else{
+                conbd.cambiarExistenciaxProducto(id, nuevaE);
             this.dispose();
+            }            
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         // TODO add your handling code here:
+        ControladorBD conbd = new ControladorBD();
         if(txtID.getText().isBlank() || txtID.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un CODIGO de producto", "CAMPO INCOMPLETO", 2); //Advertencia
             this.limpiarCampos();
         }else{
             try{
                 id = Integer.parseInt(this.txtID.getText());                
-                producto = con.buscarProducto(id);
+                producto = conbd.buscarProducto(id);
                 if (producto == null) {
                     JOptionPane.showMessageDialog(null, "El CODIGO ingresado no corresponde a ningun producto", "PRODUCTO    NO ENCONTRADO", 2); //Advertencia
                     this.limpiarCampos();
@@ -213,7 +204,6 @@ public class dlaModificarExistencia extends javax.swing.JDialog {
                     txtDescripcion.setText(producto.getDescripcion());
                     this.txtExistencia.setText(String.valueOf(producto.getExistencia()) );
                     this.spSumar.setEnabled(true);
-                    this.spRestar.setEnabled(true);
                     this.btnAceptar.setEnabled(true);
                 }
             } catch(NumberFormatException e){
@@ -270,7 +260,6 @@ public class dlaModificarExistencia extends javax.swing.JDialog {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel3;
@@ -279,7 +268,6 @@ public class dlaModificarExistencia extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel panelEdicionDeProductos;
-    private javax.swing.JSpinner spRestar;
     private javax.swing.JSpinner spSumar;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JLabel txtExistencia;

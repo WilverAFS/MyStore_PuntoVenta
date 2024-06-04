@@ -28,7 +28,7 @@ import javax.swing.Timer;
 public class vistaGeneral extends javax.swing.JFrame {          
     
     //Variables para la venta
-    private ControladorBD con = new ControladorBD(); //Iniciamos conexion a la BD
+    //private ControladorBD con = new ControladorBD(); //Iniciamos conexion a la BD
     private int id =-1; //Id para el buscador
     //Entes
     private Empleado empleadoLogueado;
@@ -41,6 +41,8 @@ public class vistaGeneral extends javax.swing.JFrame {
     private centroCajero cCaja = new centroCajero(); //Inicializamos el centro para ser usada
     private lateralCajero lCaja = new lateralCajero(this); //Inicializamos el lateral de caja mandando el acceso a this
     private JTable tablaCuenta = cCaja.getTablaCuenta(); //Traemos la Tabla de cuenta        
+    
+    private int esteNivel = 1;
         
     //dialogos de los botones principales
     private dvgVentaCliente dVenta;
@@ -67,9 +69,13 @@ public class vistaGeneral extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 actualizarFechaYHora();
+               
             }
         });
         timer.start();
+        
+        this.btnImprimirReportes.setVisible(false);
+        this.btnMovimientosDeAlmacen.setVisible(false);
     }
     
     //Constructor para hacer pruebas inicializar con un nivel de usuario
@@ -99,7 +105,7 @@ public class vistaGeneral extends javax.swing.JFrame {
     //Necesarios para acceder a los datos de la venta
     public List<Producto> getListaCuenta() {         return  this.listaCuenta;     }    
     public Double getTotal(){ return total;}    
-    public void establecerEmpleado (Empleado empleado) { this.empleadoLogueado = empleado ;}
+    public void establecerEmpleado (Empleado empleado) { this.empleadoLogueado = empleado ; this.esteNivel = empleado.getNivel(); }
     public Empleado traerEmpleado () {return this.empleadoLogueado; }    
     public void establecerCliente (Cliente cliente){ this.clienteLogueado = cliente; }
     public Cliente traerCliente(){ return this.clienteLogueado; }
@@ -117,6 +123,7 @@ public class vistaGeneral extends javax.swing.JFrame {
         this.actualizarTabla();
     }
     
+    //PPP FALTA IMPLEMENTARLO
     public void removerProducto(int codigoProducto){
         //Buscarlo en la cuenta
         boolean productoExiste = false;
@@ -137,10 +144,30 @@ public class vistaGeneral extends javax.swing.JFrame {
         this.actualizarTabla();
     }
     
-    //Pendiente
-    private void actualizaCentro(int nivel){
+    //Pendiente FALTA IMPLEMENTARLO
+    public void actualizarCentro(int nivel){
         //Metodo que vuelve a invocar la tabla central segun el nivel cuando se haga una modificacion directa en la base de datos
         //Convertir a public cuando sea implementado
+        this.panelCentral.removeAll();
+        
+        switch (nivel) {
+            case 1 -> { 
+                this.panelCentral.add( cCaja.getPanelCentroCajero());                
+            }
+            case 2 -> {
+                this.panelCentral.add(new centroAlmacen().getPanelCentroAlmacen() );
+            }
+            case 3 -> { 
+                this.panelCentral.add(new centroAdministracion().getPanelCentroAsministracion());
+            }
+            case 10 ->{
+                
+            }
+            default -> System.out.println("ERROR en la actualizacion, nivel no reconocido");
+        }
+        
+        this.panelCentral.revalidate();
+        this.panelCentral.repaint();
     }
     
     //Inicializa la modelo para la tabla de cuenta vacia
@@ -229,21 +256,25 @@ public class vistaGeneral extends javax.swing.JFrame {
                 this.panelCentral.add( cCaja.getPanelCentroCajero());
                 this.panelLateral.add(lCaja.getPanelLateralCajero() );
                 this.activarNivelUsuario(nivel);
+                this.esteNivel = nivel;
             }            
             case 2 ->{// //Vista de usuario nivel 2 = ALMACEN
                 this.panelCentral.add(new centroAlmacen().getPanelCentroAlmacen() );
-                this.panelLateral.add(new lateralAlmacen().getPanelLateralAlmacen() );
-                this.activarNivelUsuario(nivel);                
+                this.panelLateral.add(new lateralAlmacen().getPanelLateralAlmacen() );                
+                this.activarNivelUsuario(nivel);
+                this.esteNivel = nivel;
             }
             case 3 -> { //Vista de usuario nivel 3 = ADMINISTRACION
                 this.panelCentral.add(new centroAdministracion().getPanelCentroAsministracion());
                 this.panelLateral.add(new lateralAdministracion().getPanelLateralAdministracion());
-                this.activarNivelUsuario(nivel);                
+                this.activarNivelUsuario(nivel);               
+                this.esteNivel = nivel;
             }
             case 10 -> { //Vista de usuario nivel 3 = ADMINISTRACION
                 this.panelCentral.setVisible(true);
                 this.panelLateral.setVisible(true);
                 this.activarNivelUsuario(nivel);
+                this.esteNivel = nivel;
             }
             default -> {
                 System.out.println("Error fatal en el nivel de usuario, revisarlo desde el construtor o en la base de datos");                                 
@@ -299,6 +330,7 @@ public class vistaGeneral extends javax.swing.JFrame {
         panelLateral = new javax.swing.JPanel();
         btnCambiarVista = new javax.swing.JButton();
         lblFecha = new javax.swing.JLabel();
+        btnActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MY STORE");
@@ -500,7 +532,7 @@ public class vistaGeneral extends javax.swing.JFrame {
         jLabel52.setOpaque(true);
         panelVistaGeneral.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 45));
 
-        panelCentral.setBackground(new java.awt.Color(255, 255, 255));
+        panelCentral.setBackground(new java.awt.Color(204, 204, 255));
 
         javax.swing.GroupLayout panelCentralLayout = new javax.swing.GroupLayout(panelCentral);
         panelCentral.setLayout(panelCentralLayout);
@@ -547,6 +579,16 @@ public class vistaGeneral extends javax.swing.JFrame {
         lblFecha.setText("Fecha:  2024-01-01");
         panelVistaGeneral.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 50, 150, 30));
 
+        btnActualizar.setBackground(new java.awt.Color(204, 204, 255));
+        btnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        panelVistaGeneral.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 253, 90, 30));
+
         getContentPane().add(panelVistaGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, -1));
 
         pack();
@@ -566,7 +608,8 @@ public class vistaGeneral extends javax.swing.JFrame {
         }else{            
             try{
                 id = Integer.parseInt(codigo);
-                Producto producto = con.buscarProducto(id);                
+                ControladorBD conbd = new ControladorBD();
+                Producto producto = conbd.buscarProducto(id);                
                 if(producto == null){ //Si el producto con ese codigo existe o no
                     JOptionPane.showMessageDialog(null, "El CODIGO ingresado no corresponde a ningun producto", "PRODUCTO    NO ENCONTRADO", 2); //Advertencia
                     this.limpiarCampo();
@@ -574,22 +617,39 @@ public class vistaGeneral extends javax.swing.JFrame {
                     //Hacemos una copia del producto pero con los datos del anterior                     
                     Producto nuevoP = new Producto( producto);
                     nuevoP.setExistencia(1); //Utilisaremos existencia del nuevo producto para contarlos en la venta;
-                    total = total + nuevoP.getPrecioV();
-                    //NOTA: al hacer la venta final es necesario sacarlos del inventario con ayuda del metodo disminuir stock                  
+                    int stock = producto.getExistencia(); //Obetener la cantidad de stock del producto en la BD                    
                     
-                    //Ver si el mismo producto esta en la lista 
-                    boolean productoExiste = false;
-                    for(Producto p: listaCuenta){                        
-                        if(p.getCodigo() == nuevoP.getCodigo()){ //SI ya esta solo aumentamos en uno su valor
-                            p.addExistencia();
-                            productoExiste = true;
-                            break;
-                            //this.actualizarTabla();  //Revalidamos la tabla 
-                        }                        
-                    }
                     
-                    if(!productoExiste){ //Si el producto no existe lo agregamos
-                        this.listaCuenta.add(nuevoP);
+                    total = total + nuevoP.getPrecioV(); //Sumamos al total de la cuenta el producto agregado
+                    
+                    //NOTA: al hacer la venta final es necesario sacarlos del inventario con ayuda del metodo disminuir stock
+                    
+                    //Ver si hay stock disponible
+                    if(stock <1){
+                        //Error ya no hay productos disponibles de este tipo en stock
+                        JOptionPane.showMessageDialog(null, "NO hay STOCK para este producto", "STOCK TERMINADO", 0); //Error
+                    }else{ // si hay almenos uno entonces...
+                        
+                        //Ver si el mismo producto esta en la lista 
+                        boolean productoExiste = false;
+                        for (Producto p : listaCuenta) {
+                            if (p.getCodigo() == nuevoP.getCodigo()) { //SI ya esta ....
+                                productoExiste = true; //Banderia el producto existen en la lista                                
+                                if(p.getExistencia() < stock ){ //Verificamos que aun haya stock
+                                    p.addExistencia(); // SI hay stock aumentamos lo ponemos
+                                } else {
+                                    //ERROR ya no hay mas existencia
+                                    JOptionPane.showMessageDialog(null, "No hay mas productos en existencia de este tipo", "EXISTENCIAS TERMINADAS", 0); //Error
+                                }
+                                break;
+                                //this.actualizarTabla();  //Revalidamos la tabla 
+                            }
+                        }
+
+                        if (!productoExiste) { //Si el producto no existe lo agregamos
+                            this.listaCuenta.add(nuevoP);
+                        }                      
+                    
                     }
                     
                     this.actualizarTabla(); //Revalidamos la tabla al final                    
@@ -701,6 +761,11 @@ public class vistaGeneral extends javax.swing.JFrame {
         this.txtBuscar.setText("Ingresar producto");
     }//GEN-LAST:event_txtBuscarFocusLost
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+        this.actualizarCentro(this.esteNivel);
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -737,6 +802,7 @@ public class vistaGeneral extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAltaDeClientes;
     private javax.swing.JButton btnAltaDeProducto;
     private javax.swing.JButton btnAltaDeTrabajadores;

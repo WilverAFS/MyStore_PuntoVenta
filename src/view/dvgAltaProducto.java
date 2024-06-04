@@ -14,21 +14,13 @@ import model.Producto;
  */
 public class dvgAltaProducto extends javax.swing.JDialog {
     
-    ControladorBD con;
-
-    /**
+   
+    /**OK
      * Creates new form dvgAltaProducto
      */
     public dvgAltaProducto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        con = new ControladorBD();
-    }
-    
-    public dvgAltaProducto(java.awt.Frame parent, boolean modal, ControladorBD cbd) {
-        super(parent, modal);
-        initComponents();
-        con = cbd;
     }
     
 
@@ -212,10 +204,10 @@ public class dvgAltaProducto extends javax.swing.JDialog {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        
+        ControladorBD conbd= new ControladorBD();
         int categoria = cmbCategoria.getSelectedIndex() +1;
         int x = categoria*100000;
-        int id = x + con.getNPCategoria(categoria) +1;
+        int id = x + conbd.getNPCategoria(categoria) +1;
         String nombre = txtNombre.getText();
         String descripcion = txtDescripcion.getText();        
         
@@ -231,7 +223,7 @@ public class dvgAltaProducto extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "Los precios ingresados no son validos, modifiquelos por favor", "CAMPOS INCONSISTENTES", 2); //Advertencia    
                 } else {
                     Producto nuevoProducto = new Producto(id, nombre, pC, pV, categoria, descripcion, existencia);
-                    con.insertarProducto(nuevoProducto);
+                    conbd.insertarProducto(nuevoProducto);
                 }
                 
             }catch(Exception e){

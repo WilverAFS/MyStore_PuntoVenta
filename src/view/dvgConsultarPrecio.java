@@ -10,13 +10,12 @@ import javax.swing.JOptionPane;
 import model.Producto;
 
 /**
- *
+ *OK
  * @author Wilver
  */
 public class dvgConsultarPrecio extends javax.swing.JDialog {
     //ControladorConsultarPrecio controlador;
-    private ControladorBD con;
-    private int id = -1;
+    
     
     /**
      * Creates new form dvgConsultarPrecio
@@ -24,27 +23,22 @@ public class dvgConsultarPrecio extends javax.swing.JDialog {
     public dvgConsultarPrecio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        con = new ControladorBD();
     }
     
-    public dvgConsultarPrecio(java.awt.Frame parent, boolean modal, ControladorBD cbd) {
-        super(parent, modal);
-        initComponents();
-        con = cbd;
-    }
-    
-    
+
     private void busqueda(){
         
         try{
             int id = Integer.parseInt(this.txtCodigoDeProducto.getText());
+            
+            ControladorBD conbd = new ControladorBD(); //establecemos la conexion temporal para este metodo
 
-            if (con.buscarProducto(id) == null) {
+            if ( conbd.buscarProducto(id) == null ) {
                 this.lblNombre.setText("Este producto no existe");
                 this.lblDescripcion.setText("-");
                 this.txtPrecio.setText("-");
             } else {
-                Producto p = con.buscarProducto(id);
+                Producto p = conbd.buscarProducto(id);
                 this.lblNombre.setText(p.getNombre());
                 this.lblDescripcion.setText(p.getDescripcion());
                 this.txtPrecio.setText("$ " + String.valueOf(p.getPrecioV()));
@@ -53,10 +47,6 @@ public class dvgConsultarPrecio extends javax.swing.JDialog {
             System.out.println(e);
             JOptionPane.showMessageDialog(null, "El codigo ingresado no es valido");
         }
-        
-        
-        
-        
         
     }
     

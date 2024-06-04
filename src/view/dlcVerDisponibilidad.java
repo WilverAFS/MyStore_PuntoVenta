@@ -17,7 +17,7 @@ public class dlcVerDisponibilidad extends javax.swing.JDialog {
     
     int id=-1;
 
-    /**
+    /**OK
      * Creates new form dlcVerDisponibilidad
      */
     public dlcVerDisponibilidad(java.awt.Frame parent, boolean modal) {

@@ -5,7 +5,8 @@
 package view;
 
 /**
- *
+ *PENDIENTE NO IMPLEMENTADO
+ * NO USAR, NO HACE NADA
  * @author Wilver
  */
 public class dvgImprimirReporte extends javax.swing.JDialog {

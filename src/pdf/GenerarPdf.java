@@ -19,7 +19,7 @@ import javax.swing.JTable;
 
 
 /**
- *
+ *NO HAY CONEXION A BD
  * @author Wilver
  */
 public class GenerarPdf {

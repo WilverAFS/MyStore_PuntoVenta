@@ -14,7 +14,8 @@ import model.Empleado;
  */
 public class dldBuscarEmpleado extends javax.swing.JDialog {
     
-    private ControladorBD con;
+    //OK    
+    //private ControladorBD con;
     private int id =-1;
 
     /**
@@ -23,13 +24,6 @@ public class dldBuscarEmpleado extends javax.swing.JDialog {
     public dldBuscarEmpleado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        con = new ControladorBD();
-    }
-    
-    public dldBuscarEmpleado(java.awt.Frame parent, boolean modal, ControladorBD cbd) {
-        super(parent, modal);
-        initComponents();
-        con = cbd;
     }
     
     private void limpiarCampos(){
@@ -184,31 +178,30 @@ public class dldBuscarEmpleado extends javax.swing.JDialog {
     private void txtCodigoDeEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoDeEmpleadoActionPerformed
         // TODO add your handling code here:
         //READY
-        
+        ControladorBD conbd= new ControladorBD();
         if(txtCodigoDeEmpleado.getText().isBlank() || txtCodigoDeEmpleado.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un ID de empleado", "CAMPO INCOMPLETO", 2); //Advertencia     
             this.limpiarCampos();
         }else{
             try{
-                id = Integer.parseInt(this.txtCodigoDeEmpleado.getText());
+                id = Integer.parseInt(this.txtCodigoDeEmpleado.getText());                
+                Empleado empleado = conbd.buscarEmpleado(id);
+                if (empleado == null) {
+                    JOptionPane.showMessageDialog(null, "El ID ingresado no corresponde a ningun empleado", "EMPLEDO NO ENCONTRADO", 2); //Advertencia
+                    this.limpiarCampos();
+                } else {
+                    this.txtNombre.setText(empleado.getNombre());
+                    this.txtApellidoMaterno.setText(empleado.getApellidoM());
+                    this.txtApellidoPaterno.setText(empleado.getApellidoP());
+                    this.txtPuesto.setText(String.valueOf(empleado.getId_puesto()));
+                    this.txtUsuario.setText(empleado.getUsuario());
+                }                
             } catch(NumberFormatException e){
                 System.out.println(e);
-                //JOptionPane.showMessageDialog(null, "El ID ingresado no es una entrada valida", "ENTRADA INVALIDA", 2); //Advertencia
+                JOptionPane.showMessageDialog(null, "El ID ingresado no es una entrada valida", "ENTRADA INVALIDA", 2); //Advertencia
                 this.limpiarCampos();
             }
             
-            Empleado empleado = con.buscarEmpleado(id);            
-            if (empleado == null) {
-                JOptionPane.showMessageDialog(null, "El ID ingresado no corresponde a ningun empleado", "EMPLEDO NO ENCONTRADO", 2); //Advertencia
-                this.limpiarCampos();
-            } else {
-                this.txtNombre.setText(empleado.getNombre());
-                this.txtApellidoMaterno.setText(empleado.getApellidoM());
-                this.txtApellidoPaterno.setText(empleado.getApellidoP());
-                this.txtPuesto.setText(String.valueOf(empleado.getId_puesto()));
-                this.txtUsuario.setText(empleado.getUsuario());
-            }
-             
         }
         
     }//GEN-LAST:event_txtCodigoDeEmpleadoActionPerformed

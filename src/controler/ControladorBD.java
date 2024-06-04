@@ -258,8 +258,14 @@ public class ControladorBD {
             ps.setInt(1, existencia);
             ps.setInt(2, codigo);
             
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Datos guardados correctamente", "ACTUALIZACION EXISTOSA", 1);
+            int rowsUpdated = ps.executeUpdate();
+            
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(null, "Datos guardados correctamente", "ACTUALIZACION EXITOSA", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el producto con el código especificado", "ACTUALIZACION FALLIDA", JOptionPane.WARNING_MESSAGE);
+            }
+
             
         } catch(SQLException e){
             System.out.println("ERROR al editar el PRODUCTO en la BD: " + e);
@@ -293,14 +299,20 @@ public class ControladorBD {
     }
     
     public void cambiarExistenciaxProducto(int id, int existencia){
-        String query ="UPDATE producto SET existencia_p=?,  WHERE codigo_producto=? ";
+        String query ="UPDATE producto SET existencia_p=?  WHERE codigo_producto=? ";
         try{
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, existencia);
             ps.setInt(2, id);
             
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Datos guardados correctamente", "ACTUALIZACION EXISTOSA", 1);
+            int rowsUpdated = ps.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(null, "Datos guardados correctamente", "ACTUALIZACION EXITOSA", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el producto con el código especificado", "ACTUALIZACION FALLIDA", JOptionPane.WARNING_MESSAGE);
+            }
+            
         } catch(SQLException e){
             System.out.println("ERROR al editar el PRODUCTO en la BD: " + e);
             JOptionPane.showMessageDialog(null, "No se pudieron guardar los datos", "EDICION FALLIDA", 0); //Error            
@@ -396,6 +408,30 @@ public class ControladorBD {
         
     }
     
+    public void quitarExistenciaProductosVendidos(int idProducto, int unidadesVendidas){
+        String query ="UPDATE producto SET existencia_p=?  WHERE codigo_producto=? ";
+        
+        int existenciaActual = this.buscarProducto(idProducto).getExistencia();
+        int nuevaExistencia = existenciaActual - unidadesVendidas;
+        
+        try{
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, nuevaExistencia);
+            ps.setInt(2, idProducto);            
+            int rowsUpdated = ps.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(null, "Datos guardados correctamente se quitaro las unidades vendidas de stock", "ACTUALIZACION EXITOSA", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el producto con el código especificado", "ACTUALIZACION FALLIDA", JOptionPane.WARNING_MESSAGE);
+            }
+            
+        } catch(SQLException e){
+            System.out.println("ERROR al editar el PRODUCTO en la BD: " + e);
+            JOptionPane.showMessageDialog(null, "No se pudieron quitar las unidades vendidas de este producto", "ACTUALIZACION FALLIDA", 0); //Error            
+        }    
+        
+    }
     
     //------------------------------------------------------------------//
     //Metodos de tipo DELETE para ELIMINAR un registro

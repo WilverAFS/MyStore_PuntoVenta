@@ -16,21 +16,16 @@ import model.Empleado;
  */
 public class dldBajaEmpleado extends javax.swing.JDialog {
     
-    ControladorBD con;
+    //ControladorBD con;
 
-    /**
+    /**OK
+     * 
+     * 
      * Creates new form dldBajaEmpleado
      */
     public dldBajaEmpleado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        con = new ControladorBD();
-    }
-    
-    public dldBajaEmpleado(java.awt.Frame parent, boolean modal, ControladorBD con) {
-        super(parent, modal);
-        initComponents();
-        this.con = con;
     }
     
     public void limpiarCampos(){
@@ -221,6 +216,7 @@ public class dldBajaEmpleado extends javax.swing.JDialog {
 
     private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
         //Traer los datos del empleado y mostrarlos
+        ControladorBD conbd = new ControladorBD();
         String i = txtClave.getText();
         if(i.isBlank() || i.isEmpty()){
             //Si no ingresa nada
@@ -229,7 +225,7 @@ public class dldBajaEmpleado extends javax.swing.JDialog {
         } else {            
             try {
                 int id = Integer.parseInt(this.txtClave.getText());
-                Empleado empleado = con.buscarEmpleado(id);                
+                Empleado empleado = conbd.buscarEmpleado(id);                
                 if(empleado == null){
                     JOptionPane.showMessageDialog(null, "El ID ingresado no corresponde a ningun empleado", "EMPLEDO NO ENCONTRADO", 2); //Advertencia
                     limpiarCampos();                    
@@ -287,18 +283,18 @@ public class dldBajaEmpleado extends javax.swing.JDialog {
 
     private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
                
+        ControladorBD conbd = new ControladorBD();
         if(this.txtClave.getText().isBlank() || this.txtClave.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un ID de trabajador", "CAMPO INCOMPLETO", 2); //Advertencia
         } else{
             try{
                 int codigo = Integer.parseInt(txtClave.getText());
-                con.eliminarEmpleado(codigo);
+                conbd.eliminarEmpleado(codigo);
+                this.dispose();
             } catch(Exception e){
                 System.out.println(e);
                 JOptionPane.showMessageDialog(null, "ID de trabajador invalido", "CAMPO INCOMPLETO", 2); //Advertencia
             }
-            
-            this.dispose();
         }
     }//GEN-LAST:event_btnBajaActionPerformed
 

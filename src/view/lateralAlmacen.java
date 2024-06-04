@@ -12,7 +12,8 @@ import javax.swing.JPanel;
  */
 public class lateralAlmacen extends javax.swing.JFrame {
 
-    /**
+    /**OK
+     * NO TIENE CONEXION DIRECTA
      * Creates new form lateralAlmacen
      */
     public lateralAlmacen() {
@@ -151,7 +152,7 @@ public class lateralAlmacen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProductosAgotadosActionPerformed
 
     private void btnModificarExistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarExistenciaActionPerformed
-        // P
+        // READY
         dlaModificarExistencia dialog = new dlaModificarExistencia(new javax.swing.JFrame(), true);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);

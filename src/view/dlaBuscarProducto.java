@@ -14,7 +14,7 @@ import model.Producto;
  */
 public class dlaBuscarProducto extends javax.swing.JDialog {
     
-    private ControladorBD con;
+   //OK
     private int id = -1;
 
     /**
@@ -23,14 +23,8 @@ public class dlaBuscarProducto extends javax.swing.JDialog {
     public dlaBuscarProducto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        con = new ControladorBD();
     }
     
-    public dlaBuscarProducto(java.awt.Frame parent, boolean modal, ControladorBD cbd) {
-        super(parent, modal);
-        initComponents();
-        con = cbd;
-    }
     
     private void limpiarCampos(){
         this.txtCategoria.setText("");
@@ -200,6 +194,7 @@ public class dlaBuscarProducto extends javax.swing.JDialog {
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         // READY
+        ControladorBD conbd = new ControladorBD();
         if(txtID.getText().isBlank() || txtID.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un CODIGO de producto", "CAMPO INCOMPLETO", 2); //Advertencia
             this.limpiarCampos();
@@ -207,7 +202,7 @@ public class dlaBuscarProducto extends javax.swing.JDialog {
             
             try{
                 id = Integer.parseInt(this.txtID.getText());
-                Producto producto = con.buscarProducto(id);
+                Producto producto = conbd.buscarProducto(id);
                 
                 if(producto == null){
                     JOptionPane.showMessageDialog(null, "El CODIGO ingresado no corresponde a ningun producto", "PRODUCTO    NO ENCONTRADO", 2); //Advertencia

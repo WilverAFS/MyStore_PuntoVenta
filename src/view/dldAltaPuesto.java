@@ -10,7 +10,7 @@ package view;
  */
 public class dldAltaPuesto extends javax.swing.JDialog {
 
-    /**
+    /**NO IMPLETADO
      * Creates new form dldAltaPuesto
      */
     public dldAltaPuesto(java.awt.Frame parent, boolean modal) {

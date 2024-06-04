@@ -25,16 +25,14 @@ public class EnviarEmail {
     
     public void enviarCorreo(String correoElectronico, String direccionArchivo){    //ENVIAR UN PDF POR CORREO
         //  cuenta de correo o ip de servidor que usar/ en este caso BREVO
-        String username = "75952e001@smtp-brevo.com"; // NO MODIFICAR
-        String password = "mDNMhH6jAqdTICLv"; //NO MODIFICAR
-
-        // Configuración del servidor SMTP de Brevo
-        Properties props = new Properties();
+        String username = "mystoretap@gmail.com"; // Reemplaza con tu correo de Gmail
+        String password = "ujkbjdfvynwqulcj";
+        
+         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp-relay.brevo.com");
+        props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
-
         
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -85,18 +83,17 @@ public class EnviarEmail {
     
     //CREAR METODO QUE RECIBA LA RUTA DEL ARCHIVO, CORREO DE DESTINO
     
-    
+    //Purebas
      public static void main(String[] args) { //ENVIAR UN PDF POR CORREO
         //  cuenta de correo o ip de servidor que usar/ en este caso BREVO
         //75952e001@smtp-brevo.com
-        String username = "75952e001@smtp-brevo.com"; //no modificar //
-        String password = "mDNMhH6jAqdTICLv"; //no modificar //
-
-        // Configuración del servidor SMTP de Brevo
-        Properties props = new Properties();
+        String username = "mystoretap@gmail.com"; // Reemplaza con tu correo de Gmail
+        String password = "ujkbjdfvynwqulcj";
+        
+         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp-relay.brevo.com");
+        props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
 
         
@@ -128,7 +125,7 @@ public class EnviarEmail {
             
             //UBICACION DEL ARCHIVO PDF
             //C:\Users\Wilver\OneDrive\Documentos\NetBeansProjects\MySistem_PV
-            String filePath = "C:\\Users\\Wilver\\OneDrive\\Documentos\\NetBeansProjects\\MySistem_PV\\ticket1.pdf";
+            String filePath = "C:\\Users\\Wilver\\OneDrive\\Documentos\\NetBeansProjects\\MySistem_PV\\CorteCaja.pdf";
             DataSource source = new FileDataSource(filePath);
             attachmentBodyPart.setDataHandler(new DataHandler(source));
             attachmentBodyPart.setFileName("archivo.pdf");
