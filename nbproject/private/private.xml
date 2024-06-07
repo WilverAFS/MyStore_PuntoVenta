@@ -2,18 +2,10 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="16">
         <file>
-            <url>src/view/vistaGeneral.java</url>
-            <bookmark id="11">
+            <url>src/mysistem/Test.java</url>
+            <bookmark id="2">
                 <name/>
-                <line>675</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>src/mysistem/pruebaInicioSuper.java</url>
-            <bookmark id="7">
-                <name/>
-                <line>8</line>
+                <line>22</line>
                 <key/>
             </bookmark>
         </file>
@@ -26,10 +18,10 @@
             </bookmark>
         </file>
         <file>
-            <url>src/mysistem/Test.java</url>
-            <bookmark id="2">
+            <url>src/mysistem/pruebaInicioSuper.java</url>
+            <bookmark id="7">
                 <name/>
-                <line>22</line>
+                <line>8</line>
                 <key/>
             </bookmark>
         </file>
@@ -38,6 +30,14 @@
             <bookmark id="9">
                 <name/>
                 <line>82</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/view/vistaGeneral.java</url>
+            <bookmark id="11">
+                <name/>
+                <line>679</line>
                 <key/>
             </bookmark>
         </file>

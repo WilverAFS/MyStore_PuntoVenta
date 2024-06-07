@@ -620,7 +620,7 @@ public class vistaGeneral extends javax.swing.JFrame {
                     int stock = producto.getExistencia(); //Obetener la cantidad de stock del producto en la BD                    
                     
                     
-                    total = total + nuevoP.getPrecioV(); //Sumamos al total de la cuenta el producto agregado
+                    
                     
                     //NOTA: al hacer la venta final es necesario sacarlos del inventario con ayuda del metodo disminuir stock
                     
@@ -630,6 +630,8 @@ public class vistaGeneral extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "NO hay STOCK para este producto", "STOCK TERMINADO", 0); //Error
                     }else{ // si hay almenos uno entonces...
                         
+                       // total = total + nuevoP.getPrecioV(); //Sumamos al total de la cuenta el producto agregado
+                        
                         //Ver si el mismo producto esta en la lista 
                         boolean productoExiste = false;
                         for (Producto p : listaCuenta) {
@@ -637,6 +639,7 @@ public class vistaGeneral extends javax.swing.JFrame {
                                 productoExiste = true; //Banderia el producto existen en la lista                                
                                 if(p.getExistencia() < stock ){ //Verificamos que aun haya stock
                                     p.addExistencia(); // SI hay stock aumentamos lo ponemos
+                                    total = total + nuevoP.getPrecioV(); //Sumamos al total de la cuenta el producto agregado
                                 } else {
                                     //ERROR ya no hay mas existencia
                                     JOptionPane.showMessageDialog(null, "No hay mas productos en existencia de este tipo", "EXISTENCIAS TERMINADAS", 0); //Error
@@ -648,6 +651,7 @@ public class vistaGeneral extends javax.swing.JFrame {
 
                         if (!productoExiste) { //Si el producto no existe lo agregamos
                             this.listaCuenta.add(nuevoP);
+                            total = total + nuevoP.getPrecioV(); //Sumamos al total de la cuenta el producto agregado
                         }                      
                     
                     }
